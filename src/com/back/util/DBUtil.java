@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class DBUtil {
 	private static final String DRIVER = "com.mysql.jdbc.Driver"; // mysql驱动
-	private static final String URL = "jdbc:mysql://localhost:3306/design_second?characterEncoding=utf8&useSSL=true"; // mysql
+	private static final String URL = "jdbc:mysql://localhost:3306/employee?characterEncoding=utf8&useSSL=true"; // mysql
 																				// url
 	private static final String USER = "root"; // 数据库用户名
 	private static final String PASSWORD = "zjx1754294529"; // 数据库密码

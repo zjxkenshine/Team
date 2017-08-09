@@ -22,6 +22,7 @@ String  path = request.getContextPath();
 <link href="css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -35,11 +36,11 @@ String  path = request.getContextPath();
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="index.html" method="post">
+    <form class="form form-horizontal" action="login.do" method="post">
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="user" name="username" type="text" placeholder="账户" class="input-text size-L">
+          <input id="user" name="username" type="text" placeholder="用户名/邮箱/手机号" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
@@ -51,7 +52,7 @@ String  path = request.getContextPath();
       <div class="row cl">
         <div class="formControls col-8 col-offset-3">
           <input name="code" id="code" class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src="student-number.jsp" id="rcode"> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
+          <img  src="student-number.jsp" id="rcode"> <a id="kanbuq">看不清，换一张</a> </div>
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
@@ -59,7 +60,7 @@ String  path = request.getContextPath();
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input name="loginbtn" id="loginbtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;">
           <a href="">忘记密码</a>
@@ -71,8 +72,84 @@ String  path = request.getContextPath();
 <div class="footer">大学生就业创业服务中心</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="js/H-ui.js"></script> 
+<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 <script>
+
+	$("#rcode").click(function(){
+		$("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+		
+	})
 	
+	$("#kanbuq").on("click", function(){
+		$("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+	})
+	
+	$("#loginbtn").on('click', function(){
+		var username=$("#user").val();
+		var password=$("#pwd").val();
+		var code=$("#code").val();
+		//验证空值
+		 if(username==""){
+			 layer.alert('用户名/电话/邮箱不能为空！',{
+		               title: '提示框',				
+					   icon:2,		
+					  });
+			 $("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+			 layer.close(index);
+			 return false;
+		 }else if(password==""){
+			 layer.alert('密码不能为空！',{
+	               title: '提示框',				
+				   icon:2,		
+				  });
+		 $("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+		 layer.close(index);
+		 return false;
+	 	}else if(code=="验证码:"){
+	 		 layer.alert('验证码不能为空！',{
+	               title: '提示框',				
+				   icon:2,		
+				  });
+		 $("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+		 layer.close(index);
+		 return false;
+	 	}else{
+	 		$.ajax({
+  				url:"../StudentLoginCheck.do",        //验证账号密码
+  				type:"POST",
+  				dataType:"json",
+  				data:{username:username,password:password},
+  				success:function(data){
+  					if(code!=data["rcode"]){
+  						layer.alert('验证码错误',{            //验证码
+    			               title: '提示框',				
+    						   icon:2,		
+    						  });
+   						layer.close(index);
+   						return false;
+  					}
+  					if(data["flag"]=="1"){				//登录成功
+  							layer.alert(data["msg"],{
+  			               title: '提示框',				
+  						   icon:1,		
+  						  });
+  					
+  						location.href="../StudentLogin.do?ID="+data["stuid"];
+  						layer.close(index);	
+  					}else if(data["flag"]=="0"){        //登录失败
+  						layer.alert(data["msg"],{
+   			               title: '提示框',				
+   						   icon:2,		
+   						  });
+  						 $("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
+  						layer.close(index);
+  						return false;
+  					}
+  				}
+	 		})
+	 	}
+		
+	})
 </script>
 </body>
 </html>

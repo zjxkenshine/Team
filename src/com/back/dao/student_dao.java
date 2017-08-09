@@ -1,132 +1,72 @@
 package com.back.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.back.model.Student;
+import com.back.util.DBUtil;
+
 public class student_dao {
-	private int ID;
-	private String StudentName;
-	private String PassWord;
-	private String Sex;
-	private int Age;
-	private String Province;  //省份
-	private String School;
-	private String Academy; //学院
-	private String Major;   //专业
-	private String Home;    //籍贯
-	private String tel;
-	private String Email;
-	private String ID_Card;
-	private String picture;  //头像
-	private String Resume;   //简历图片
-	private String ResumeTime;
-	private String Motto;   //左右銘
-	public int getID() {
-		return ID;
+	
+	public Map<String,Object> loginCheck(String user,String password){
+		String sql="select * from student where (StudentName=? and PassWord=?) or (Tel=? and PassWord=?) or (Email=? and PassWord=?)";
+		System.out.println(sql);
+		List<Map<String,Object>> stulist=DBUtil.list(sql,new Object[]{user,password,user,password,user,password});
+		Map<String,Object> mesg=new HashMap<String,Object>();
+		if(stulist.size()>1){
+			mesg.put("flag",0);
+			mesg.put("msg","登录失败，您的用户名密码与他人冲突，建议您修改密码或修改登录方式！" );
+		}else if(stulist.size()==1){
+			String stu=(String)stulist.get(0).get("Status");
+			if (stu.equals("1")){
+				mesg.put("flag", 1);
+				mesg.put("msg","登陆成功！");
+				mesg.put("stuid",(int) stulist.get(0).get("ID"));
+			}else{
+				mesg.put("flag",0);
+				mesg.put("msg","登录失败,该账号已被冻结！");
+			}
+			
+		}else if(stulist.size()<1){
+			mesg.put("flag",0);
+			mesg.put("msg","登录失败,账号或密码错误！");
+		}
+		return mesg;
+		
 	}
-	public void setID(int iD) {
-		ID = iD;
+	
+	
+	public Student queryOneStudent(String stuid){
+		Student stu= new Student();
+		String sql ="select * from student where ID=?";
+		Map<String,Object> map=DBUtil.query(sql, stuid);
+		if(map!=null){
+			//把值存进Student类
+			stu.setAcademy((String)map.get("Academy"));
+			stu.setAge((int)map.get("Age"));
+			stu.setEducationBgd((String)map.get("EducationBgd"));
+			stu.setEmail((String)map.get("Email"));
+			stu.setHome((String)map.get("Home"));
+			stu.setID((int)map.get("ID"));
+			stu.setID_Card((String)map.get("ID_Card"));
+			stu.setIntention((String)map.get("Intention"));
+			stu.setMajor((String)map.get("Major"));
+			stu.setMotto((String)map.get("Motto"));
+			stu.setPassWord((String)map.get("PassWord"));
+			stu.setPicture((String)map.get("Picture"));
+			stu.setProvince((String)map.get("Province"));
+			stu.setResume((String)map.get("Resume"));
+			stu.setResumeTime((String)map.get("ResumeTime"));
+			stu.setSchool((String)map.get("School"));
+			stu.setSex((String)map.get("Sex"));
+			stu.setStatus((String)map.get("Status"));
+			stu.setStudentName((String)map.get("StudentName"));
+			stu.setTel((String)map.get("Tel"));
+		}
+		return stu;
 	}
-	public String getStudentName() {
-		return StudentName;
-	}
-	public void setStudentName(String studentName) {
-		StudentName = studentName;
-	}
-	public String getPassWord() {
-		return PassWord;
-	}
-	public void setPassWord(String passWord) {
-		PassWord = passWord;
-	}
-	public String getSex() {
-		return Sex;
-	}
-	public void setSex(String sex) {
-		Sex = sex;
-	}
-	public int getAge() {
-		return Age;
-	}
-	public void setAge(int age) {
-		Age = age;
-	}
-	public String getProvince() {
-		return Province;
-	}
-	public void setProvince(String province) {
-		Province = province;
-	}
-	public String getSchool() {
-		return School;
-	}
-	public void setSchool(String school) {
-		School = school;
-	}
-	public String getAcademy() {
-		return Academy;
-	}
-	public void setAcademy(String academy) {
-		Academy = academy;
-	}
-	public String getMajor() {
-		return Major;
-	}
-	public void setMajor(String major) {
-		Major = major;
-	}
-	public String getHome() {
-		return Home;
-	}
-	public void setHome(String home) {
-		Home = home;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public String getEmail() {
-		return Email;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public String getID_Card() {
-		return ID_Card;
-	}
-	public void setID_Card(String iD_Card) {
-		ID_Card = iD_Card;
-	}
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-	public String getResume() {
-		return Resume;
-	}
-	public void setResume(String resume) {
-		Resume = resume;
-	}
-	public String getResumeTime() {
-		return ResumeTime;
-	}
-	public void setResumeTime(String resumeTime) {
-		ResumeTime = resumeTime;
-	}
-	public String getMotto() {
-		return Motto;
-	}
-	public void setMotto(String motto) {
-		Motto = motto;
-	}
-	@Override
-	public String toString() {
-		return "student_dao [ID=" + ID + ", StudentName=" + StudentName + ", PassWord=" + PassWord + ", Sex=" + Sex
-				+ ", Age=" + Age + ", Province=" + Province + ", School=" + School + ", Academy=" + Academy + ", Major="
-				+ Major + ", Home=" + Home + ", tel=" + tel + ", Email=" + Email + ", ID_Card=" + ID_Card + ", picture="
-				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + "]";
-	}
+	
 	
 	
 	

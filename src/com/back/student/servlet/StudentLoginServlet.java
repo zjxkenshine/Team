@@ -1,31 +1,27 @@
 package com.back.student.servlet;
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.back.model.Student;
 import com.back.service.student_service;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LoginCheckServlet
+ * Servlet implementation class StudentLoginServlet
  */
-@WebServlet("/StudentLoginCheck.do")
-public class StudentLoginCheckServlet extends HttpServlet {
+@WebServlet("/StudentLogin.do")
+public class StudentLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginCheckServlet() {
+    public StudentLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +29,22 @@ public class StudentLoginCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-  
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//验证学生登录
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out =response.getWriter();
-		Gson gson = new Gson();
+		//学生登录设置
 		student_service stuse=new student_service();
-		String rcord =(String)request.getSession().getAttribute("rCode");  //获取验证码
-		String user=request.getParameter("username");
-		String password=request.getParameter("password");
-		System.out.println(user +","+ password);
 		
 		try{
-			 Map<String,Object> map=stuse.loginCheck(user, password);
-			 map.put("rcode", rcord);
-			 System.out.println(map);
-			String json =gson.toJson(map);
-    		out.write(json);
+			String stuid=request.getParameter("ID"); //获取ID
+			//System.out.println(stuid);
+			Student stu=stuse.queryOneStudent(stuid);
+			HttpSession session = request.getSession(); //获取session
+			session.setMaxInactiveInterval(30*60); //设置session时间
+			session.setAttribute("student", stu); //存值进session
+			response.sendRedirect("Back/student-index.jsp");  //跳转
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 }
