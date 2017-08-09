@@ -22,7 +22,7 @@ public class DBUtil {
 	private static final String URL = "jdbc:mysql://localhost:3306/design_second?characterEncoding=utf8&useSSL=true"; // mysql
 																				// url
 	private static final String USER = "root"; // 数据库用户名
-	private static final String PASSWORD = "mysql"; // 数据库密码
+	private static final String PASSWORD = "zjx1754294529"; // 数据库密码
 	private static Connection conn = null;
 
 	// 静态代码块?为什么使用静态代码块？
