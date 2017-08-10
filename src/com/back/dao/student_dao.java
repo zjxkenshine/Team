@@ -9,6 +9,7 @@ import com.back.util.DBUtil;
 
 public class student_dao {
 	
+	//登录验证
 	public Map<String,Object> loginCheck(String user,String password){
 		String sql="select * from student where (StudentName=? and PassWord=?) or (Tel=? and PassWord=?) or (Email=? and PassWord=?)";
 		System.out.println(sql);
@@ -36,7 +37,7 @@ public class student_dao {
 		
 	}
 	
-	
+	//根据ID查询学生信息
 	public Student queryOneStudent(String stuid){
 		Student stu= new Student();
 		String sql ="select * from student where ID=?";
@@ -63,11 +64,38 @@ public class student_dao {
 			stu.setStatus((String)map.get("Status"));
 			stu.setStudentName((String)map.get("StudentName"));
 			stu.setTel((String)map.get("Tel"));
+			stu.setRegisterTime((String)map.get("RegisterTime"));
+			stu.setRealName((String)map.get("RealName"));
+			stu.setRegisterStatus((String)map.get("RegisterStatus"));
 		}
 		return stu;
 	}
 	
+	//学生注册验证
+	public boolean checkStudentRegister(String name,String value){
+		String sql="select * from student where "+name+"=?";
+		System.out.println(sql);
+		Map<String,Object> map =DBUtil.query(sql, value);
+		if(map.size()==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
+	//添加注册学生
+	public int addRegisterStudent(Student stu){
+		String sql ="insert into student(StudentName,PassWord,Tel,Email,RegisterStatus,Status,RegisterTime) values(?,?,?,?,?,?,?)";
+		int i=DBUtil.executeUpdate(sql, new Object[]{stu.getStudentName(),stu.getPassWord(),stu.getTel(),stu.getEmail(),stu.getRegisterStatus(),stu.getStatus(),stu.getRegisterTime()});
+		return i;
+	}
+	
+	//注册成功解封账号
+	public int studentRegisterUpdate(String Email){
+		String sql="update student set Status='1',RegisterStatus='1' where Email=? and RegisterStatus='0'";
+		int i=DBUtil.executeUpdate(sql,Email);
+		return i;
+	}
 	
 	
 }

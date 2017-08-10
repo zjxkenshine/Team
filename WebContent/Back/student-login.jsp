@@ -8,6 +8,7 @@
 <%
 String  path = request.getContextPath();
 %>
+<base href="<%=path%>/Back/">
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -62,7 +63,7 @@ String  path = request.getContextPath();
         <div class="formControls col-8 col-offset-3">
           <input name="loginbtn" id="loginbtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;">
+          <a href="student-register.jsp"><input name="" id="" type="button" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;"></a>
           <a href="">忘记密码</a>
         </div>
       </div>

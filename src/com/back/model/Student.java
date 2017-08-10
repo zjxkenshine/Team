@@ -2,6 +2,7 @@ package com.back.model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Student implements Serializable {
 	private int ID;
 	private String StudentName;
@@ -23,7 +24,41 @@ public class Student implements Serializable {
 	private String Status;   //状态
 	private String Intention;   //求职意向
 	private String EducationBgd;   //学历
+	private String RealName;  //真实姓名
+	private String RegisterStatus;   //注册状态
+	private String RegisterTime;	//注册时间
+	
+	
 
+	
+	@Override
+	public String toString() {
+		return "Student [ID=" + ID + ", StudentName=" + StudentName + ", PassWord=" + PassWord + ", Sex=" + Sex
+				+ ", Age=" + Age + ", Province=" + Province + ", School=" + School + ", Academy=" + Academy + ", Major="
+				+ Major + ", Home=" + Home + ", tel=" + tel + ", Email=" + Email + ", ID_Card=" + ID_Card + ", picture="
+				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + ", Status="
+				+ Status + ", Intention=" + Intention + ", EducationBgd=" + EducationBgd + ", RealName=" + RealName
+				+ ", RegisterStatus=" + RegisterStatus + ", RegisterTime=" + RegisterTime + "]";
+	}
+	public String getRegisterTime() {
+		return RegisterTime;
+	}
+	public void setRegisterTime(String registerTime) {
+		RegisterTime = registerTime;
+	}
+	public String getRealName() {
+		return RealName;
+	}
+	public void setRealName(String realName) {
+		RealName = realName;
+	}
+	public String getRegisterStatus() {
+		return RegisterStatus;
+	}
+	public void setRegisterStatus(String registerStatus) {
+		RegisterStatus = registerStatus;
+	}
+	
 	public int getID() {
 		return ID;
 	}
@@ -144,14 +179,5 @@ public class Student implements Serializable {
 	public void setEducationBgd(String educationBgd) {
 		EducationBgd = educationBgd;
 	}
-	@Override
-	public String toString() {
-		return "Student [ID=" + ID + ", StudentName=" + StudentName + ", PassWord=" + PassWord + ", Sex=" + Sex
-				+ ", Age=" + Age + ", Province=" + Province + ", School=" + School + ", Academy=" + Academy + ", Major="
-				+ Major + ", Home=" + Home + ", tel=" + tel + ", Email=" + Email + ", ID_Card=" + ID_Card + ", picture="
-				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + ", Status="
-				+ Status + ", Intention=" + Intention + ", EducationBgd=" + EducationBgd + "]";
-	}
-	
 	
 }

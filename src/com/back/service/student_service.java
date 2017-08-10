@@ -24,5 +24,42 @@ public class student_service {
 			throw new Exception("查询学生信息失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public boolean checkStudentRegister(String name,String value) throws Exception{
+		try{
+			return sda.checkStudentRegister(name,value);
+		}catch(Exception e){
+			throw new Exception("验证学生信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public int addRegisterStudent(Student stu) throws Exception{
+		try{
+			int i= sda.addRegisterStudent(stu);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("插入信息条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("添加学生信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	
+	public int studentRegisterUpdate(String Email) throws Exception{
+		try{
+			int i= sda.studentRegisterUpdate(Email);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("更新信息条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("更新学生账号信息失败，原因是："+e.getMessage());
+		}
+	}
+
+	
 
 }
