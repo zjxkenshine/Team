@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class StudentForgetEmailCheckServlet
  */
-@WebServlet("/StudentForgetEmailCheck.do")
+@WebServlet("/StudentForgetEmailCheck.sdo")
 public class StudentForgetEmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

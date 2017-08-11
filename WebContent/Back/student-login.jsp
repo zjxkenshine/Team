@@ -116,7 +116,7 @@ String  path = request.getContextPath();
 		 return false;
 	 	}else{
 	 		$.ajax({
-  				url:"../StudentLoginCheck.do",        //验证账号密码
+  				url:"../StudentLoginCheck.sdo",        //验证账号密码
   				type:"POST",
   				dataType:"json",
   				data:{username:username,password:password},
@@ -136,7 +136,7 @@ String  path = request.getContextPath();
   						   icon:1,		
   						  });
   					
-  						location.href="../StudentLogin.do?ID="+data["stuid"];
+  						location.href="../StudentLogin.sdo?ID="+data["stuid"];
   						layer.close(index);	
   					}else if(data["flag"]=="0"){        //登录失败
   						layer.alert(data["msg"],{

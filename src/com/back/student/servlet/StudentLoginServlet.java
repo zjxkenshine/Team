@@ -17,7 +17,7 @@ import com.back.service.student_service;
 /**
  * Servlet implementation class StudentLoginServlet
  */
-@WebServlet("/StudentLogin.do")
+@WebServlet("/StudentLogin.sdo")
 public class StudentLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -59,8 +59,8 @@ public class StudentLoginServlet extends HttpServlet {
 			
 			//传值
 			session.setMaxInactiveInterval(30*60); //设置session时间
-			session.setAttribute("student", stu); //存值进session
-			response.sendRedirect("Back/student-index.jsp");  //跳转
+			session.setAttribute("student", stu); //存值进
+			response.sendRedirect("StudentLoginTransform.sdo");  //跳转
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);

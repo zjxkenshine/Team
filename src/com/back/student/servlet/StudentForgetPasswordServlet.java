@@ -20,7 +20,7 @@ import com.back.service.student_service;
 /**
  * Servlet implementation class StudentForgetPasswordServlet
  */
-@WebServlet("/StudentForgetPassword.do")
+@WebServlet("/StudentForgetPassword.sdo")
 public class StudentForgetPasswordServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
        

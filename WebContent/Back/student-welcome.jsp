@@ -1,6 +1,15 @@
-﻿<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
+<%
+String  path = request.getContextPath();
+%>
+<base href="<%=path%>/Back/">
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -19,74 +28,17 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>我的桌面</title>
+<title>我的首页</title>
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
-  <p class="f-20 text-success">欢迎使用H-ui.admin <span class="f-14">v2.3</span>后台模版！</p>
-  <p>登录次数：18 </p>
-  <p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
-  <table class="table table-border table-bordered table-bg">
-    <thead>
-      <tr>
-        <th colspan="7" scope="col">信息统计</th>
-      </tr>
-      <tr class="text-c">
-        <th>统计</th>
-        <th>资讯库</th>
-        <th>图片库</th>
-        <th>产品库</th>
-        <th>用户</th>
-        <th>管理员</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="text-c">
-        <td>总数</td>
-        <td>92</td>
-        <td>9</td>
-        <td>0</td>
-        <td>8</td>
-        <td>20</td>
-      </tr>
-      <tr class="text-c">
-        <td>今日</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr class="text-c">
-        <td>昨日</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr class="text-c">
-        <td>本周</td>
-        <td>2</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr class="text-c">
-        <td>本月</td>
-        <td>2</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-    </tbody>
-  </table>
+  <p class="f-20 text-success">欢迎登录学生个人中心</p>
+  <p>登录次数：<c:out value="${student.getLoginNum() }"></c:out> </p>
+  <p>上次登录时间：<c:out value="${student.getLastLoginTime() }"></c:out></p>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
-        <th colspan="2" scope="col">服务器信息</th>
+        <th colspan="2" scope="col">学生信息</th>
       </tr>
     </thead>
     <tbody>
@@ -201,4 +153,4 @@ var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " 
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
 </script>
 </body>
-</html>
+</html

@@ -31,7 +31,7 @@ String  path = request.getContextPath();
 </head>
 <body>
 <c:if test="${Email!=null }">
-<form action="../StudentRegisterSuccess.do" method="post" class="form form-horizontal" id="codecheck">
+<form action="../StudentRegisterSuccess.sdo" method="post" class="form form-horizontal" id="codecheck">
 <div class="pd-20">
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
@@ -43,14 +43,14 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>验证码：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="请输入邮箱中的验证码" id="code" name="code" datatype="*" nullmsg="验证码不能为空"  ajaxurl="../StudentCodeCheck.do">
+        <input type="text" class="input-text" value="" placeholder="请输入邮箱中的验证码" id="code" name="code" datatype="*" nullmsg="验证码不能为空"  ajaxurl="../StudentCodeCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认激活&nbsp;&nbsp;">&nbsp;&nbsp;&nbsp;
-        <a href="../StudentResendSet.do"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;重新发送&nbsp;&nbsp;"></a>
+        <a href="../StudentResendSet.sdo"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;重新发送&nbsp;&nbsp;"></a>
       	<a href="student-login.jsp"><input class="btn btn-default radius" type="button" id="back" value="&nbsp;&nbsp;返回登录&nbsp;&nbsp;"></a>&nbsp;&nbsp;&nbsp;
       </div>
     </div>
