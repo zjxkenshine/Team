@@ -1,6 +1,5 @@
 package com.back.student.servlet;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -12,20 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.service.student_service;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LoginCheckServlet
+ * Servlet implementation class StudentRegisterCodeCheckServlet
  */
-@WebServlet("/StudentLoginCheck.do")
-public class StudentLoginCheckServlet extends HttpServlet {
+@WebServlet("/StudentCodeCheck.do")
+public class StudentRegisterCodeCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginCheckServlet() {
+    public StudentRegisterCodeCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +31,39 @@ public class StudentLoginCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-  
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//验证学生登录
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out =response.getWriter();
-		Gson gson = new Gson();
-		student_service stuse=new student_service();
-		String rcord =(String)request.getSession().getAttribute("rCode");  //获取验证码
-		String user=request.getParameter("username");
-		String password=request.getParameter("password");
-		System.out.println(user +","+ password);
-		
+		// 邮箱验证码验证
 		try{
-			 Map<String,Object> map=stuse.loginCheck(user, password);
-			 map.put("rcode", rcord);
-			 System.out.println(map);
-			String json =gson.toJson(map);
-    		out.write(json);
+			//初始化
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out =response.getWriter();
+			Map<String,String> map=new HashMap<String,String>();
+			Gson gson = new Gson();
+			
+			//取值
+			String value=request.getParameter("param");   
+			int rcode=(Integer)request.getSession().getAttribute("Code");
+			String code=String.valueOf(rcode);
+			
+			
+			//验证码验证
+			if(value.equals(code)){
+				map.put("info","");
+				map.put("status","y");
+			}else{
+				map.put("info","验证码错误");
+				map.put("status","n");
+			}
+			//返回值
+			String json=gson.toJson(map);
+			out.print(json);
+			
+			
+	 
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 }

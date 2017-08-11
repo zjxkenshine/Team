@@ -6,22 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentLoginServlet
+ * Servlet implementation class StudentRegisterSuccessServlet
  */
-@WebServlet("/StudentLogin.do")
-public class StudentLoginServlet extends HttpServlet {
+@WebServlet("/StudentRegisterSuccess.do")
+public class StudentRegisterSuccessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginServlet() {
+    public StudentRegisterSuccessServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +28,19 @@ public class StudentLoginServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//学生登录设置
-		student_service stuse=new student_service();
-		
+		// TODO Auto-generated method stub
+		//邮箱验证成功后账号解封
 		try{
-			String stuid=request.getParameter("ID"); //获取ID
-			//System.out.println(stuid);
-			Student stu=stuse.queryOneStudent(stuid);
-			HttpSession session = request.getSession(); //获取session
-			session.setMaxInactiveInterval(30*60); //设置session时间
-			session.setAttribute("student", stu); //存值进session
-			response.sendRedirect("Back/student-index.jsp");  //跳转
+			//初始化
+			student_service stus= new student_service();
+			
+			//取值
+			String Email = request.getParameter("Email");
+			stus.studentRegisterUpdate(Email);
+			
+			//跳转
+			response.sendRedirect("Back/student-registerSuccess.jsp");
+			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);

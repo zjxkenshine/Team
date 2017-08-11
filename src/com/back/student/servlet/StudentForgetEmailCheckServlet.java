@@ -1,6 +1,5 @@
 package com.back.student.servlet;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -16,16 +15,16 @@ import com.back.service.student_service;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LoginCheckServlet
+ * Servlet implementation class StudentForgetEmailCheckServlet
  */
-@WebServlet("/StudentLoginCheck.do")
-public class StudentLoginCheckServlet extends HttpServlet {
+@WebServlet("/StudentForgetEmailCheck.do")
+public class StudentForgetEmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginCheckServlet() {
+    public StudentForgetEmailCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +32,40 @@ public class StudentLoginCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-  
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//验证学生登录
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out =response.getWriter();
-		Gson gson = new Gson();
-		student_service stuse=new student_service();
-		String rcord =(String)request.getSession().getAttribute("rCode");  //获取验证码
-		String user=request.getParameter("username");
-		String password=request.getParameter("password");
-		System.out.println(user +","+ password);
-		
+		// TODO Auto-generated method stub
+		//忘记密码邮箱验证
 		try{
-			 Map<String,Object> map=stuse.loginCheck(user, password);
-			 map.put("rcode", rcord);
-			 System.out.println(map);
-			String json =gson.toJson(map);
-    		out.write(json);
+			//初始化
+			System.out.println("执行邮箱验证");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out =response.getWriter();
+			student_service stus=new student_service();
+			Map<String,String> map=new HashMap<String,String>();
+			Gson gson = new Gson();
+			
+			//取值
+			String Email=request.getParameter("param");  //取得Email值
+			
+			//验证
+			boolean bol=stus.checkForgetPasswordEmail(Email);
+			if(bol){
+				map.put("info","");
+				map.put("status","y");
+			}else{
+				map.put("info","该邮箱不存在");
+				map.put("status","n");
+			}
+			
+			//返回值
+			String json=gson.toJson(map);
+			out.print(json);
+			out.close();
+			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 }

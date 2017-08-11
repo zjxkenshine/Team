@@ -6,22 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.back.model.Student;
-import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentLoginServlet
+ * Servlet implementation class StudentResendSetServlet
  */
-@WebServlet("/StudentLogin.do")
-public class StudentLoginServlet extends HttpServlet {
+@WebServlet("/StudentResendSet.do")
+public class StudentResendSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginServlet() {
+    public StudentResendSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +26,13 @@ public class StudentLoginServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//学生登录设置
-		student_service stuse=new student_service();
-		
+		// TODO Auto-generated method stub
+		//初始化
 		try{
-			String stuid=request.getParameter("ID"); //获取ID
-			//System.out.println(stuid);
-			Student stu=stuse.queryOneStudent(stuid);
-			HttpSession session = request.getSession(); //获取session
-			session.setMaxInactiveInterval(30*60); //设置session时间
-			session.setAttribute("student", stu); //存值进session
-			response.sendRedirect("Back/student-index.jsp");  //跳转
+			   request.getSession().setAttribute("Email", null);
+		       request.getSession().setAttribute("Code", null);
+			//跳转
+			request.getRequestDispatcher("Back/student-registerCheck.jsp").forward(request, response);
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
