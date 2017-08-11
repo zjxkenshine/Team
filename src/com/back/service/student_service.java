@@ -90,5 +90,18 @@ public class student_service {
 			throw new Exception("更新学生登录信息失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public int updateStudentPassword(String stuid,String password) throws Exception{
+		try{
+			int i= sda.updateStudentPassword(stuid,password);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("更新学生密码条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("更新学生密码失败，原因是："+e.getMessage());
+		}
+	}
 
 }

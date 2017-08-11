@@ -129,5 +129,12 @@ public class student_dao {
 		return i;
 	}
 	
+	//更新学生密码
+	public int updateStudentPassword(String stuid,String password){
+		String sql="update student set PassWord=? where ID=?";
+	//	System.out.println(sql);
+		int i=DBUtil.executeUpdate(sql,new Object[]{password,stuid});
+		return i;
+	}
 	
 }

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,13 +24,12 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>错误页面</title>
+<title>注册成功</title>
 </head>
 <body>
 <section class="page-404 minWP text-c">
-  <p class="error-title"><i class="Hui-iconfont va-m" style="font-size:80px">&#xe656;</i><span class="va-m">出错啦</span></p>
-  <p class="error-description"><c:out value="${message }"></c:out></p>
-  <p class="error-info">您可以：<a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a></p>
+  <p class="error-description">修改密码成功！</p>
+  <p class="error-info">请您立即<a href="student-login.jsp" target="_top" class="c-primary ml-20">重新登录 &gt;</a></p>
 </section>
 </body>
 </html>
