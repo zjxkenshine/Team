@@ -126,6 +126,7 @@ String  path = request.getContextPath();
     			               title: '提示框',				
     						   icon:2,		
     						  });
+  						 $("#rcode").attr("src","student-number.jsp?"+new Date().getTime());
    						layer.close(index);
    						return false;
   					}

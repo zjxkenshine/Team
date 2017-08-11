@@ -1,6 +1,9 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +34,30 @@ public class StudentLoginServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//学生登录设置
-		student_service stuse=new student_service();
+		
 		
 		try{
+			//初始化
+			HttpSession session = request.getSession(); //获取session
+			Date nowTime =new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String now = sf.format(nowTime);
+			student_service stuse=new student_service();
+			
+			//取值
 			String stuid=request.getParameter("ID"); //获取ID
 			//System.out.println(stuid);
 			Student stu=stuse.queryOneStudent(stuid);
-			HttpSession session = request.getSession(); //获取session
+			//System.out.println(stu);
+			
+			//更新登陆次数
+			int num = stu.getLoginNum()+1;
+			
+			//更新学生信息
+			System.out.println(stuid);
+			stuse.updateStudentLoginMessage(now,num,stuid);
+			
+			//传值
 			session.setMaxInactiveInterval(30*60); //设置session时间
 			session.setAttribute("student", stu); //存值进session
 			response.sendRedirect("Back/student-index.jsp");  //跳转
