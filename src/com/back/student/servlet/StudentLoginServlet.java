@@ -43,7 +43,7 @@ public class StudentLoginServlet extends HttpServlet {
 			response.sendRedirect("Back/student-index.jsp");  //跳转
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
 	}
 

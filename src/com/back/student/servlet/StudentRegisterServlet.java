@@ -144,7 +144,7 @@ public class StudentRegisterServlet extends HttpServlet {
 			request.getRequestDispatcher("Back/student-registerCheck.jsp").forward(request, response);
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
 	}
 	

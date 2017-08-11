@@ -59,6 +59,24 @@ public class student_service {
 			throw new Exception("更新学生账号信息失败，原因是："+e.getMessage());
 		}
 	}
+	
+	
+	public boolean checkForgetPasswordEmail(String Email) throws Exception{
+		try{
+			return sda.checkForgetPasswordEmail(Email);
+		}catch(Exception e){
+			throw new Exception("忘记密码验证邮箱失败，原因是："+e.getMessage());
+		}
+	}
+	
+	
+	public String checkForgetPassword(String Email,String StudentName,String Tel) throws Exception{
+		try{
+			return sda.checkForgetPassword(Email,StudentName,Tel);
+		}catch(Exception e){
+			throw new Exception("忘记密码身份验证失败，原因是："+e.getMessage());
+		}
+	}
 
 	
 

@@ -64,7 +64,7 @@ String  path = request.getContextPath();
           <input name="loginbtn" id="loginbtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
           <a href="student-register.jsp"><input name="" id="" type="button" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;"></a>
-          <a href="">忘记密码</a>
+          <a href="student-forgetPassword.jsp">忘记密码</a>
         </div>
       </div>
     </form>

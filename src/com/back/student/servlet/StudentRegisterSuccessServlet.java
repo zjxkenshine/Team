@@ -39,11 +39,11 @@ public class StudentRegisterSuccessServlet extends HttpServlet {
 			stus.studentRegisterUpdate(Email);
 			
 			//跳转
-			response.sendRedirect("Back/student-login.jsp");
+			response.sendRedirect("Back/student-registerSuccess.jsp");
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
 	}
 

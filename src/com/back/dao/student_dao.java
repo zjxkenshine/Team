@@ -97,5 +97,27 @@ public class student_dao {
 		return i;
 	}
 	
+	//忘记密码邮箱验证
+	public boolean checkForgetPasswordEmail(String Email){
+		String sql="select ID from student where Email=?";
+		List<Map<String,Object>> stulist=DBUtil.list(sql,Email);
+		if(stulist.size()==1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//忘记密码身份验证
+	public String checkForgetPassword(String Email,String StudentName,String Tel){
+		String sql="select PassWord from student where (Email=? and Tel=?) or (Email=? and StudentName=?)";
+		List<Map<String,Object>> stulist=DBUtil.list(sql,new Object[]{Email,Tel,Email,StudentName});
+		if(stulist.size()==1){
+			return (String) stulist.get(0).get("PassWord");
+		}else{
+			return null;
+		}
+	}
+	
 	
 }

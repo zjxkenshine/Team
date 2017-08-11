@@ -70,7 +70,7 @@ public class StudentRegisterCheckServlet extends HttpServlet {
 			out1.close();  
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
 	}
 

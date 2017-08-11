@@ -27,7 +27,7 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>学生注册</title>
+<title>验证激活</title>
 </head>
 <body>
 <c:if test="${Email!=null }">
@@ -51,6 +51,7 @@ String  path = request.getContextPath();
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认激活&nbsp;&nbsp;">&nbsp;&nbsp;&nbsp;
         <a href="../StudentResendSet.do"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;重新发送&nbsp;&nbsp;"></a>
+      	<a href="student-login.jsp"><input class="btn btn-default radius" type="button" id="back" value="&nbsp;&nbsp;返回登录&nbsp;&nbsp;"></a>&nbsp;&nbsp;&nbsp;
       </div>
     </div>
   </form>
@@ -75,6 +76,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;重新发送&nbsp;&nbsp;">
+        <a href="student-login.jsp"><input class="btn btn-default radius" type="button" id="back" value="&nbsp;&nbsp;返回登录&nbsp;&nbsp;"></a>&nbsp;&nbsp;&nbsp;
       </div>
     </div>
   </form>
