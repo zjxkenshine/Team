@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class StudentResendRegisterCodeServlet
  */
-@WebServlet("/StudentResendRegisterCode.do")
+@WebServlet("/StudentResendRegisterCode.sdo")
 public class StudentResendRegisterCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

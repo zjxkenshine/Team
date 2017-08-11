@@ -27,9 +27,10 @@ public class Student implements Serializable {
 	private String RealName;  //真实姓名
 	private String RegisterStatus;   //注册状态
 	private String RegisterTime;	//注册时间
-	
-	
+	private String LastLoginTime;   //上次登录时间
+	private int LoginNum;   //登录次数
 
+	
 	
 	@Override
 	public String toString() {
@@ -38,7 +39,20 @@ public class Student implements Serializable {
 				+ Major + ", Home=" + Home + ", tel=" + tel + ", Email=" + Email + ", ID_Card=" + ID_Card + ", picture="
 				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + ", Status="
 				+ Status + ", Intention=" + Intention + ", EducationBgd=" + EducationBgd + ", RealName=" + RealName
-				+ ", RegisterStatus=" + RegisterStatus + ", RegisterTime=" + RegisterTime + "]";
+				+ ", RegisterStatus=" + RegisterStatus + ", RegisterTime=" + RegisterTime + ", LastLoginTime="
+				+ LastLoginTime + ", LoginNum=" + LoginNum + "]";
+	}
+	public String getLastLoginTime() {
+		return LastLoginTime;
+	}
+	public void setLastLoginTime(String lastLoginTime) {
+		LastLoginTime = lastLoginTime;
+	}
+	public int getLoginNum() {
+		return LoginNum;
+	}
+	public void setLoginNum(int loginNum) {
+		LoginNum = loginNum;
 	}
 	public String getRegisterTime() {
 		return RegisterTime;

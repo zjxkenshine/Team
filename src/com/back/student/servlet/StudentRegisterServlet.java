@@ -22,7 +22,7 @@ import com.back.service.student_service;
 /**
  * Servlet implementation class StudentRegisterServlet
  */
-@WebServlet("/StudentRegister.do")
+@WebServlet("/StudentRegister.sdo")
 public class StudentRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

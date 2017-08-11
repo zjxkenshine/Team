@@ -15,16 +15,16 @@ import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentLoginServlet
+ * Servlet implementation class StudentReLoginServlet
  */
-@WebServlet("/StudentLogin.sdo")
-public class StudentLoginServlet extends HttpServlet {
+@WebServlet("/StudentReLogin.sdo")
+public class StudentReLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginServlet() {
+    public StudentReLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +33,7 @@ public class StudentLoginServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//学生登录设置
-		
-		
+		// 重新登录
 		try{
 			//初始化
 			HttpSession session = request.getSession(); //获取session
@@ -45,17 +43,16 @@ public class StudentLoginServlet extends HttpServlet {
 			student_service stuse=new student_service();
 			
 			//取值
-			String stuid=request.getParameter("ID"); //获取ID
+			Student stu1=(Student)request.getSession().getAttribute("student"); //获取student信息
 			//System.out.println(stuid);
-			Student stu=stuse.queryOneStudent(stuid);
+			Student stu=stuse.queryOneStudent(String.valueOf(stu1.getID()));
 			//System.out.println(stu);
 			
 			//更新登陆次数
 			int num = stu.getLoginNum()+1;
 			
 			//更新学生信息
-			System.out.println(stuid);
-			stuse.updateStudentLoginMessage(now,num,stuid);
+			stuse.updateStudentLoginMessage(now,num,String.valueOf(stu1.getID()));
 			
 			//传值
 			session.setMaxInactiveInterval(30*60); //设置session时间

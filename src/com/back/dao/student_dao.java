@@ -12,7 +12,7 @@ public class student_dao {
 	//登录验证
 	public Map<String,Object> loginCheck(String user,String password){
 		String sql="select * from student where (StudentName=? and PassWord=?) or (Tel=? and PassWord=?) or (Email=? and PassWord=?)";
-		System.out.println(sql);
+	//	System.out.println(sql);
 		List<Map<String,Object>> stulist=DBUtil.list(sql,new Object[]{user,password,user,password,user,password});
 		Map<String,Object> mesg=new HashMap<String,Object>();
 		if(stulist.size()>1){
@@ -67,6 +67,8 @@ public class student_dao {
 			stu.setRegisterTime((String)map.get("RegisterTime"));
 			stu.setRealName((String)map.get("RealName"));
 			stu.setRegisterStatus((String)map.get("RegisterStatus"));
+			stu.setLastLoginTime((String)map.get("LastLoginTime"));
+			stu.setLoginNum((int)map.get("LoginNum"));
 		}
 		return stu;
 	}
@@ -74,7 +76,7 @@ public class student_dao {
 	//学生注册验证
 	public boolean checkStudentRegister(String name,String value){
 		String sql="select * from student where "+name+"=?";
-		System.out.println(sql);
+	//  System.out.println(sql);
 		Map<String,Object> map =DBUtil.query(sql, value);
 		if(map.size()==0){
 			return true;
@@ -117,6 +119,14 @@ public class student_dao {
 		}else{
 			return null;
 		}
+	}
+	
+	//更新学生登录信息
+	public int updateStudentLoginMessage(String now,int num,String id){
+		String sql="update student set LoginNum=?,LastLoginTime=? where ID=?";
+		System.out.println(sql);
+		int i =DBUtil.executeUpdate(sql, new Object[]{num,now,id});
+		return i;
 	}
 	
 	

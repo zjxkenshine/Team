@@ -29,7 +29,7 @@ String  path = request.getContextPath();
 <base href="<%=path%>/Back/">
 <body>
 <div class="pd-20">
-  <form action="../StudentForgetPassword.do" method="post" class="form form-horizontal" id="forgetpassword">
+  <form action="../StudentForgetPassword.sdo" method="post" class="form form-horizontal" id="forgetpassword">
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
       <div class="formControls col-5">
@@ -47,7 +47,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" placeholder="必填，请填写正确邮箱" name="Email" id="Email" datatype="e" nullmsg="请输入邮箱！" ajaxurl="../StudentForgetEmailCheck.do">
+        <input type="text" class="input-text" placeholder="必填，请填写正确邮箱" name="Email" id="Email" datatype="e" nullmsg="请输入邮箱！" ajaxurl="../StudentForgetEmailCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>

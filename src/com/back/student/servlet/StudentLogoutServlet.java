@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.service.student_service;
-
 /**
- * Servlet implementation class StudentRegisterSuccessServlet
+ * Servlet implementation class StudentLogoutServlet
  */
-@WebServlet("/StudentRegisterSuccess.sdo")
-public class StudentRegisterSuccessServlet extends HttpServlet {
+@WebServlet("/StudentLogout.sdo")
+public class StudentLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentRegisterSuccessServlet() {
+    public StudentLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,18 +26,11 @@ public class StudentRegisterSuccessServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//邮箱验证成功后账号解封
+		// 登出
 		try{
-			//初始化
-			student_service stus= new student_service();
-			
-			//取值
-			String Email = request.getParameter("Email");
-			stus.studentRegisterUpdate(Email);
-			
-			//跳转
-			response.sendRedirect("Back/student-registerSuccess.jsp");
+			//传值
+			request.getSession().setAttribute("student",null); //存值进session
+			response.sendRedirect("Back/student-login.jsp");  //跳转
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	

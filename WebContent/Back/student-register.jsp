@@ -29,11 +29,11 @@ String  path = request.getContextPath();
 </head>
 <body>
 <div class="pd-20">
-  <form action="../StudentRegister.do" method="post" class="form form-horizontal" id="studentregister">
+  <form action="../StudentRegister.sdo" method="post" class="form form-horizontal" id="studentregister">
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="必填" id="StudentName" name="StudentName" datatype="*2-16" nullmsg="用户名不能为空" ajaxurl="../StudentRegisterCheck.do">
+        <input type="text" class="input-text" value="" placeholder="必填" id="StudentName" name="StudentName" datatype="*2-16" nullmsg="用户名不能为空" ajaxurl="../StudentRegisterCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -54,14 +54,14 @@ String  path = request.getContextPath();
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>手机：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="必填" id="Tel" name="Tel" datatype="m" nullmsg="手机号不能为空" ajaxurl="../StudentRegisterCheck.do">
+        <input type="text" class="input-text" value="" placeholder="必填" id="Tel" name="Tel" datatype="m" nullmsg="手机号不能为空" ajaxurl="../StudentRegisterCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>
      <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="必填，用于验证激活" id="Email" name="Email" datatype="e" nullmsg="邮箱不能为空" ajaxurl="../StudentRegisterCheck.do">
+        <input type="text" class="input-text" value="" placeholder="必填，用于验证激活" id="Email" name="Email" datatype="e" nullmsg="邮箱不能为空" ajaxurl="../StudentRegisterCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>

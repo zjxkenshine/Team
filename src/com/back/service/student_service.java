@@ -78,6 +78,17 @@ public class student_service {
 		}
 	}
 
-	
+	public int updateStudentLoginMessage(String now,int num,String id) throws Exception{
+		try{
+			int i= sda.updateStudentLoginMessage(now,num,id);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("更新学生登录信息条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("更新学生登录信息失败，原因是："+e.getMessage());
+		}
+	}
 
 }
