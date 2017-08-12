@@ -35,7 +35,7 @@ String  path = request.getContextPath();
   <p class="f-20 text-success">欢迎登录学生个人中心</p>
   <p>登录次数：<c:out value="${student.getLoginNum()+1 }"></c:out> </p>
   <p>上次登录时间：<c:out value="${student.getLastLoginTime() }"></c:out></p>
-  <a href="student-school.jsp"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>
+  <a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updatePassword.jsp"><button class="btn btn-primary radius">修改密码</button></a>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>

@@ -42,6 +42,7 @@ String  path = request.getContextPath();
 		<li>欢迎登录</li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A">学生：<c:out value="${student.getStudentName() }"></c:out> <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
+				<li><a href="../StudentSelfMessageSet.sdo" target="commoniframe">个人中心</a></li>
 				<li><a href="student-updatePassword.jsp" target="commoniframe">修改密码</a></li>
 				<li><a href="../StudentReLogin.sdo">重新登录</a></li>
 				<li><a href="../StudentLogout.sdo">退出</a></li>

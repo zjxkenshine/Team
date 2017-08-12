@@ -1,10 +1,12 @@
 package com.back.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.back.model.Student;
+import com.back.model.Student_Province;
 import com.back.util.DBUtil;
 
 public class student_dao {
@@ -134,6 +136,55 @@ public class student_dao {
 		String sql="update student set PassWord=? where ID=?";
 	//	System.out.println(sql);
 		int i=DBUtil.executeUpdate(sql,new Object[]{password,stuid});
+		return i;
+	}
+	
+	//查询省份信息
+	public List<Student_Province> queryProvinceAll(){
+		String sql="select * from cms_provinces";
+		List<Map<String,Object>> lmp=DBUtil.list(sql);
+		if(lmp.size()>0){
+			List<Student_Province> lpro=new ArrayList<Student_Province>();
+			for(int i=0;i<lmp.size();i++){
+				Student_Province pro=new Student_Province();
+				pro.setProvince_id((int)lmp.get(i).get("province_id"));
+				pro.setProvince((String)lmp.get(i).get("province"));
+				lpro.add(pro);
+			}
+			return lpro;
+		}else{
+			return null;
+		}
+	}
+	
+	//查询学校信息
+	public List<Map<String,Object>> queryUniversity(String province){
+		String sql="select university from cms_provinces as pro,cms_university as sch where pro.province_id=sch.province_id and pro.province=?";
+	//	System.out.println(sql);
+		List<Map<String,Object>> lmp=DBUtil.list(sql,province);
+		if(lmp.size()>0){
+			return lmp;
+		}else{
+			return null;
+		}
+	}
+	
+	//查询学院信息
+	public List<Map<String,Object>> queryAcademy(String school){
+		String sql="select college from cms_university as sch,cms_college as aca where sch.university_id=aca.university_id and sch.university=?";
+		List<Map<String,Object>> lmp=DBUtil.list(sql,school);
+	//	System.out.println(lmp);
+		if(lmp.size()>0){
+			return lmp;
+		}else{
+			return null;
+		}
+	}
+	
+	//更新学生学校信息
+	public int updateStudentSchool(String province,String school,String academy,String major,int stuid){
+		String sql="update student set Province=?,School=?,Academy=?,Major=? where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{province,school,academy,major,stuid});
 		return i;
 	}
 	
