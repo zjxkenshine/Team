@@ -41,7 +41,7 @@ String  path = request.getContextPath();
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="user" name="username" type="text" placeholder="用户名/邮箱/手机号" class="input-text size-L">
+          <input id="user" name="username" type="text" placeholder="用户名/身份证/邮箱/手机号" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">

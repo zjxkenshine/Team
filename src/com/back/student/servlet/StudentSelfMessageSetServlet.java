@@ -40,6 +40,7 @@ public class StudentSelfMessageSetServlet extends HttpServlet {
 			Student stu=(Student)request.getSession().getAttribute("student");
 			String ID=String.valueOf(stu.getID());
 			Student stu1=stus.queryOneStudent(ID);
+			stu1.setLastLoginTime(stu.getLastLoginTime());
 			
 			session.setMaxInactiveInterval(30*60); //设置session时间
 			session.setAttribute("student", stu1); //存值进session

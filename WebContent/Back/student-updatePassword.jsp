@@ -64,6 +64,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认修改&nbsp;&nbsp;">
+        <a href="student-selfMessage.jsp"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;返回&nbsp;&nbsp;"></a>
       </div>
     </div>
   </form>

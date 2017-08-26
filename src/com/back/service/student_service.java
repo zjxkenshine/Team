@@ -142,4 +142,25 @@ public class student_service {
 			throw new Exception("更新学生学校信息失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public boolean checkStudentUpdateSelfMessage(String name,String value,String value2) throws Exception{
+		try{
+			return sda.checkStudentUpdateSelfMessage(name,value,value2);
+		}catch(Exception e){
+			throw new Exception("验证学生信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public int updateStudentSelfMessage(Student stu) throws Exception{
+		try{
+			int i= sda.updateStudentSelfMessage(stu);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("更新学生个人信息条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("更新学生个人信息失败，原因是："+e.getMessage());
+		}
+	}
 }

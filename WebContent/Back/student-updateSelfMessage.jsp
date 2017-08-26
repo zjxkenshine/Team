@@ -31,11 +31,40 @@ String  path = request.getContextPath();
 </head>
 <body>
 <div class="pd-20">
-  <form action="" method="post" class="form form-horizontal" id="form-member-add">
+  <form action="../StudentUpdateSelfMessage.sdo" method="post" class="form form-horizontal" id="updatemessage">
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="member-name" name="member-name" datatype="*2-16" nullmsg="用户名不能为空">
+      <!--  -->
+        <input type="text" class="input-text" value="${student.getStudentName() }" placeholder="必填" id="StudentName" name="StudentName" datatype="*2-16" nullmsg="用户名不能为空" ajaxurl="../StudentUpdateSelfMessageCheck.sdo?stuname=${student.getStudentName() }">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+     <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>手机：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getTel() }"  placeholder="必填" id="Tel" name="Tel" datatype="m" nullmsg="手机号不能为空" ajaxurl="../StudentUpdateSelfMessageCheck.sdo?tel=${student.getTel() }">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+     <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getRealName() }" placeholder="必填" id="RealName" name="RealName">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>身份证号：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getID_Card() }" placeholder="必填" id="ID_Card" name="ID_Card" datatype="idcard" nullmsg="身份证号不能为空" ajaxurl="../StudentUpdateSelfMessageCheck.sdo?idcard=${student.getID_Card() }">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>年龄：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getAge() }" placeholder="" id="Age" name="Age" readonly="readonly" ajaxurl="../StudentUpdateSelfMessageCheck.sdo">
       </div>
       <div class="col-4"> </div>
     </div>
@@ -43,66 +72,37 @@ String  path = request.getContextPath();
       <label class="form-label col-3"><span class="c-red">*</span>性别：</label>
       <div class="formControls col-5 skin-minimal">
         <div class="radio-box">
-          <input type="radio" id="sex-1" name="sex" datatype="*" nullmsg="请选择性别！">
-          <label for="sex-1">男</label>
+          <input type="radio" id="Sex1" name="sex" value="男" onclick="return false" <c:if test="${student.getSex() eq '男' }">checked="checked"</c:if>>
+          <label for="Sex1">男</label>
         </div>
         <div class="radio-box">
-          <input type="radio" id="sex-2" name="sex">
-          <label for="sex-2">女</label>
-        </div>
-        <div class="radio-box">
-          <input type="radio" id="sex-3" name="sex">
-          <label for="sex-3">保密</label>
+          <input type="radio" id="Sex2" name="sex" value="女" onclick="return false" <c:if test="${student.getSex() eq '女' }">checked="checked"</c:if>>
+          <label for="Sex2">女</label>
         </div>
       </div>
       <div class="col-4"> </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>手机：</label>
+   
+   <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>籍贯：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="" placeholder="" id="member-tel" name="member-tel"  datatype="m" nullmsg="手机不能为空">
+        <input type="text" class="input-text" value="${student.getHome() }" placeholder="选填" id="Home" name="Home" >
       </div>
       <div class="col-4"> </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
+    
+     <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>座右铭：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" placeholder="@" name="email" id="email" datatype="e" nullmsg="请输入邮箱！">
+        <input type="text" class="input-text" value="${student.getMotto() }" placeholder="选填" id="Motto" name="Motto">
       </div>
       <div class="col-4"> </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-3">附件：</label>
-      <div class="formControls col-5"> <span class="btn-upload form-group">
-        <input class="input-text upload-url" type="text" name="uploadfile-2" id="uploadfile-2" readonly  datatype="*" nullmsg="请添加附件！" style="width:200px">
-        <a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
-        <input type="file" multiple name="file-2" class="input-file">
-        </span> </div>
-      <div class="col-4"> </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-3">所在城市：</label>
-      <div class="formControls col-5"> <span class="select-box">
-        <select class="select" size="1" name="demo1" datatype="*" nullmsg="请选择所在城市！">
-          <option value="" selected>请选择城市</option>
-          <option value="1">北京</option>
-          <option value="2">上海</option>
-          <option value="3">广州</option>
-        </select>
-        </span> </div>
-      <div class="col-4"> </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-3">备注：</label>
-      <div class="formControls col-5">
-        <textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,100)"></textarea>
-        <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
-      </div>
-      <div class="col-4"> </div>
-    </div>
+    
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+        <a href="student-selfMessage.jsp"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;返回&nbsp;&nbsp;"></a>
       </div>
     </div>
   </form>
@@ -114,6 +114,7 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
+<script src="lib/laydate/laydate.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
@@ -122,7 +123,7 @@ $(function(){
 		increaseArea: '20%'
 	});
 	
-	$("#updatepassword").Validform({
+	$("#updatemessage").Validform({
 		tiptype:2,
 		callback:function(form){
 			form[0].submit();
@@ -131,7 +132,21 @@ $(function(){
 			parent.layer.close(index);
 		}
 	});
+	
+	$("#ID_Card").change(function(){
+		var idcard=$("#ID_Card").val();
+		if(idcard.trim().charAt(16)%2==0){
+			$("#Sex2").attr("checked","true");
+		}else{
+			$("#Sex1").attr("checked","true");
+		}
+		$("#Age").val(parseInt(laydate.now().substring(0,5))-parseInt(idcard.substring(6,10))+1);
+		alert(parseInt(laydate.now().substring(0,5))-parseInt(idcard.substring(6,10))+1);
+	})
+	
 });
+
+
 </script>
 </body>
 </html>
