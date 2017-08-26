@@ -40,7 +40,7 @@ public class StudentSessionFilter implements Filter {
 		String realURI =request.getRequestURI();
 		
 		String path = request.getContextPath();
-		System.out.println(realURI+"+=====+   "+path);
+	//	System.out.println(realURI+"+=====+   "+path);
 		if(request.getSession().getAttribute("student")!=null||realURI.endsWith("StudentLogin.sdo")||realURI.endsWith("StudentLoginCheck.sdo")
 				||realURI.endsWith("StudentForgetEmailCheck.sdo")||realURI.endsWith("StudentForgetPassword.sdo")||realURI.endsWith("StudentRegisterCheck.sdo")
 				||realURI.endsWith("StudentCodeCheck.sdo")||realURI.endsWith("StudentRegister.sdo")||realURI.endsWith("StudentRegisterSuccess.sdo")

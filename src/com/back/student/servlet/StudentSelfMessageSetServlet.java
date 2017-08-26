@@ -1,9 +1,6 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +12,16 @@ import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentLoginServlet
+ * Servlet implementation class StudentSelfMessageSetServlet
  */
-@WebServlet("/StudentLogin.sdo")
-public class StudentLoginServlet extends HttpServlet {
+@WebServlet("/StudentSelfMessageSet.sdo")
+public class StudentSelfMessageSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginServlet() {
+    public StudentSelfMessageSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,34 +30,21 @@ public class StudentLoginServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//学生登录设置
-		
-		
+		// 个人信息初始化
 		try{
 			//初始化
+			student_service stus=new student_service();
 			HttpSession session = request.getSession(); //获取session
-			Date nowTime =new Date();
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String now = sf.format(nowTime);
-			student_service stuse=new student_service();
 			
 			//取值
-			String stuid=request.getParameter("ID"); //获取ID
-			//System.out.println(stuid);
-			Student stu=stuse.queryOneStudent(stuid);
-			//System.out.println(stu);
+			Student stu=(Student)request.getSession().getAttribute("student");
+			String ID=String.valueOf(stu.getID());
+			Student stu1=stus.queryOneStudent(ID);
+			stu1.setLastLoginTime(stu.getLastLoginTime());
 			
-			//更新登陆次数
-			int num = stu.getLoginNum()+1;
-			
-			//更新学生信息
-			System.out.println(stuid);
-			stuse.updateStudentLoginMessage(now,num,stuid);
-			
-			//传值
 			session.setMaxInactiveInterval(30*60); //设置session时间
-			session.setAttribute("student", stu); //存值进session
-			response.sendRedirect("StudentLoginTransform.sdo");  //跳转
+			session.setAttribute("student", stu1); //存值进session
+			request.getRequestDispatcher("Back/student-selfMessage.jsp").forward(request, response);		
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);

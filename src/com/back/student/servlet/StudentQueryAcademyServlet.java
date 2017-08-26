@@ -1,9 +1,8 @@
 package com.back.student.servlet;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,16 +15,16 @@ import com.back.service.student_service;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LoginCheckServlet
+ * Servlet implementation class StudentQueryAcademyServlet
  */
-@WebServlet("/StudentLoginCheck.sdo")
-public class StudentLoginCheckServlet extends HttpServlet {
+@WebServlet("/StudentQueryAcademy.sdo")
+public class StudentQueryAcademyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentLoginCheckServlet() {
+    public StudentQueryAcademyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +32,32 @@ public class StudentLoginCheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-  
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//验证学生登录
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out =response.getWriter();
-		Gson gson = new Gson();
-		student_service stuse=new student_service();
-		String rcord =(String)request.getSession().getAttribute("rCode");  //获取验证码
-		String user=request.getParameter("username");
-		String password=request.getParameter("password");
-	//  System.out.println(user +","+ password);
-		
+		// 三级联动-查询学院
 		try{
-			 Map<String,Object> map=stuse.loginCheck(user, password);
-			 map.put("rcode", rcord);
-			 System.out.println(map);
-			String json =gson.toJson(map);
+			//初始化
+			System.out.println("执行2");
+			student_service stus=new student_service();
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out =response.getWriter();
+			Gson gson = new Gson();
+			
+			//取值
+			String school=request.getParameter("School");
+			System.out.println(school);
+			
+			//查询学校
+			List<Map<String,Object>> laca=stus.queryAcademy(school);
+		//	System.out.println(laca);
+			
+			//传值
+			String json =gson.toJson(laca);
     		out.write(json);
+			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 }
