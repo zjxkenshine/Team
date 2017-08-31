@@ -13,9 +13,9 @@
  */
 
 //根目录路径，可以指定绝对路径，比如 /var/www/attached/
-String rootPath = pageContext.getServletContext().getRealPath("/") + "hou/upload/";
+String rootPath = pageContext.getServletContext().getRealPath("/") + "Back/stu-upload/";
 //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
-String rootUrl  = request.getContextPath() + "/hou/upload/";
+String rootUrl  = request.getContextPath() + "/Back/stu-upload/";
 //图片扩展名
 String[] fileTypes = new String[]{"gif", "jpg", "jpeg", "png", "bmp"};
 

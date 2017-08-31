@@ -208,4 +208,11 @@ public class student_dao {
 		return i;
 	}
 	
+	//上传简历
+	public int uploadResume(String url,String time,String id){
+		String sql="update student set Resume=?,ResumeTime=? where ID=?";
+		int i = DBUtil.executeUpdate(sql, new Object[]{url,time,id});
+		return i;
+	}
+	
 }
