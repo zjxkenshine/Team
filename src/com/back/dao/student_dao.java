@@ -39,6 +39,15 @@ public class student_dao {
 		
 	}
 	
+	//查询所有学生
+	public List<Student> queryAllStudent(){
+		Student stu= new Student();
+		String sql ="select * from student";
+		List<Map<String,Object>> lmap=DBUtil.list(sql);
+		
+		return null;
+	}
+	
 	//根据ID查询学生信息
 	public Student queryOneStudent(String stuid){
 		Student stu= new Student();
@@ -71,6 +80,8 @@ public class student_dao {
 			stu.setRegisterStatus((String)map.get("RegisterStatus"));
 			stu.setLastLoginTime((String)map.get("LastLoginTime"));
 			stu.setLoginNum((int)map.get("LoginNum"));
+			stu.setCheckStatus((String)map.get("CheckStatus"));
+			stu.setIdPic((String)map.get("IdPic"));
 		}
 		return stu;
 	}
@@ -205,6 +216,20 @@ public class student_dao {
 	public int updateStudentSelfMessage(Student stu){
 		String sql="update student set StudentName=?,Tel=?,ID_Card=?,Home=?,Motto=?,Age=?,Sex=?,RealName=? where ID=?";
 		int i = DBUtil.executeUpdate(sql, new Object[]{stu.getStudentName(),stu.getTel(),stu.getID_Card(),stu.getHome(),stu.getMotto(),stu.getAge(),stu.getSex(),stu.getRealName(),stu.getID()});
+		return i;
+	}
+	
+	//上传简历
+	public int uploadResume(String url,String time,String id){
+		String sql="update student set Resume=?,ResumeTime=? where ID=?";
+		int i = DBUtil.executeUpdate(sql, new Object[]{url,time,id});
+		return i;
+	}
+	
+	//真实信息验证
+	public int updateSelfMessageCheck(String RealName,String ID_Card,String IdPic,String Picture,String id){
+		String sql="update student set RealName=?,ID_Card=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,ID_Card,IdPic,Picture,id});
 		return i;
 	}
 	

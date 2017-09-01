@@ -65,28 +65,28 @@ String  path = request.getContextPath();
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe616;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="article-list.html" href="javascript:void(0)">资讯管理</a></li>
+					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
+					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">信息验证</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe613;</i>我的收藏<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="picture-list.html" href="javascript:void(0)">图片管理</a></li>
+					<li><a _href="picture-list.html" href="javascript:void(0)">收藏招聘信息</a></li>
+					<li><a _href="picture-list.html" href="javascript:void(0)">收藏公司</a></li>
 				</ul>
 			</dd>
 		</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe620;</i> 帮助中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="product-brand.html" href="javascript:void(0)">品牌管理</a></li>
-					<li><a _href="product-category.html" href="javascript:void(0)">分类管理</a></li>
-					<li><a _href="product-list.html" href="javascript:void(0)">产品管理</a></li>
+					<li><a _href="product-brand.html" href="javascript:void(0)">待定</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -100,11 +100,11 @@ String  path = request.getContextPath();
 			</dd>
 		</dl>-->
 		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe622;</i>我的消息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="http://h-ui.duoshuo.com/admin/" href="javascript:;">评论列表</a></li>
-					<li><a _href="feedback-list.html" href="javascript:void(0)">意见反馈</a></li>
+					<li><a _href="" href="javascript:;">系统消息</a></li>
+					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
 				</ul>
 			</dd>
 		</dl>
