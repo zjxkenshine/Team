@@ -176,4 +176,17 @@ public class student_service {
 			throw new Exception("上传简历失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public int updateSelfMessageCheck(String RealName,String ID_Card,String IdPic,String Picture,String id) throws Exception{
+		try{
+			int i= sda.updateSelfMessageCheck( RealName, ID_Card, IdPic, Picture, id);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("真实信息验证条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("真实信息验证失败，原因是："+e.getMessage());
+		}
+	}
 }

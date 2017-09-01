@@ -29,6 +29,8 @@ public class Student implements Serializable {
 	private String RegisterTime;	//注册时间
 	private String LastLoginTime;   //上次登录时间
 	private int LoginNum;   //登录次数
+	private String CheckStatus; //认证状态
+	private String IdPic; //认证照片
 
 	
 	
@@ -40,7 +42,19 @@ public class Student implements Serializable {
 				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + ", Status="
 				+ Status + ", Intention=" + Intention + ", EducationBgd=" + EducationBgd + ", RealName=" + RealName
 				+ ", RegisterStatus=" + RegisterStatus + ", RegisterTime=" + RegisterTime + ", LastLoginTime="
-				+ LastLoginTime + ", LoginNum=" + LoginNum + "]";
+				+ LastLoginTime + ", LoginNum=" + LoginNum + ", CheckStatus=" + CheckStatus + ", IdPic=" + IdPic + "]";
+	}
+	public String getCheckStatus() {
+		return CheckStatus;
+	}
+	public void setCheckStatus(String checkStatus) {
+		CheckStatus = checkStatus;
+	}
+	public String getIdPic() {
+		return IdPic;
+	}
+	public void setIdPic(String idPic) {
+		IdPic = idPic;
 	}
 	public String getLastLoginTime() {
 		return LastLoginTime;
