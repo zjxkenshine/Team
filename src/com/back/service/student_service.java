@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.back.dao.student_dao;
+import com.back.model.Collect;
+import com.back.model.Firm;
+import com.back.model.Recruit;
 import com.back.model.Student;
 import com.back.model.Student_Province;
 
@@ -189,4 +192,66 @@ public class student_service {
 			throw new Exception("真实信息验证失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public List<Collect> queryRecruitCollect(String id) throws Exception{
+		try{
+			return sda.queryRecruitCollect(id);
+		}catch(Exception e){
+			throw new Exception("查询职位收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Collect> queryFirmCollect(String id) throws Exception{
+		try{
+			return sda.queryFirmCollect(id);
+		}catch(Exception e){
+			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Firm> queryFirmCollectDetils(List<Integer> lid) throws Exception{
+		try{
+			return sda.queryFirmCollectDetils(lid);
+		}catch(Exception e){
+			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Recruit> queryRecruitCollectDetils(List<Integer> lid) throws Exception{
+		try{
+			return sda.queryRecruitCollectDetils(lid);
+		}catch(Exception e){
+			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	//删除收藏公司信息
+		public int deleteCollectFirm(String lid,int id) throws Exception{
+			try{
+				int i= sda.deleteCollectFirm(lid,id);
+				if(i>0){
+					return i;
+				}else{
+					throw new Exception("删除条数为0");
+				}
+			}catch(Exception e){
+				throw new Exception("删除收藏失败，原因是："+e.getMessage());
+			}
+		}
+		
+		//删除收藏职位信息
+				public int deleteCollectRecruit(String lid,int id) throws Exception{
+					try{
+						int i= sda.deleteCollectRecruit(lid, id);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("删除条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("删除收藏失败，原因是："+e.getMessage());
+					}
+				}
+				
+				
 }
