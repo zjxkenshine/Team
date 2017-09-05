@@ -266,6 +266,20 @@ public class student_service {
 					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
 				}
 			}
+			
+			//更新学院信息校正表
+			public int updateSchoolMessage(String province,String school,String college,int id) throws Exception{
+				try{
+					int i= sda.updateSchoolMessage(province,school,college,id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("更新条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
+				}
+			}
 				
 				
 }

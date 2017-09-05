@@ -64,16 +64,26 @@ String  path = request.getContextPath();
 <aside class="Hui-aside">
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dl id="menu-menber">
+			<dt><i class="Hui-iconfont">&#xe60d;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="../StudentSelfMessageSet.sdo" href="javascript:void(0)">个人信息主页</a></li>
-					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
 					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">信息验证</a></li>
 				</ul>
 			</dd>
 		</dl>
+		<c:if test="${student.getCheckStatus() eq '2' }">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 我的简历<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
+					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">简历投递</a></li>
+				</ul>
+			</dd>
+		</dl>
+		</c:if>
 		<dl id="menu-picture">
 			<dt><i class="Hui-iconfont">&#xe613;</i>我的收藏<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -91,7 +101,6 @@ String  path = request.getContextPath();
 					<li><a _href="" href="javascript:void(0)">老师消息</a></li>
 					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
 					<li><a _href="" href="javascript:;">其他消息</a></li>
-					<li><a _href="" href="javascript:;">我发送的消息</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -99,7 +108,7 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe620;</i> 帮助中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="#" href="javascript:void(0)">敬请期待</a></li>
+					<li><a _href="#" href="javascript:void(0)">关于认证</a></li>
 				</ul>
 			</dd>
 		</dl>

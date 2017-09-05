@@ -33,7 +33,7 @@ String  path = request.getContextPath();
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 个人信息 <span class="c-gray en">&gt;</span> 我的简历 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><c:if test="${student.getCheckStatus() eq '2' }"> <a onclick="Competence_upload(this,${student.getID()})"   class="btn btn-primary radius"> 上传简历（替换掉原来的简历）</a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if><a  class="btn btn-primary radius">投放简历功能仅对认证学生开放</a>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a onclick="Competence_upload(this,${student.getID()})"   class="btn btn-primary radius"> 上传简历（替换掉原来的简历）</a>
 	<div class="portfolio-content">
 		<ul class="cl portfolio-area">
 			<li class="item">

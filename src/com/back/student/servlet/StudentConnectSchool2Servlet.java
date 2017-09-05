@@ -43,7 +43,7 @@ public class StudentConnectSchool2Servlet extends HttpServlet {
 					
 					//更新
 					stus.updateStudentSchool(province,school,academy,major,stu.getID());
-					
+					stus.updateSchoolMessage(province, school, academy, stu.getID());
 					
 					//传值跳转
 					response.sendRedirect("StudentSelfMessageSet.sdo");

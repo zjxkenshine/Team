@@ -90,6 +90,20 @@ String  path = request.getContextPath();
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" datatype="*" nullmsg="请选择学历！">
+          <option value="" selected>请选择学历</option>
+          <option value="大学专科">大学专科</option>
+          <option value="大学本科">大学本科</option>
+          <option value="硕士研究生">硕士研究生</option>
+          <option value="博士研究生">博士研究生</option>
+          <option value="其他">其他</option>
+        </select>
+        </span> </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实头像(真人)：</label>
       <div class="formControls col-5">
       	<p><input type="hidden" id="url3" name="Picture"  value=""  datatype="*" nullmsg="请上传头像" /><img src="" width="200px" height="200px" id="img3"><input type="button" id="image3" value="选择图片" /></p>
@@ -117,21 +131,30 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getRealName() }" placeholder=""   datatype="*" nullmsg="请填写真实姓名">
+        <input type="text" class="input-text" value="${student.getRealName() }" placeholder=""  readonly="readonly">
       </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" >
+          <option value="${student.getEducationBgd() }" selected>${student.getEducationBgd()}</option>
+        </select>
+        </span> </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实头像：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url3" value=""  datatype="*" nullmsg="请上传头像" /><img src="${student.getPicture() }" width="200px" height="200px" id="img3"></p>
+      	<p><input type="hidden" id="url3" value=""  datatype="*" nullmsg="请上传头像" /><img src="${student.getPicture() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>学生证正面照片：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px" id="img1"></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -151,6 +174,15 @@ String  path = request.getContextPath();
       <div class="formControls col-5">
         <input type="text" class="input-text" readonly="readonly" value="${student.getRealName() }" placeholder=""   datatype="*" nullmsg="请填写真实姓名">
       </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" >
+          <option value="${student.getEducationBgd() }" selected>${student.getEducationBgd()}</option>
+        </select>
+        </span> </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">

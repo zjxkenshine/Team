@@ -35,7 +35,7 @@ String  path = request.getContextPath();
   <p class="f-20 text-success">欢迎登录学生个人中心</p>
   <p>登录次数：<c:out value="${student.getLoginNum() }"></c:out> </p>
   <p>上次登录时间：<c:out value="${student.getLastLoginTime() }"></c:out></p>
-  <a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updatePassword.jsp"><button class="btn btn-primary radius">修改密码</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<button id="intention" class="btn btn-primary radius">求职意向</button>
+  <c:if test="${student.getCheckStatus() eq '0' }"><a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if><a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updatePassword.jsp"><button class="btn btn-primary radius">修改密码</button></a><c:if test="${student.getCheckStatus() eq '2' }">&nbsp;&nbsp;&nbsp;&nbsp;<button id="intention" class="btn btn-primary radius">求职意向</button></c:if>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
@@ -47,6 +47,12 @@ String  path = request.getContextPath();
         <th width="200">学生编号(不可修改)</th>
         <td><c:out value="${student.getID() }"></c:out></td>
       </tr>
+      <c:if test="${student.getCheckStatus() eq '2' }">
+      <tr>
+        <td>用户照片</td>
+        <td><img src="${student.getPicture()}" width="150px" height="150px"></td>
+      </tr>
+     </c:if>
       <tr>
         <td>用户名</td>
         <td><c:out value="${student.getStudentName() }"></c:out></td>

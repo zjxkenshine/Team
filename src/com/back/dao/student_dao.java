@@ -230,9 +230,9 @@ public class student_dao {
 	}
 	
 	//真实信息验证
-	public int updateSelfMessageCheck(String RealName,String ID_Card,String IdPic,String Picture,String id){
-		String sql="update student set RealName=?,ID_Card=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
-		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,ID_Card,IdPic,Picture,id});
+	public int updateSelfMessageCheck(String RealName,String EducationBgd,String IdPic,String Picture,String id){
+		String sql="update student set RealName=?,EducationBgd=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,EducationBgd,IdPic,Picture,id});
 		return i;
 	}
 	
@@ -365,6 +365,13 @@ public class student_dao {
 		public int updateIntention(String in,int id){
 			String sql="update student set Intention=? where ID=?";
 			int i=DBUtil.executeUpdate(sql,new Object[]{in,id});
+			return i;
+		}
+		
+		//更新学院信息校正表
+		public int updateSchoolMessage(String province,String school,String college,int id){
+			String sql="insert into updateschoolmessage (Province,University,College,StuID) values(?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{province,school,college,id});
 			return i;
 		}
 	
