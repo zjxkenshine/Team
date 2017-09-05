@@ -28,11 +28,11 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>绑定学校</title>
+<title>绑定学校（矫正）</title>
 </head>
 <body>
 <div class="pd-20">
-  <form action="../StudentConnectSchool.sdo" method="post" class="form form-horizontal" id="schoolbind">
+  <form action="../StudentConnectSchool2.sdo" method="post" class="form form-horizontal" id="schoolbind">
     <div class="row cl">
       <label class="form-label col-3">学校所在省份：</label>
       <div class="formControls col-5"> <span class="select-box">
@@ -50,32 +50,20 @@ String  path = request.getContextPath();
         </span> </div>
       <div class="col-4"> </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-3">学校：</label>
-      <div class="formControls col-5"> <span class="select-box">
-        <select class="select" size="1" name="School" id="School">
-          <c:if test="${student.getSchool()!=null||student.getSchool()!='' }">
-          <option value="${student.getSchool() }" selected><c:out value="${student.getSchool() }"></c:out></option>
-        </c:if> 
-        <c:if test="${student.getSchool()==null||student.getSchool()=='' }">
-          <option value="" selected>请选择学校</option>
-        </c:if> 
-        </select>
-        </span> </div>
+    
+   <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>学校：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getSchool() }" placeholder="" id="School" name="School" datatype="*2-16" nullmsg="学校不能为空">
+      </div>
       <div class="col-4"> </div>
     </div>
+    
     <div class="row cl">
-      <label class="form-label col-3">学院：</label>
-      <div class="formControls col-5"> <span class="select-box">
-        <select class="select" size="1" name="Academy" id="Academy">
-        <c:if test="${student.getAcademy()!=null||student.getAcademy()!='' }">
-          <option value="${student.getAcademy() }" selected><c:out value="${student.getAcademy() }"></c:out></option>
-        </c:if> 
-        <c:if test="${student.getAcademy()==null||student.getAcademy()=='' }">
-          <option value="" selected>请选择学院</option>
-        </c:if> 
-        </select>
-        </span> </div>
+      <label class="form-label col-3"><span class="c-red">*</span>学院：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" value="${student.getAcademy() }" placeholder="" id="Academy" name="Academy" datatype="*2-16" nullmsg="学院不能为空">
+      </div>
       <div class="col-4"> </div>
     </div>
     
@@ -90,8 +78,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确认绑定&nbsp;&nbsp;">
-        <a href="student-selfMessage.jsp"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;返回&nbsp;&nbsp;"></a>
-        <a href="student-connectSchool.jsp">没有你的学校或学院?点击手动添加</a>
+        <a href="student-school.jsp"><input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;返回&nbsp;&nbsp;"></a>
       </div>
     </div>
   </form>
@@ -103,44 +90,7 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
 <script type="text/javascript">
-function queryschool(){
-	var Province=$("#Province").val();
-	$("#Academy").html("<option value=''>请选择学院</option>");
-	$("#School").html("<option value=''>请选择学校</option>");
-	$.ajax({
-		url:"../StudentQuerySchool.sdo",
-		type:"GET",
-		dataType:"json",
-		data:{Province:Province},
-		success:function(data){
-			$(data).each(function(i){
-				$("#School").append("<option value="+this.university+">"+this.university+"</option>");
-			})
-		},
-		error:function(){
-			alert("出错啦!");
-		}
-	})
-}
 
-function queryacademy(){
-	var School=$("#School").val();
-	$("#Academy").html("<option value=''>请选择学院</option>");
-	$.ajax({
-		url:"../StudentQueryAcademy.sdo",
-		type:"GET",
-		dataType:"json",
-		data:{School:School},
-		success:function(data){
-			$(data).each(function(i){
-				$("#Academy").append("<option value="+this.college+">"+this.college+"</option>");
-			})
-		},
-		error:function(){
-			alert("出错啦");
-		}
-	})
-}
 
 $(function(){
 	$('.skin-minimal input').iCheck({
@@ -162,8 +112,7 @@ $(function(){
 });
 
 $(function(){
-	$("#Province").change(queryschool);
-	$("#School").change(queryacademy);
+	
 });
 
 

@@ -36,7 +36,6 @@ public class StudentSchoolSetServlet extends HttpServlet {
 			//初始化
 			student_service stus=new student_service();
 			
-			
 			//查询省份信息
 			List<Student_Province> ls=stus.queryProvinceAll();
 			

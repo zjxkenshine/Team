@@ -48,9 +48,9 @@ String  path = request.getContextPath();
       <div class="col-4"> </div>
     </div>
      <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>真实姓名(认证成功后不可修改)：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getRealName() }" placeholder="必填" id="RealName" name="RealName">
+        <input type="text" class="input-text" value="${student.getRealName() }" <c:if test="${student.getCheckStatus() eq '2' }">readonly="readonly"</c:if> placeholder="必填" id="RealName" name="RealName">
       </div>
       <div class="col-4"> </div>
     </div>

@@ -360,5 +360,12 @@ public class student_dao {
 			int i=DBUtil.executeUpdate(sql,new Object[]{id1,id});
 			return i;
 		}
+		
+		//更新求职意向
+		public int updateIntention(String in,int id){
+			String sql="update student set Intention=? where ID=?";
+			int i=DBUtil.executeUpdate(sql,new Object[]{in,id});
+			return i;
+		}
 	
 }

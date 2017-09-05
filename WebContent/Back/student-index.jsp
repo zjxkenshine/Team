@@ -68,6 +68,7 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe616;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					<li><a _href="../StudentSelfMessageSet.sdo" href="javascript:void(0)">个人信息主页</a></li>
 					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
 					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">信息验证</a></li>
 				</ul>
@@ -82,43 +83,26 @@ String  path = request.getContextPath();
 				</ul>
 			</dd>
 		</dl>
-		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 帮助中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="product-brand.html" href="javascript:void(0)">待定</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<!--<dl id="menu-page">
-			<dt><i class="Hui-iconfont">&#xe626;</i> 页面管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="page-home.html" href="javascript:void(0)">首页管理</a></li>
-					<li><a _href="page-flinks.html" href="javascript:void(0)">友情链接</a></li>
-				</ul>
-			</dd>
-		</dl>-->
 		<dl id="menu-comments">
 			<dt><i class="Hui-iconfont">&#xe622;</i>我的消息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="" href="javascript:;">系统消息</a></li>
+					<li><a _href="" href="javascript:void(0)">老师消息</a></li>
 					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
 					<li><a _href="" href="javascript:;">其他消息</a></li>
+					<li><a _href="" href="javascript:;">我发送的消息</a></li>
 				</ul>
 			</dd>
 		</dl>
-		<!--<dl id="menu-order">
-			<dt><i class="Hui-iconfont">&#xe63a;</i> 财务管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 帮助中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="order-list.html" href="javascript:void(0)">订单列表</a></li>
-					<li><a _href="recharge-list.html" href="javascript:void(0)">充值管理</a></li>
-					<li><a _href="invoice-list.html" href="javascript:void(0)">发票管理</a></li>
+					<li><a _href="#" href="javascript:void(0)">敬请期待</a></li>
 				</ul>
 			</dd>
-		</dl>-->
+		</dl>
 	</div>
 </aside>
 <div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

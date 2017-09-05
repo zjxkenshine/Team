@@ -221,7 +221,7 @@ public class student_service {
 		try{
 			return sda.queryRecruitCollectDetils(lid);
 		}catch(Exception e){
-			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+			throw new Exception("查询职位收藏信息失败，原因是："+e.getMessage());
 		}
 	}
 	
@@ -252,6 +252,20 @@ public class student_service {
 						throw new Exception("删除收藏失败，原因是："+e.getMessage());
 					}
 				}
+				
+			//更新求职意向
+			public int updateIntention(String in,int id) throws Exception{
+				try{
+					int i= sda.updateIntention(in, id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("更新条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
+				}
+			}
 				
 				
 }
