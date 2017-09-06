@@ -7,6 +7,7 @@ import com.back.dao.student_dao;
 import com.back.model.Collect;
 import com.back.model.Firm;
 import com.back.model.Recruit;
+import com.back.model.Resume;
 import com.back.model.Student;
 import com.back.model.Student_Province;
 
@@ -280,6 +281,66 @@ public class student_service {
 					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
 				}
 			}
+			
+			
+			public List<Firm> queryAllSchool() throws Exception{
+				try{
+					return sda.queryAllSchool();
+				}catch(Exception e){
+					throw new Exception("查询公司列表失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public Firm queryFirm(String id) throws Exception{
+				try{
+					return sda.queryFirm(id);
+				}catch(Exception e){
+					throw new Exception("查询公司失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addResume(String firmname,Student stu) throws Exception{
+				try{
+					return sda.addResume(firmname,stu);
+				}catch(Exception e){
+					throw new Exception("投递失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkSendResume(String firmname,int i) throws Exception{
+				try{
+					//System.out.println(111);
+					return sda.checkSendResume(firmname,i);
+				}catch(Exception e){
+					throw new Exception("投递失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public List<Resume> queryallresumesend(int id) throws Exception{
+				try{
+					//System.out.println(111);
+					return sda.queryallresumesend(id);
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkCollectFirm(String a,int id) throws Exception{
+				try{
+					return sda.checkCollectFirm(a,id);
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addCollectFirm(String a,int id,String now) throws Exception{
+				try{
+					return sda.addCollectFirm(a,id,now);
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+		
 				
 				
 }

@@ -78,12 +78,22 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe616;</i> 我的简历<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
-					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">简历投递</a></li>
+					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">简历管理</a></li>
+					<li><a _href="../StudentFirmListSet.sdo" href="javascript:void(0)">简历投递</a></li>
+					<li><a _href="../StudentResumeManagerSet.sdo" href="javascript:void(0)">投递管理</a></li>
 				</ul>
 			</dd>
 		</dl>
 		</c:if>
+		<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe61a;</i>信息检索<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="" href="javascript:void(0)">招聘信息查询</a></li>
+					<li><a _href="" href="javascript:void(0)">公司查询</a></li>
+				</ul>
+			</dd>
+		</dl>
 		<dl id="menu-picture">
 			<dt><i class="Hui-iconfont">&#xe613;</i>我的收藏<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

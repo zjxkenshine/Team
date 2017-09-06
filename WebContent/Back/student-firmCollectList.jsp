@@ -31,10 +31,6 @@ String  path = request.getContextPath();
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 我的收藏  <span class="c-gray en">&gt;</span> 收藏公司 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<div class="text-c"> 
-		<input type="text" class="input-text" style="width:250px" placeholder="" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索公司</button>
-	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a id="prodelete" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 取消收藏</a> </div>
 	<div class="mt-20">
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
