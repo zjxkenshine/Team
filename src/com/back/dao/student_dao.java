@@ -1,6 +1,7 @@
 package com.back.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -460,11 +461,12 @@ public class student_dao {
 		
 		//查询所有投递的简历
 		public List<Resume> queryallresumesend(int id){
-			String sql="select * from resume_list where StuID=?";
+			String sql="select * from resume_list where Stu_ID=?";
 			List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+		//	System.out.println(lmap);
 			List<Resume> lre=new ArrayList<Resume>();
 			if(lmap!=null){
-				for(int i=0;i<lre.size();i++){
+				for(int i=0;i<lmap.size();i++){
 					Resume re=new Resume();
 					re.setID((int) lmap.get(i).get("ID"));
 					re.setEducationBgd((String) lmap.get(i).get("EducationBgd"));
@@ -473,7 +475,7 @@ public class student_dao {
 					re.setMajor((String) lmap.get(i).get("Major"));
 					re.setRealName((String) lmap.get(i).get("RealName"));
 					re.setResume((String) lmap.get(i).get("Resume"));
-					re.setResumeTime((String) lmap.get(i).get("ResumeTime"));
+					re.setResumeTime((String)lmap.get(i).get("ResumeTime"));
 					lre.add(re);
 				}
 				return lre;
@@ -499,6 +501,13 @@ public class student_dao {
 		public int addCollectFirm(String a,int id,String now){
 			String sql="insert into stu_collect(StuID,FirmID,CollectTime) values(?,?,?)";
 			int i=DBUtil.executeUpdate(sql,new Object[]{id,a,now});
+			return i;
+		}
+		
+		//删除投递的简历
+		public int deleteResume(String id){
+			String sql="delete from resume_list where ID=?";
+			int i=DBUtil.executeUpdate(sql,id);
 			return i;
 		}
 	

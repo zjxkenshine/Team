@@ -318,7 +318,6 @@ public class student_service {
 			
 			public List<Resume> queryallresumesend(int id) throws Exception{
 				try{
-					//System.out.println(111);
 					return sda.queryallresumesend(id);
 				}catch(Exception e){
 					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
@@ -338,6 +337,19 @@ public class student_service {
 					return sda.addCollectFirm(a,id,now);
 				}catch(Exception e){
 					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int deleteResume(String id) throws Exception{
+				try{
+					int i= sda.deleteResume(id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("删除条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("删除简历投递失败，原因是："+e.getMessage());
 				}
 			}
 		

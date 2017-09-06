@@ -10,7 +10,7 @@
 </head>
 <body>
  	<script type="text/javascript">	
- 	top.layer.alert('取消收藏成功！',{
+ 	top.layer.alert('取消成功！',{
   	  	  			               title: '提示框',				
   	  	  						   icon:1,		
   	  	  						  });
