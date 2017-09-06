@@ -377,7 +377,7 @@ public class student_dao {
 			return i;
 		}
 		
-		//查询所有学校信息（已认证）
+		//查询所有公司信息（已认证）
 		public List<Firm> queryAllSchool(){
 			String sql="select * from firm where Status='Yes'";
 			List<Map<String,Object>> lmap=DBUtil.list(sql);
@@ -409,7 +409,7 @@ public class student_dao {
 			}
 		}
 		
-		//查询学校信息（已认证）
+		//查询公司信息（已认证）
 				public Firm queryFirm(String id){
 					String sql="select * from firm where Status='Yes' and ID=?";
 					List<Map<String,Object>> lmap=DBUtil.list(sql,id);
@@ -485,9 +485,20 @@ public class student_dao {
 			
 		}
 		
-		//判断收藏表
+		//判断收藏公司
 		public boolean checkCollectFirm(String a,int id){
 			String sql="select * from stu_collect where FirmID=? and StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{a,id});
+			if(lmap.size()>=1){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		//判断收藏职位
+		public boolean checkCollectRecruit(String a,int id){
+			String sql="select * from stu_collect where RecruitID=? and StuID=?";
 			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{a,id});
 			if(lmap.size()>=1){
 				return false;
@@ -504,11 +515,44 @@ public class student_dao {
 			return i;
 		}
 		
+		//添加收藏职位
+		public int addCollectRecruit(String a,int id,String now){
+			String sql="insert into stu_collect(StuID,RecruitID,CollectTime) values(?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{id,a,now});
+			return i;
+		}
+		
 		//删除投递的简历
 		public int deleteResume(String id){
 			String sql="delete from resume_list where ID=?";
 			int i=DBUtil.executeUpdate(sql,id);
 			return i;
+		}
+		
+		//查询所有职位信息
+		public List<Recruit> queryAllRecruit(){
+			String sql="select * from recruit";
+			List<Map<String,Object>> lmap=DBUtil.list(sql);
+			List<Recruit> lr=new ArrayList<Recruit>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+							Recruit rec=new Recruit();
+							rec.setDate((String)lmap.get(i).get("Date"));
+							rec.setDepartment((String)lmap.get(i).get("Department"));
+							rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+							rec.setFirmName((String)lmap.get(i).get("FirmName"));
+							rec.setID((int)lmap.get(i).get("ID"));
+							rec.setJob((String)lmap.get(i).get("Job"));
+							rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+							rec.setJobNature((String)lmap.get(i).get("JobNature"));
+							rec.setPay((String)lmap.get(i).get("Pay"));
+							rec.setWelfare((String)lmap.get(i).get("Welfare"));
+							lr.add(rec);
+				}
+				return lr;
+			}else{
+			return null;
+			}
 		}
 	
 }

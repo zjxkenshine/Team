@@ -26,13 +26,13 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>简历投递</title>
+<title>公司信息</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 我的简历<span class="c-gray en">&gt;</span> 简历投递 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 信息<span class="c-gray en">&gt;</span> 公司信息 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
 	<div class="mt-20">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a id="prosend" class="btn btn-primary radius">一键投递</a>&nbsp;&nbsp;&nbsp;&nbsp; <a id="procol" class="btn btn-primary radius">一键收藏</a></div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a id="procol" class="btn btn-primary radius">一键收藏</a></div>
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
@@ -64,7 +64,6 @@ String  path = request.getContextPath();
 				<td><c:out value="${fir.getDes() }"></c:out></td>
 				<td> 
 				<a style="text-decoration:none" onClick="collect(this,${fir.getID() })" href="javascript:;" title="收藏"><i class="Hui-iconfont">&#xe603;</i></a>
-				<a style="text-decoration:none" onClick="sendresume(this,${fir.getID() })" href="javascript:;" title="投递简历"><i class="Hui-iconfont">&#xe6de;</i></a>
 				</td>
 			
 			</tr>
@@ -136,39 +135,6 @@ function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 
-function sendresume(obj,id){
-	layer.confirm('确认要向该公司投递简历吗？',function(index){
-		layer.open({
-		    type: 2 //Page层类型
-		   	,area: ['700px', '530px']
-		    ,title: '简历投递'
-		    ,shade: 0.6 //遮罩透明度
-		    ,maxmin: true //允许全屏最小化
-		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentSendResume.sdo?CollectID='+id,
-		  
-		});
-	});
-}
-
-//批量删除
-$("#prosend").click(function(){
-	layer.confirm('确认要向这些公司投递简历吗？',{icon:0,},function(index){
-		var status=[];
-		$(".ace[btn_name='checkid']:checked").each(function(){
-			status.push($(this).val());
-		})
-		layer.open({
-		    type: 2 //Page层类型
-		   	,area: ['700px', '530px']
-		    ,title: '一键投递'
-		    ,shade: 0.6 //遮罩透明度
-		    ,maxmin: true //允许全屏最小化
-		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentSendResume.sdo?CollectID='+status,
-		});
-	});
-})
 
 function collect(obj,id){
 		layer.open({

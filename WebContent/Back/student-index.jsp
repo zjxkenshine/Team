@@ -89,8 +89,8 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe61a;</i>信息检索<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="" href="javascript:void(0)">招聘信息查询</a></li>
-					<li><a _href="" href="javascript:void(0)">公司查询</a></li>
+					<li><a _href="../StudentRecuritSet.sdo" href="javascript:void(0)">招聘职位查询</a></li>
+					<li><a _href="..//StudentFirmSet.sdo" href="javascript:void(0)">公司查询</a></li>
 				</ul>
 			</dd>
 		</dl>

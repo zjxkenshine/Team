@@ -328,7 +328,15 @@ public class student_service {
 				try{
 					return sda.checkCollectFirm(a,id);
 				}catch(Exception e){
-					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+					throw new Exception("验证收藏失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkCollectRecruit(String a,int id) throws Exception{
+				try{
+					return sda.checkCollectRecruit(a,id);
+				}catch(Exception e){
+					throw new Exception("验证收藏失败，原因是："+e.getMessage());
 				}
 			}
 			
@@ -336,7 +344,15 @@ public class student_service {
 				try{
 					return sda.addCollectFirm(a,id,now);
 				}catch(Exception e){
-					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+					throw new Exception("收藏公司失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addCollectRecruit(String a,int id,String now) throws Exception{
+				try{
+					return sda.addCollectRecruit(a,id,now);
+				}catch(Exception e){
+					throw new Exception("收藏职位失败失败，原因是："+e.getMessage());
 				}
 			}
 			
@@ -352,7 +368,16 @@ public class student_service {
 					throw new Exception("删除简历投递失败，原因是："+e.getMessage());
 				}
 			}
+			
 		
-				
+			public List<Recruit> queryAllRecruit() throws Exception{
+				try{
+					return sda.queryAllRecruit();
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+		
+			
 				
 }
