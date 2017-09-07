@@ -1,10 +1,15 @@
 package com.back.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.back.model.Collect;
+import com.back.model.Firm;
+import com.back.model.Recruit;
+import com.back.model.Resume;
 import com.back.model.Student;
 import com.back.model.Student_Province;
 import com.back.util.DBUtil;
@@ -227,10 +232,327 @@ public class student_dao {
 	}
 	
 	//真实信息验证
-	public int updateSelfMessageCheck(String RealName,String ID_Card,String IdPic,String Picture,String id){
-		String sql="update student set RealName=?,ID_Card=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
-		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,ID_Card,IdPic,Picture,id});
+	public int updateSelfMessageCheck(String RealName,String EducationBgd,String IdPic,String Picture,String id){
+		String sql="update student set RealName=?,EducationBgd=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,EducationBgd,IdPic,Picture,id});
 		return i;
 	}
+	
+	//收藏招聘信息
+	public List<Collect> queryRecruitCollect(String id){
+		String sql="select * from stu_collect where StuID=? and RecruitID is not null and FirmID is null";
+		List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+		List<Collect> lco=new ArrayList<Collect>();
+		System.out.println(lco);
+		if(lmap!=null){
+			for(int i=0;i<lmap.size();i++){
+				Collect col=new Collect();
+				col.setStuID((int)lmap.get(i).get("StuID"));
+				col.setCollectID((int)lmap.get(i).get("CollectID"));
+				col.setRecruitID((int)lmap.get(i).get("RecruitID"));
+				col.setCollectTime((String)lmap.get(i).get("CollectTime"));
+				lco.add(col);
+			}
+			return lco;
+		}else{
+			return null;
+		}
+		
+	}
+	
+	//收藏公司信息
+	public List<Collect> queryFirmCollect(String id){
+		String sql="select * from stu_collect where StuID=? and FirmID is not null and RecruitID is null";
+		List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+		List<Collect> lco=new ArrayList<Collect>();
+		if(lmap!=null){
+			for(int i=0;i<lmap.size();i++){
+				Collect col=new Collect();
+				col.setStuID((int)lmap.get(i).get("StuID"));
+				col.setCollectID((int)lmap.get(i).get("CollectID"));
+				col.setFirmID((int)lmap.get(i).get("FirmID"));
+				col.setCollectTime((String)lmap.get(i).get("CollectTime"));
+				lco.add(col);
+			}
+			return lco;
+		}else{
+			return null;
+		}
+		
+	}
+	
+	//获取收藏公司列表
+	public List<Firm> queryFirmCollectDetils(List<Integer> lid){
+		//System.out.println(lid);
+		String sql="select * from firm where Status='Yes'";
+		List<Map<String,Object>> lmap=DBUtil.list(sql);
+		List<Firm> lf=new ArrayList<Firm>();
+		
+		if(lmap!=null){
+			for(int i=0;i<lmap.size();i++){
+				for(int j=0;j<lid.size();j++){
+					if((int)lmap.get(i).get("ID")==lid.get(j)){
+						Firm fir=new Firm();
+						fir.setAdress((String)lmap.get(i).get("Adress"));
+						fir.setArea((String)lmap.get(i).get("Area"));
+						fir.setCardStart((String)lmap.get(i).get("CardStart"));
+						fir.setDes((String)lmap.get(i).get("Des"));
+						fir.setEmail((String)lmap.get(i).get("Email"));
+						fir.setFirmID((String)lmap.get(i).get("FirmID"));
+						fir.setFirmName((String)lmap.get(i).get("FirmName"));
+						fir.setID((int)lmap.get(i).get("ID"));
+						fir.setLinkMan((String)lmap.get(i).get("LinkMan"));
+						fir.setLogo((String)lmap.get(i).get("Logo"));
+						fir.setPeopleNumber((String)lmap.get(i).get("PeopleNumber"));
+						fir.setPicture((String)lmap.get(i).get("Picture"));
+						fir.setStatus((String)lmap.get(i).get("Status"));
+						fir.setTel((String)lmap.get(i).get("Tel"));
+						fir.setType((String)lmap.get(i).get("Type"));
+						lf.add(fir);
+					}
+				}
+				
+			}
+			return lf;
+		}else{
+		return null;
+		}
+	}
+	
+	//获取收藏职位信息
+	public List<Recruit> queryRecruitCollectDetils(List<Integer> lid){
+		String sql="select * from recruit";
+		List<Map<String,Object>> lmap=DBUtil.list(sql);
+		List<Recruit> lr=new ArrayList<Recruit>();
+		if(lmap!=null){
+			for(int i=0;i<lmap.size();i++){
+				for(int j=0;j<lid.size();j++){
+					if((int)lmap.get(i).get("ID")==lid.get(j)){
+						Recruit rec=new Recruit();
+						rec.setDate((String)lmap.get(i).get("Date"));
+						rec.setDepartment((String)lmap.get(i).get("Department"));
+						rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+						rec.setFirmName((String)lmap.get(i).get("FirmName"));
+						rec.setID((int)lmap.get(i).get("ID"));
+						rec.setJob((String)lmap.get(i).get("Job"));
+						rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+						rec.setJobNature((String)lmap.get(i).get("JobNature"));
+						rec.setPay((String)lmap.get(i).get("Pay"));
+						rec.setWelfare((String)lmap.get(i).get("Welfare"));
+						lr.add(rec);
+					}
+				}
+			}
+			return lr;
+		}else{
+		return null;
+		}
+	}
+	
+	//删除收藏公司信息
+	public int deleteCollectFirm(String id1,int id){
+		String sql="delete from stu_collect where FirmID=? and StuID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{id1,id});
+		return i;
+	}
+	
+	//删除收藏职位信息
+		public int deleteCollectRecruit(String id1,int id){
+			String sql="delete from stu_collect where RecruitID=? and StuID=?";
+			int i=DBUtil.executeUpdate(sql,new Object[]{id1,id});
+			return i;
+		}
+		
+		//更新求职意向
+		public int updateIntention(String in,int id){
+			String sql="update student set Intention=? where ID=?";
+			int i=DBUtil.executeUpdate(sql,new Object[]{in,id});
+			return i;
+		}
+		
+		//更新学院信息校正表
+		public int updateSchoolMessage(String province,String school,String college,int id){
+			String sql="insert into updateschoolmessage (Province,University,College,StuID) values(?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{province,school,college,id});
+			return i;
+		}
+		
+		//查询所有公司信息（已认证）
+		public List<Firm> queryAllSchool(){
+			String sql="select * from firm where Status='Yes'";
+			List<Map<String,Object>> lmap=DBUtil.list(sql);
+			//System.out.println(lmap);
+			List<Firm> lf=new ArrayList<Firm>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+							Firm fir=new Firm();
+							fir.setAdress((String)lmap.get(i).get("Adress"));
+							fir.setArea((String)lmap.get(i).get("Area"));
+							fir.setCardStart((String)lmap.get(i).get("CardStart"));
+							fir.setDes((String)lmap.get(i).get("Des"));
+							fir.setEmail((String)lmap.get(i).get("Email"));
+							fir.setFirmID((String)lmap.get(i).get("FirmID"));
+							fir.setFirmName((String)lmap.get(i).get("FirmName"));
+							fir.setID((int)lmap.get(i).get("ID"));
+							fir.setLinkMan((String)lmap.get(i).get("LinkMan"));
+							fir.setLogo((String)lmap.get(i).get("Logo"));
+							fir.setPeopleNumber((String)lmap.get(i).get("PeopleNumber"));
+							fir.setPicture((String)lmap.get(i).get("Picture"));
+							fir.setStatus((String)lmap.get(i).get("Status"));
+							fir.setTel((String)lmap.get(i).get("Tel"));
+							fir.setType((String)lmap.get(i).get("Type"));
+							lf.add(fir);	
+				}
+				return lf;
+			}else{
+			return null;
+			}
+		}
+		
+		//查询公司信息（已认证）
+				public Firm queryFirm(String id){
+					String sql="select * from firm where Status='Yes' and ID=?";
+					List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+					//System.out.println(lmap);
+					if(lmap.size()==1){
+						Firm fir=new Firm();
+						for(int i=0;i<lmap.size();i++){
+									fir.setAdress((String)lmap.get(i).get("Adress"));
+									fir.setArea((String)lmap.get(i).get("Area"));
+									fir.setCardStart((String)lmap.get(i).get("CardStart"));
+									fir.setDes((String)lmap.get(i).get("Des"));
+									fir.setEmail((String)lmap.get(i).get("Email"));
+									fir.setFirmID((String)lmap.get(i).get("FirmID"));
+									fir.setFirmName((String)lmap.get(i).get("FirmName"));
+									fir.setID((int)lmap.get(i).get("ID"));
+									fir.setLinkMan((String)lmap.get(i).get("LinkMan"));
+									fir.setLogo((String)lmap.get(i).get("Logo"));
+									fir.setPeopleNumber((String)lmap.get(i).get("PeopleNumber"));
+									fir.setPicture((String)lmap.get(i).get("Picture"));
+									fir.setStatus((String)lmap.get(i).get("Status"));
+									fir.setTel((String)lmap.get(i).get("Tel"));
+									fir.setType((String)lmap.get(i).get("Type"));	
+						}
+						return fir;
+					}else{
+						return null;
+					}
+				}
+				
+		//查询是否已投简历
+		public boolean checkSendResume(String firmname,int id){
+			//System.out.println("11111111111111111111111");
+			String sql="select * from resume_list where FirmName=? and Stu_ID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{firmname,id});
+			if (lmap.size()==0) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//投递简历
+		public int addResume(String firmname,Student stu){
+			String sql="insert into resume_list(Stu_ID,FirmName,Resume,Major,RealName,EducationBgd,Intention,ResumeTime) values(?,?,?,?,?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{stu.getID(),firmname,stu.getResume(),stu.getMajor(),stu.getRealName(),stu.getEducationBgd(),stu.getIntention()
+					,stu.getResumeTime()});
+			return i;
+		}
+		
+		//查询所有投递的简历
+		public List<Resume> queryallresumesend(int id){
+			String sql="select * from resume_list where Stu_ID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+		//	System.out.println(lmap);
+			List<Resume> lre=new ArrayList<Resume>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					Resume re=new Resume();
+					re.setID((int) lmap.get(i).get("ID"));
+					re.setEducationBgd((String) lmap.get(i).get("EducationBgd"));
+					re.setFirmName((String) lmap.get(i).get("FirmName"));
+					re.setIntention((String) lmap.get(i).get("Intention"));
+					re.setMajor((String) lmap.get(i).get("Major"));
+					re.setRealName((String) lmap.get(i).get("RealName"));
+					re.setResume((String) lmap.get(i).get("Resume"));
+					re.setResumeTime((String)lmap.get(i).get("ResumeTime"));
+					lre.add(re);
+				}
+				return lre;
+			}else{
+				return null;
+			}
+			
+		}
+		
+		//判断收藏公司
+		public boolean checkCollectFirm(String a,int id){
+			String sql="select * from stu_collect where FirmID=? and StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{a,id});
+			if(lmap.size()>=1){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		//判断收藏职位
+		public boolean checkCollectRecruit(String a,int id){
+			String sql="select * from stu_collect where RecruitID=? and StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{a,id});
+			if(lmap.size()>=1){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		
+		//添加收藏公司
+		public int addCollectFirm(String a,int id,String now){
+			String sql="insert into stu_collect(StuID,FirmID,CollectTime) values(?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{id,a,now});
+			return i;
+		}
+		
+		//添加收藏职位
+		public int addCollectRecruit(String a,int id,String now){
+			String sql="insert into stu_collect(StuID,RecruitID,CollectTime) values(?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{id,a,now});
+			return i;
+		}
+		
+		//删除投递的简历
+		public int deleteResume(String id){
+			String sql="delete from resume_list where ID=?";
+			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+		
+		//查询所有职位信息
+		public List<Recruit> queryAllRecruit(){
+			String sql="select * from recruit";
+			List<Map<String,Object>> lmap=DBUtil.list(sql);
+			List<Recruit> lr=new ArrayList<Recruit>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+							Recruit rec=new Recruit();
+							rec.setDate((String)lmap.get(i).get("Date"));
+							rec.setDepartment((String)lmap.get(i).get("Department"));
+							rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+							rec.setFirmName((String)lmap.get(i).get("FirmName"));
+							rec.setID((int)lmap.get(i).get("ID"));
+							rec.setJob((String)lmap.get(i).get("Job"));
+							rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+							rec.setJobNature((String)lmap.get(i).get("JobNature"));
+							rec.setPay((String)lmap.get(i).get("Pay"));
+							rec.setWelfare((String)lmap.get(i).get("Welfare"));
+							lr.add(rec);
+				}
+				return lr;
+			}else{
+			return null;
+			}
+		}
 	
 }

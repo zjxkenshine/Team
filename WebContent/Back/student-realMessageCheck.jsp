@@ -85,28 +85,35 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getRealName() }" placeholder="" id="RealName" name="RealName"  datatype="*" nullmsg="请填写真实姓名">
-      </div>
-      <div class="col-4"> </div>
-    </div>
-     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>身份证：</label>
-      <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getID_Card() }"  id="IDCard" name="IDCard"  datatype="idcard" nullmsg="请填写身份证">
+        <input type="text" class="input-text"  value="${student.getRealName() }" placeholder="" id="RealName" name="RealName"  datatype="*" nullmsg="请填写真实姓名">
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>真实头像：</label>
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" datatype="*" nullmsg="请选择学历！">
+          <option value="" selected>请选择学历</option>
+          <option value="大学专科">大学专科</option>
+          <option value="大学本科">大学本科</option>
+          <option value="硕士研究生">硕士研究生</option>
+          <option value="博士研究生">博士研究生</option>
+          <option value="其他">其他</option>
+        </select>
+        </span> </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>真实头像(真人)：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url3" name="Picture" value=""  datatype="*" nullmsg="请上传头像" /><img src="" id="img3"><input type="button" id="image3" value="选择图片" /></p>
+      	<p><input type="hidden" id="url3" name="Picture"  value=""  datatype="*" nullmsg="请上传头像" /><img src="" width="200px" height="200px" id="img3"><input type="button" id="image3" value="选择图片" /></p>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>手持身份证照片（正面）：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>学生证信息照片（正面）：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="" id="img1"><input type="button" id="image1" value="选择图片" /></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传学生证照片" /><img width="200px" height="200px" src="" id="img1"><input type="button" id="image1" value="选择图片" /></p>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -124,34 +131,77 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getRealName() }" placeholder=""   datatype="*" nullmsg="请填写真实姓名">
+        <input type="text" class="input-text" value="${student.getRealName() }" placeholder=""  readonly="readonly">
       </div>
       <div class="col-4"> </div>
     </div>
-     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>身份证：</label>
-      <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getID_Card() }"   datatype="idcard" nullmsg="请填写身份证">
-      </div>
+    <div class="row cl">
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" >
+          <option value="${student.getEducationBgd() }" selected>${student.getEducationBgd()}</option>
+        </select>
+        </span> </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实头像：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url3" value=""  datatype="*" nullmsg="请上传头像" /><img src="${student.getPicture() }" id="img3"></p>
+      	<p><input type="hidden" id="url3" value=""  datatype="*" nullmsg="请上传头像" /><img src="${student.getPicture() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>手持身份证照片（正面）：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>学生证正面照片：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" id="img1"></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <div class="col-9 col-offset-3">
         <input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;您的认证已提交，正在审核&nbsp;&nbsp;">
+      </div>
+    </div>
+  </form>
+</div>
+</c:if>
+<c:if test="${student.getCheckStatus() eq '2' }">
+<div class="pd-20">
+  <form method="post" class="form form-horizontal" id="form-member-add">
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>真实姓名(不可更改)：</label>
+      <div class="formControls col-5">
+        <input type="text" class="input-text" readonly="readonly" value="${student.getRealName() }" placeholder=""   datatype="*" nullmsg="请填写真实姓名">
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3">学历：</label>
+      <div class="formControls col-5"> <span class="select-box">
+        <select class="select" size="1" name="EducationBgd" >
+          <option value="${student.getEducationBgd() }" selected>${student.getEducationBgd()}</option>
+        </select>
+        </span> </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>真实头像(无法更改)：</label>
+      <div class="formControls col-5">
+      	<p><input type="hidden" id="url3" value=""  datatype="*" nullmsg="请上传头像" /><img src="${student.getPicture() }" width="200px" height="200px"></p>
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-3"><span class="c-red">*</span>学生证正面照片(无法更改)：</label>
+      <div class="formControls col-5">
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px"></p>
+      </div>
+      <div class="col-4"> </div>
+    </div>
+    <div class="row cl">
+      <div class="col-9 col-offset-3">
+        <input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;您的认证已通过&nbsp;&nbsp;">
       </div>
     </div>
   </form>

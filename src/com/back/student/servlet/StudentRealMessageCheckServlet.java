@@ -40,16 +40,15 @@ public class StudentRealMessageCheckServlet extends HttpServlet {
 			//取值
 			Student stu=(Student) request.getSession().getAttribute("student");
 			String RealName=request.getParameter("RealName");
-			String ID_Card=request.getParameter("IDCard");
+			String EducationBgd=request.getParameter("EducationBgd");
 			String id=String.valueOf(stu.getID());
 			String IdPic=request.getParameter("IdPic");
 			String Picture=request.getParameter("Picture");
 		//	System.out.println(IdPic+","+Picture+","+id);
-			System.out.println(RealName+","+ID_Card);
 			
 			
 			//执行更新
-			stus.updateSelfMessageCheck(RealName, ID_Card, IdPic, Picture, id);
+			stus.updateSelfMessageCheck(RealName, EducationBgd, IdPic, Picture, id);
 			Student stu1=stus.queryOneStudent(id);
 			
 			//传值跳转

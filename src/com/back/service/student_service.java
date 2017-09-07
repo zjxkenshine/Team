@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.back.dao.student_dao;
+import com.back.model.Collect;
+import com.back.model.Firm;
+import com.back.model.Recruit;
+import com.back.model.Resume;
 import com.back.model.Student;
 import com.back.model.Student_Province;
 
@@ -189,4 +193,191 @@ public class student_service {
 			throw new Exception("真实信息验证失败，原因是："+e.getMessage());
 		}
 	}
+	
+	public List<Collect> queryRecruitCollect(String id) throws Exception{
+		try{
+			return sda.queryRecruitCollect(id);
+		}catch(Exception e){
+			throw new Exception("查询职位收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Collect> queryFirmCollect(String id) throws Exception{
+		try{
+			return sda.queryFirmCollect(id);
+		}catch(Exception e){
+			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Firm> queryFirmCollectDetils(List<Integer> lid) throws Exception{
+		try{
+			return sda.queryFirmCollectDetils(lid);
+		}catch(Exception e){
+			throw new Exception("查询公司收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public List<Recruit> queryRecruitCollectDetils(List<Integer> lid) throws Exception{
+		try{
+			return sda.queryRecruitCollectDetils(lid);
+		}catch(Exception e){
+			throw new Exception("查询职位收藏信息失败，原因是："+e.getMessage());
+		}
+	}
+	
+	//删除收藏公司信息
+		public int deleteCollectFirm(String lid,int id) throws Exception{
+			try{
+				int i= sda.deleteCollectFirm(lid,id);
+				if(i>0){
+					return i;
+				}else{
+					throw new Exception("删除条数为0");
+				}
+			}catch(Exception e){
+				throw new Exception("删除收藏失败，原因是："+e.getMessage());
+			}
+		}
+		
+		//删除收藏职位信息
+				public int deleteCollectRecruit(String lid,int id) throws Exception{
+					try{
+						int i= sda.deleteCollectRecruit(lid, id);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("删除条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("删除收藏失败，原因是："+e.getMessage());
+					}
+				}
+				
+			//更新求职意向
+			public int updateIntention(String in,int id) throws Exception{
+				try{
+					int i= sda.updateIntention(in, id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("更新条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
+				}
+			}
+			
+			//更新学院信息校正表
+			public int updateSchoolMessage(String province,String school,String college,int id) throws Exception{
+				try{
+					int i= sda.updateSchoolMessage(province,school,college,id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("更新条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("更新求职意向失败，原因是："+e.getMessage());
+				}
+			}
+			
+			
+			public List<Firm> queryAllSchool() throws Exception{
+				try{
+					return sda.queryAllSchool();
+				}catch(Exception e){
+					throw new Exception("查询公司列表失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public Firm queryFirm(String id) throws Exception{
+				try{
+					return sda.queryFirm(id);
+				}catch(Exception e){
+					throw new Exception("查询公司失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addResume(String firmname,Student stu) throws Exception{
+				try{
+					return sda.addResume(firmname,stu);
+				}catch(Exception e){
+					throw new Exception("投递失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkSendResume(String firmname,int i) throws Exception{
+				try{
+					//System.out.println(111);
+					return sda.checkSendResume(firmname,i);
+				}catch(Exception e){
+					throw new Exception("投递失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public List<Resume> queryallresumesend(int id) throws Exception{
+				try{
+					return sda.queryallresumesend(id);
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkCollectFirm(String a,int id) throws Exception{
+				try{
+					return sda.checkCollectFirm(a,id);
+				}catch(Exception e){
+					throw new Exception("验证收藏失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public boolean checkCollectRecruit(String a,int id) throws Exception{
+				try{
+					return sda.checkCollectRecruit(a,id);
+				}catch(Exception e){
+					throw new Exception("验证收藏失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addCollectFirm(String a,int id,String now) throws Exception{
+				try{
+					return sda.addCollectFirm(a,id,now);
+				}catch(Exception e){
+					throw new Exception("收藏公司失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addCollectRecruit(String a,int id,String now) throws Exception{
+				try{
+					return sda.addCollectRecruit(a,id,now);
+				}catch(Exception e){
+					throw new Exception("收藏职位失败失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int deleteResume(String id) throws Exception{
+				try{
+					int i= sda.deleteResume(id);
+					if(i>0){
+						return i;
+					}else{
+						throw new Exception("删除条数为0");
+					}
+				}catch(Exception e){
+					throw new Exception("删除简历投递失败，原因是："+e.getMessage());
+				}
+			}
+			
+		
+			public List<Recruit> queryAllRecruit() throws Exception{
+				try{
+					return sda.queryAllRecruit();
+				}catch(Exception e){
+					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
+				}
+			}
+		
+			
+				
 }

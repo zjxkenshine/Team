@@ -1,6 +1,7 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,20 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.model.Student_Province;
+import com.back.model.Collect;
+import com.back.model.Firm;
+import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentSchoolSetServlet
+ * Servlet implementation class StudentCollectFirmListSetServlet
  */
-@WebServlet("/StudentSchoolSet.sdo")
-public class StudentSchoolSetServlet extends HttpServlet {
+@WebServlet("/StudentCollectFirmListSet.sdo")
+public class StudentCollectFirmListSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentSchoolSetServlet() {
+    public StudentCollectFirmListSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +34,26 @@ public class StudentSchoolSetServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 绑定学校-学校加载
+		// 公司收藏列表
 		try{
 			//初始化
 			student_service stus=new student_service();
 			
-			//查询省份信息
-			List<Student_Province> ls=stus.queryProvinceAll();
+			//取值
+			Student stu=(Student)request.getSession().getAttribute("student");
+			String id=String.valueOf(stu.getID());
+			List<Collect> lco=stus.queryFirmCollect(id);
+		//	System.out.println(lco);
+			List<Integer> lid=new ArrayList<Integer>();
+			for(Collect co:lco){
+				lid.add(co.getFirmID());
+			}
+			List<Firm> lf=stus.queryFirmCollectDetils(lid);
+		//	System.out.println(lf);
 			
-			//传值
-			request.setAttribute("prolist", ls);
-			request.getRequestDispatcher("Back/student-school.jsp").forward(request, response);
+			//传值跳转
+			request.setAttribute("FirmCollectList", lf);
+			request.getRequestDispatcher("Back/student-firmCollectList.jsp").forward(request, response);
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	

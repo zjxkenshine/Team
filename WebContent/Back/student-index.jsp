@@ -64,12 +64,33 @@ String  path = request.getContextPath();
 <aside class="Hui-aside">
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+		<dl id="menu-menber">
+			<dt><i class="Hui-iconfont">&#xe60d;</i>个人信息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">我的简历</a></li>
+					<li><a _href="../StudentSelfMessageSet.sdo" href="javascript:void(0)">个人信息主页</a></li>
 					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">信息验证</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<c:if test="${student.getCheckStatus() eq '2' }">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 我的简历<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">简历管理</a></li>
+					<li><a _href="../StudentFirmListSet.sdo" href="javascript:void(0)">简历投递</a></li>
+					<li><a _href="../StudentResumeManagerSet.sdo" href="javascript:void(0)">投递管理</a></li>
+				</ul>
+			</dd>
+		</dl>
+		</c:if>
+		<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe61a;</i>信息检索<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="../StudentRecuritSet.sdo" href="javascript:void(0)">招聘职位查询</a></li>
+					<li><a _href="..//StudentFirmSet.sdo" href="javascript:void(0)">公司查询</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -77,8 +98,19 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe613;</i>我的收藏<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="picture-list.html" href="javascript:void(0)">收藏招聘信息</a></li>
-					<li><a _href="picture-list.html" href="javascript:void(0)">收藏公司</a></li>
+					<li><a _href="../StudentCollectRecruitListSet.sdo" href="javascript:void(0)">收藏招聘信息</a></li>
+					<li><a _href="../StudentCollectFirmListSet.sdo" href="javascript:void(0)">收藏公司</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-comments">
+			<dt><i class="Hui-iconfont">&#xe622;</i>我的消息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="" href="javascript:;">系统消息</a></li>
+					<li><a _href="" href="javascript:void(0)">老师消息</a></li>
+					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
+					<li><a _href="" href="javascript:;">其他消息</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -86,85 +118,7 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe620;</i> 帮助中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="product-brand.html" href="javascript:void(0)">待定</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<!--<dl id="menu-page">
-			<dt><i class="Hui-iconfont">&#xe626;</i> 页面管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="page-home.html" href="javascript:void(0)">首页管理</a></li>
-					<li><a _href="page-flinks.html" href="javascript:void(0)">友情链接</a></li>
-				</ul>
-			</dd>
-		</dl>-->
-		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i>我的消息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="" href="javascript:;">系统消息</a></li>
-					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<!--<dl id="menu-order">
-			<dt><i class="Hui-iconfont">&#xe63a;</i> 财务管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="order-list.html" href="javascript:void(0)">订单列表</a></li>
-					<li><a _href="recharge-list.html" href="javascript:void(0)">充值管理</a></li>
-					<li><a _href="invoice-list.html" href="javascript:void(0)">发票管理</a></li>
-				</ul>
-			</dd>
-		</dl>-->
-		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="member-list.html" href="javascript:;">会员列表</a></li>
-					<li><a _href="member-del.html" href="javascript:;">删除的会员</a></li>
-					<li><a _href="member-level.html" href="javascript:;">等级管理</a></li>
-					<li><a _href="member-scoreoperation.html" href="javascript:;">积分管理</a></li>
-					<li><a _href="member-record-browse.html" href="javascript:void(0)">浏览记录</a></li>
-					<li><a _href="member-record-download.html" href="javascript:void(0)">下载记录</a></li>
-					<li><a _href="member-record-share.html" href="javascript:void(0)">分享记录</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="admin-role.html" href="javascript:void(0)">角色管理</a></li>
-					<li><a _href="admin-permission.html" href="javascript:void(0)">权限管理</a></li>
-					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-tongji">
-			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="charts-1.html" href="javascript:void(0)">折线图</a></li>
-					<li><a _href="charts-2.html" href="javascript:void(0)">时间轴折线图</a></li>
-					<li><a _href="charts-3.html" href="javascript:void(0)">区域图</a></li>
-					<li><a _href="charts-4.html" href="javascript:void(0)">柱状图</a></li>
-					<li><a _href="charts-5.html" href="javascript:void(0)">饼状图</a></li>
-					<li><a _href="charts-6.html" href="javascript:void(0)">3D柱状图</a></li>
-					<li><a _href="charts-7.html" href="javascript:void(0)">3D饼状图</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-system">
-			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="system-base.html" href="javascript:void(0)">系统设置</a></li>
-					<li><a _href="system-category.html" href="javascript:void(0)">栏目管理</a></li>
-					<li><a _href="system-data.html" href="javascript:void(0)">数据字典</a></li>
-					<li><a _href="system-shielding.html" href="javascript:void(0)">屏蔽词</a></li>
-					<li><a _href="system-log.html" href="javascript:void(0)">系统日志</a></li>
+					<li><a _href="#" href="javascript:void(0)">关于认证</a></li>
 				</ul>
 			</dd>
 		</dl>

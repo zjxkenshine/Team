@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.model.Student_Province;
+import com.back.model.Resume;
+import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentSchoolSetServlet
+ * Servlet implementation class StudentResumeManagerSetServlet
  */
-@WebServlet("/StudentSchoolSet.sdo")
-public class StudentSchoolSetServlet extends HttpServlet {
+@WebServlet("/StudentResumeManagerSet.sdo")
+public class StudentResumeManagerSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentSchoolSetServlet() {
+    public StudentResumeManagerSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +32,22 @@ public class StudentSchoolSetServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 绑定学校-学校加载
+		// 简历投递管理初始化
 		try{
 			//初始化
 			student_service stus=new student_service();
 			
-			//查询省份信息
-			List<Student_Province> ls=stus.queryProvinceAll();
+			//取值
+			Student stu=(Student) request.getSession().getAttribute("student");
 			
-			//传值
-			request.setAttribute("prolist", ls);
-			request.getRequestDispatcher("Back/student-school.jsp").forward(request, response);
+			//执行
+			List<Resume> lre=stus.queryallresumesend(stu.getID());
+		//	System.out.println(lre);
+			
+			//传值跳转
+			
+			request.setAttribute("resumelist",lre);
+			request.getRequestDispatcher("Back/student-resumeSendManage.jsp").forward(request, response);
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
