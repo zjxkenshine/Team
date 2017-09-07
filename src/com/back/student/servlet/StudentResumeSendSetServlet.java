@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.back.model.Firm;
+import com.back.model.Recruit;
 import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
  * Servlet implementation class StudentFirmListSetServlet
  */
-@WebServlet("/StudentFirmListSet.sdo")
-public class StudentFirmListSetServlet extends HttpServlet {
+@WebServlet("/StudentResumeSendSet.sdo")
+public class StudentResumeSendSetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentFirmListSetServlet() {
+    public StudentResumeSendSetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,15 +41,15 @@ public class StudentFirmListSetServlet extends HttpServlet {
 			Student stu =(Student)request.getSession().getAttribute("student");
 		
 			//执行
-			List<Firm> lf=stus.queryAllSchool(); //获取所有公司信息
+			List<Recruit> lf=stus.queryAllRecruit(); //获取所有公司信息
 		//	System.out.println(lf);
 			
 			
 			//传值
-			request.setAttribute("firmlist",lf);
+			request.setAttribute("reclist",lf);
 			
 			//跳转
-			request.getRequestDispatcher("Back/student-firmList.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-resumeSend.jsp").forward(request, response);
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	

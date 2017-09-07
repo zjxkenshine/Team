@@ -154,7 +154,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>学生证正面照片：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px"></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getStuPic() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>
@@ -195,7 +195,7 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>学生证正面照片(无法更改)：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getIdPic() }" width="200px" height="200px"></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传身份证照片" /><img src="${student.getStuPic() }" width="200px" height="200px"></p>
       </div>
       <div class="col-4"> </div>
     </div>

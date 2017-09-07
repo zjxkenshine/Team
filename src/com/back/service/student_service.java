@@ -299,18 +299,26 @@ public class student_service {
 				}
 			}
 			
-			public int addResume(String firmname,Student stu) throws Exception{
+			public Recruit queryRecruit(String id) throws Exception{
 				try{
-					return sda.addResume(firmname,stu);
+					return sda.queryRecruit(id);
+				}catch(Exception e){
+					throw new Exception("查询职位失败，原因是："+e.getMessage());
+				}
+			}
+			
+			public int addResume(Recruit rec,Student stu) throws Exception{
+				try{
+					return sda.addResume(rec,stu);
 				}catch(Exception e){
 					throw new Exception("投递失败，原因是："+e.getMessage());
 				}
 			}
 			
-			public boolean checkSendResume(String firmname,int i) throws Exception{
+			public boolean checkSendResume(int id1,int i) throws Exception{
 				try{
 					//System.out.println(111);
-					return sda.checkSendResume(firmname,i);
+					return sda.checkSendResume(id1,i);
 				}catch(Exception e){
 					throw new Exception("投递失败，原因是："+e.getMessage());
 				}

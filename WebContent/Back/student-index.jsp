@@ -69,7 +69,10 @@ String  path = request.getContextPath();
 			<dd>
 				<ul>
 					<li><a _href="../StudentSelfMessageSet.sdo" href="javascript:void(0)">个人信息主页</a></li>
-					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">信息验证</a></li>
+					<li><a _href="student-realMessageCheck.jsp" href="javascript:void(0)">学生认证</a></li>
+					<c:if test="${student.getCheckStatus() eq '2' }">
+					<li><a _href="student-creatCheck.jsp" href="javascript:void(0)">创业认证</a></li>
+					</c:if>
 				</ul>
 			</dd>
 		</dl>
@@ -79,7 +82,7 @@ String  path = request.getContextPath();
 			<dd>
 				<ul>
 					<li><a _href="../StudentResumeSet.sdo" href="javascript:void(0)">简历管理</a></li>
-					<li><a _href="../StudentFirmListSet.sdo" href="javascript:void(0)">简历投递</a></li>
+					<li><a _href="../StudentResumeSendSet.sdo" href="javascript:void(0)">简历投递</a></li>
 					<li><a _href="../StudentResumeManagerSet.sdo" href="javascript:void(0)">投递管理</a></li>
 				</ul>
 			</dd>
@@ -90,7 +93,7 @@ String  path = request.getContextPath();
 			<dd>
 				<ul>
 					<li><a _href="../StudentRecuritSet.sdo" href="javascript:void(0)">招聘职位查询</a></li>
-					<li><a _href="..//StudentFirmSet.sdo" href="javascript:void(0)">公司查询</a></li>
+					<li><a _href="../StudentFirmSet.sdo" href="javascript:void(0)">公司查询</a></li>
 				</ul>
 			</dd>
 		</dl>

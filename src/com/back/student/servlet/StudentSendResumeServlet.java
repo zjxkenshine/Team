@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.back.model.Firm;
+import com.back.model.Recruit;
 import com.back.model.Student;
 import com.back.service.student_service;
 
@@ -52,11 +53,11 @@ public class StudentSendResumeServlet extends HttpServlet {
 					
 					//添加数据库
 					for(String a:lid){
-						System.out.println(a);
-						Firm f=stus.queryFirm(a);
-						boolean m=stus.checkSendResume(f.getFirmName(),stu.getID());
+					//	System.out.println(a);
+						Recruit rec=stus.queryRecruit(a);
+						boolean m=stus.checkSendResume(Integer.parseInt(a),stu.getID());
 						if(m){
-							stus.addResume(f.getFirmName(),stu);
+							stus.addResume(rec,stu);
 						}
 					}
 				

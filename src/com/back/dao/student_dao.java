@@ -86,7 +86,10 @@ public class student_dao {
 			stu.setLastLoginTime((String)map.get("LastLoginTime"));
 			stu.setLoginNum((int)map.get("LoginNum"));
 			stu.setCheckStatus((String)map.get("CheckStatus"));
+			stu.setStuPic((String)map.get("StuPic"));
 			stu.setIdPic((String)map.get("IdPic"));
+			stu.setCreaPic((String)map.get("CreaPic"));
+			stu.setCreaStatus((String)map.get("CreaStatus"));
 		}
 		return stu;
 	}
@@ -232,9 +235,9 @@ public class student_dao {
 	}
 	
 	//真实信息验证
-	public int updateSelfMessageCheck(String RealName,String EducationBgd,String IdPic,String Picture,String id){
-		String sql="update student set RealName=?,EducationBgd=?,IdPic=?,Picture=?,CheckStatus='1' where ID=?";
-		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,EducationBgd,IdPic,Picture,id});
+	public int updateSelfMessageCheck(String RealName,String EducationBgd,String StuPic,String Picture,String id){
+		String sql="update student set RealName=?,EducationBgd=?,StuPic=?,Picture=?,CheckStatus='1' where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{RealName,EducationBgd,StuPic,Picture,id});
 		return i;
 	}
 	
@@ -439,11 +442,38 @@ public class student_dao {
 					}
 				}
 				
+
+				//查询职位
+						public Recruit queryRecruit(String id){
+							String sql="select * from recruit where ID=?";
+							List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+							Recruit rec=new Recruit();
+							if(lmap.size()==1){
+								for(int i=0;i<lmap.size();i++){
+											
+											rec.setDate((String)lmap.get(i).get("Date"));
+											rec.setDepartment((String)lmap.get(i).get("Department"));
+											rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+											rec.setFirmName((String)lmap.get(i).get("FirmName"));
+											rec.setID((int)lmap.get(i).get("ID"));
+											rec.setJob((String)lmap.get(i).get("Job"));
+											rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+											rec.setJobNature((String)lmap.get(i).get("JobNature"));
+											rec.setPay((String)lmap.get(i).get("Pay"));
+											rec.setWelfare((String)lmap.get(i).get("Welfare"));
+										
+								}
+								return rec;
+							}else{
+							return null;
+							}
+						}
+				
 		//查询是否已投简历
-		public boolean checkSendResume(String firmname,int id){
+		public boolean checkSendResume(int id1,int id2){
 			//System.out.println("11111111111111111111111");
-			String sql="select * from resume_list where FirmName=? and Stu_ID=?";
-			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{firmname,id});
+			String sql="select * from resume_list where RecruitID=? and Stu_ID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{id1,id2});
 			if (lmap.size()==0) {
 				return true;
 			}else{
@@ -452,10 +482,10 @@ public class student_dao {
 		}
 		
 		//投递简历
-		public int addResume(String firmname,Student stu){
-			String sql="insert into resume_list(Stu_ID,FirmName,Resume,Major,RealName,EducationBgd,Intention,ResumeTime) values(?,?,?,?,?,?,?,?)";
-			int i=DBUtil.executeUpdate(sql,new Object[]{stu.getID(),firmname,stu.getResume(),stu.getMajor(),stu.getRealName(),stu.getEducationBgd(),stu.getIntention()
-					,stu.getResumeTime()});
+		public int addResume(Recruit rec,Student stu){
+			String sql="insert into resume_list(Stu_ID,FirmName,Resume,Major,RealName,EducationBgd,Intention,ResumeTime,RecruitID,Job) values(?,?,?,?,?,?,?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{stu.getID(),rec.getFirmName(),stu.getResume(),stu.getMajor(),stu.getRealName(),stu.getEducationBgd(),stu.getIntention()
+					,stu.getResumeTime(),rec.getID(),rec.getJob()});
 			return i;
 		}
 		
@@ -476,6 +506,8 @@ public class student_dao {
 					re.setRealName((String) lmap.get(i).get("RealName"));
 					re.setResume((String) lmap.get(i).get("Resume"));
 					re.setResumeTime((String)lmap.get(i).get("ResumeTime"));
+					re.setRecruitID((int) lmap.get(i).get("RecruitID"));
+					re.setJob((String) lmap.get(i).get("Job"));
 					lre.add(re);
 				}
 				return lre;

@@ -10,6 +10,27 @@ public class Resume {
 	private String EducationBgd;
 	private String Intention;
 	private String ResumeTime;
+	private int RecruitID;
+	private String Job;
+	
+	@Override
+	public String toString() {
+		return "Resume [ID=" + ID + ", Stu_ID=" + Stu_ID + ", FirmName=" + FirmName + ", Resume=" + Resume + ", Major="
+				+ Major + ", RealName=" + RealName + ", EducationBgd=" + EducationBgd + ", Intention=" + Intention
+				+ ", ResumeTime=" + ResumeTime + ", RecruitID=" + RecruitID + ", Job=" + Job + "]";
+	}
+	public int getRecruitID() {
+		return RecruitID;
+	}
+	public void setRecruitID(int recruitID) {
+		RecruitID = recruitID;
+	}
+	public String getJob() {
+		return Job;
+	}
+	public void setJob(String job) {
+		Job = job;
+	}
 	public int getID() {
 		return ID;
 	}
@@ -64,12 +85,7 @@ public class Resume {
 	public void setResumeTime(String resumeTime) {
 		ResumeTime = resumeTime;
 	}
-	@Override
-	public String toString() {
-		return "Resume [ID=" + ID + ", Stu_ID=" + Stu_ID + ", FirmName=" + FirmName + ", Resume=" + Resume + ", Major="
-				+ Major + ", RealName=" + RealName + ", EducationBgd=" + EducationBgd + ", Intention=" + Intention
-				+ ", ResumeTime=" + ResumeTime + "]";
-	}
+	
 	
 	
 	
