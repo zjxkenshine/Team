@@ -76,7 +76,7 @@ String  path = request.getContextPath();
 				});
 			});
 		</script>
-<title>信息验证</title>
+<title>学生认证</title>
 </head>
 <body>
 <c:if test="${student.getCheckStatus() eq '0' }">
@@ -160,7 +160,7 @@ String  path = request.getContextPath();
     </div>
     <div class="row cl">
       <div class="col-9 col-offset-3">
-        <input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;您的认证已提交，正在审核&nbsp;&nbsp;">
+         <input class="btn btn-danger radius" type="botton" value="&nbsp;&nbsp;您的认证正在审核&nbsp;&nbsp;">
       </div>
     </div>
   </form>

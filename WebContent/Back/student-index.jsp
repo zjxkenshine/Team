@@ -97,6 +97,31 @@ String  path = request.getContextPath();
 				</ul>
 			</dd>
 		</dl>
+		<c:if test="${student.getCreaStatus() eq '2' }">
+		<dl id="menu-order">
+			<dt><i class="Hui-iconfont">&#xe63a;</i>我要创业<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="" href="javascript:void(0)">我的创业项目</a></li>
+					<li><a _href="" href="javascript:void(0)">项目申报</a></li>
+					<li><a _href="" href="javascript:void(0)">申请管理</a></li>
+					<li><a _href="" href="javascript:void(0)">成员管理</a></li>
+				</ul>
+			</dd>
+		</dl>
+		</c:if>
+		<c:if test="${student.getCheckStatus() eq '2' }">
+		<dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62d;</i>创业项目管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="" href="javascript:void(0)">项目列表</a></li>
+					<li><a _href="" href="javascript:void(0)">我的申请</a></li>
+					<li><a _href="" href="javascript:void(0)">我加入的项目</a></li>
+				</ul>
+			</dd>
+		</dl>
+		</c:if>
 		<dl id="menu-picture">
 			<dt><i class="Hui-iconfont">&#xe613;</i>我的收藏<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

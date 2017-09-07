@@ -241,6 +241,12 @@ public class student_dao {
 		return i;
 	}
 	
+	public int updatecreaCheck(String ID_Card,String CreaPic,String IdPic,String id){
+		String sql="update student set ID_Card=?,CreaPic=?,IdPic=?,CreaStatus='1' where ID=?";
+		int i=DBUtil.executeUpdate(sql,new Object[]{ID_Card,CreaPic,IdPic,id});
+		return i;
+	}
+	
 	//收藏招聘信息
 	public List<Collect> queryRecruitCollect(String id){
 		String sql="select * from stu_collect where StuID=? and RecruitID is not null and FirmID is null";

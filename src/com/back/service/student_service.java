@@ -168,6 +168,8 @@ public class student_service {
 		}
 	}
 	
+	
+	
 	public int uploadResume(String url,String time,String id) throws Exception{
 		try{
 			int i= sda.uploadResume(url,time,id);
@@ -178,6 +180,19 @@ public class student_service {
 			}
 		}catch(Exception e){
 			throw new Exception("上传简历失败，原因是："+e.getMessage());
+		}
+	}
+	
+	public int updatecreaCheck(String ID_Card,String CreaPic,String IdPic,String id) throws Exception{
+		try{
+			int i= sda.updatecreaCheck( ID_Card, CreaPic, IdPic, id);
+			if(i>0){
+				return i;
+			}else{
+				throw new Exception("创业信息验证条数为0");
+			}
+		}catch(Exception e){
+			throw new Exception("创业信息验证失败，原因是："+e.getMessage());
 		}
 	}
 	
