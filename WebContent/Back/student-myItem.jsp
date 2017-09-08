@@ -27,90 +27,93 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>学生首页</title>
+<title>我的项目</title>
 </head>
 <body>
 <div class="pd-20" style="padding-top:20px;">
-  <p class="f-20 text-success">欢迎登录学生个人中心</p>
-  <p>登录次数：<c:out value="${student.getLoginNum() }"></c:out> </p>
-  <p>上次登录时间：<c:out value="${student.getLastLoginTime() }"></c:out></p>
-  <c:if test="${student.getCheckStatus() eq '0' }"><a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;</c:if><a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updatePassword.jsp"><button class="btn btn-primary radius">修改密码</button></a><c:if test="${student.getCheckStatus() eq '2' }">&nbsp;&nbsp;&nbsp;&nbsp;<button id="intention" class="btn btn-primary radius">求职意向</button></c:if>
+  <p class="f-20 text-success">我的项目</p>
+  <a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
-        <th colspan="2" scope="col">学生信息（若修改信息后未及时更新请重新登录）</th>
+        <th colspan="2" scope="col">项目详情</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th width="200">学生编号(不可修改)</th>
-        <td><c:out value="${student.getID() }"></c:out></td>
-      </tr>
-      <c:if test="${student.getCheckStatus() eq '2' }">
-      <tr>
-        <td>用户照片</td>
-        <td><img src="${student.getPicture()}" width="150px" height="150px"></td>
-      </tr>
-     </c:if>
-      <tr>
-        <td>用户名</td>
-        <td><c:out value="${student.getStudentName() }"></c:out></td>
+        <th width="200">项目编号</th>
+        <td><c:out value="${item.getID() }"></c:out></td>
       </tr>
       <tr>
-        <td>性别</td>
-        <td><c:out value="${student.getSex() }"></c:out></td>
+        <td>项目名</td>
+        <td><c:out value="${item.getItemName() }"></c:out></td>
       </tr>
       <tr>
-        <td>年龄</td>
-        <td><c:out value="${student.getAge() }"></c:out></td>
+        <td>负责人</td>
+        <td><c:out value="${item.getStuName() }"></c:out></td>
       </tr>
       <tr>
-        <td>学习所在省份</td>
-        <td><c:out value="${student.getProvince() }"></c:out></td>
+        <td>项目总人数(目前)</td>
+        <td><c:out value="${item.getNumber() }"></c:out></td>
       </tr>
       <tr>
-        <td>学校 </td>
-        <td><c:out value="${student.getSchool() }"></c:out></td>
+        <td>所在地</td>
+        <td><c:out value="${item.getAddresss() }"></c:out></td>
       </tr>
       <tr>
-        <td>学院 </td>
-        <td><c:out value="${student.getAcademy() }"></c:out></td>
+        <td>关联学校 </td>
+        <td><c:out value="${item.getSchool() }"></c:out></td>
       </tr>
       <tr>
-        <td>专业 </td>
-        <td><c:out value="${student.getMajor() }"></c:out></td>
+        <td>扶持公司 </td>
+        <td><c:out value="${item.getFirmName() }"></c:out></td>
       </tr>
       <tr>
-        <td>籍贯</td>
-        <td><c:out value="${student.getHome() }"></c:out></td>
+        <td>研究方向 </td>
+        <td><c:out value="${item.getIntention() }"></c:out></td>
       </tr>
       <tr>
-        <td>电话 </td>
-        <td><c:out value="${student.getTel() }"></c:out></td>
+        <td>专利数量</td>
+        <td><c:out value="${item.getPatentNum() }"></c:out>项</td>
       </tr>
       <tr>
-        <td>邮箱 (不可修改)</td>
-        <td><c:out value="${student.getEmail() }"></c:out></td>
+        <td>负责人电话 </td>
+        <td><c:out value="${item.getTel() }"></c:out></td>
       </tr>
       <tr>
-        <td>身份证号</td>
-        <td><c:out value="${student.getID_Card() }"></c:out></td>
+        <td>负责人邮箱</td>
+        <td><c:out value="${item.getEmail() }"></c:out></td>
       </tr>
       <tr>
-        <td>座右铭 </td>
-        <td><c:out value="${student.getMotto() }"></c:out></td>
+        <td>负责人QQ</td>
+        <td><c:out value="${item.getQQ() }"></c:out></td>
       </tr>
       <tr>
-        <td>求职意向 </td>
-        <td><c:out value="${student.getIntention() }"></c:out></td>
+        <td>需要人数 </td>
+        <td><c:out value="${item.getNeedNumber() }"></c:out></td>
       </tr>
       <tr>
-        <td>学历 </td>
-        <td><c:out value="${student.getEducationBgd() }"></c:out></td>
+        <td>需要人才描述 </td>
+        <td><c:out value="${item.getNeedDiscripe() }"></c:out></td>
       </tr>
       <tr>
-        <td>真实姓名 </td>
-        <td><c:out value="${student.getRealName() }"></c:out></td>
+        <td>项目描述 </td>
+        <td><c:out value="${item.getDescripe() }"></c:out></td>
+      </tr>
+      <tr>
+        <td>状态 </td>
+        <td>
+        <c:if test="${item.getStatus() eq '0' }">禁用</c:if>
+        <c:if test="${item.getStatus() eq '1' }">正常</c:if>
+        </td>
+      </tr>
+      <tr>
+        <td>发布状态 </td>
+        <td>
+        <c:if test="${item.getCheckStatus() eq '0' }">未发布</c:if>
+        <c:if test="${item.getCheckStatus() eq '1' }">待审核</c:if>
+        <c:if test="${item.getCheckStatus() eq '2' }">已发布</c:if>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -131,7 +134,7 @@ $(intention).click(function(){
 	    ,shade: 0.6 //遮罩透明度
 	    ,maxmin: true //允许全屏最小化
 	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: 'student-intention2.jsp',	  
+	    ,content: '',	  
 	});
 })
 

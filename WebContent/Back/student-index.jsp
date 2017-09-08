@@ -102,7 +102,7 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe63a;</i>我要创业<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="" href="javascript:void(0)">我的创业项目</a></li>
+					<li><a _href="../StudentMyStartItemSet.sdo" href="javascript:void(0)">我的创业项目</a></li>
 					<li><a _href="" href="javascript:void(0)">项目申报</a></li>
 					<li><a _href="" href="javascript:void(0)">申请管理</a></li>
 					<li><a _href="" href="javascript:void(0)">成员管理</a></li>
@@ -112,7 +112,7 @@ String  path = request.getContextPath();
 		</c:if>
 		<c:if test="${student.getCheckStatus() eq '2' }">
 		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i>创业项目管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe62d;</i>创业管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="" href="javascript:void(0)">项目列表</a></li>

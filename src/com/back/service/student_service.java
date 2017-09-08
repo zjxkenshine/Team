@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.back.dao.student_dao;
-import com.back.model.Collect;
+import com.back.model.StuCollect;
 import com.back.model.Firm;
+import com.back.model.Item;
 import com.back.model.Recruit;
 import com.back.model.Resume;
 import com.back.model.Student;
@@ -209,7 +210,7 @@ public class student_service {
 		}
 	}
 	
-	public List<Collect> queryRecruitCollect(String id) throws Exception{
+	public List<StuCollect> queryRecruitCollect(String id) throws Exception{
 		try{
 			return sda.queryRecruitCollect(id);
 		}catch(Exception e){
@@ -217,7 +218,7 @@ public class student_service {
 		}
 	}
 	
-	public List<Collect> queryFirmCollect(String id) throws Exception{
+	public List<StuCollect> queryFirmCollect(String id) throws Exception{
 		try{
 			return sda.queryFirmCollect(id);
 		}catch(Exception e){
@@ -400,6 +401,43 @@ public class student_service {
 					throw new Exception("查询所有投递的简历失败，原因是："+e.getMessage());
 				}
 			}
+			
+			public List<Item> queryAllItems() throws Exception{
+				try{
+					return sda.queryAllItems();
+				}catch(Exception e){
+					throw new Exception("查询所有项目失败，原因是："+e.getMessage());
+				}
+			}
+			
+			 public Item queryItemById(String id) throws Exception{
+				 try{
+						return sda.queryItemById(id);
+					}catch(Exception e){
+						throw new Exception("查询我的项目失败，原因是："+e.getMessage());
+					}
+			 }
+			 
+			 public boolean checkItem(int id) throws Exception{
+				 try{
+						return sda.checkItem(id);
+					}catch(Exception e){
+						throw new Exception("验证项目失败，原因是："+e.getMessage());
+					}
+			 }
+			 
+			 public int addItemById(Student stu) throws Exception{
+				 try{
+						int i= sda.addItemById(stu);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("添加条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("默认添加创业项目失败，原因是："+e.getMessage());
+					}
+			 }
 		
 			
 				
