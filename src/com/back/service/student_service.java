@@ -9,6 +9,7 @@ import com.back.model.Firm;
 import com.back.model.Item;
 import com.back.model.Recruit;
 import com.back.model.Resume;
+import com.back.model.StuApply;
 import com.back.model.Student;
 import com.back.model.Student_Province;
 
@@ -418,6 +419,14 @@ public class student_service {
 					}
 			 }
 			 
+			 public Item queryItemByItemId(int id) throws Exception{
+				 try{
+						return sda.queryItemByItemId(id);
+					}catch(Exception e){
+						throw new Exception("查询我的项目失败，原因是："+e.getMessage());
+					}
+			 }
+			 
 			 public boolean checkItem(int id) throws Exception{
 				 try{
 						return sda.checkItem(id);
@@ -438,7 +447,102 @@ public class student_service {
 						throw new Exception("默认添加创业项目失败，原因是："+e.getMessage());
 					}
 			 }
+			 
+			 public int updateItemBasicMessage(Item ite) throws Exception{
+				 try{
+						int i= sda.updateItemBasicMessage(ite);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("更新项目基本信息条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("更新项目基本信息失败，原因是："+e.getMessage());
+					}
+			 }
 		
+			 public int updateItemNeed(Item ite) throws Exception{
+				 try{
+						int i= sda.updateItemNeed(ite);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("更新项目招募信息条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("更新项目招募信息失败，原因是："+e.getMessage());
+					}
+			 }
 			
+			 
+				//更新项目验证
+				public int updateItemCheck(Item ite) throws Exception{
+					 try{
+							int i= sda.updateItemCheck(ite);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("更新项目招募信息条数为0");
+							}
+						}catch(Exception e){
+							throw new Exception("更新项目招募信息失败，原因是："+e.getMessage());
+						}
+				}
+				
+				public List<StuApply> queryApply(int id) throws Exception{
+					 try{
+							return sda.queryApply(id);
+						}catch(Exception e){
+							throw new Exception("查询申请失败，原因是："+e.getMessage());
+						}
+				}
+				
+				public List<StuApply> queryMember(int id) throws Exception{
+					try{
+						return sda.queryMember(id);
+					}catch(Exception e){
+						throw new Exception("查询成员失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int ignoreApply(String id) throws Exception{
+					 try{
+							int i= sda.ignoreApply(id);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("忽略申请条数位0");
+							}
+						}catch(Exception e){
+							throw new Exception("忽略申请失败，原因是："+e.getMessage());
+						}
+				}
+				
+				public int passApply(String id) throws Exception{
+					 try{
+							int i= sda.passApply(id);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("通过申请条数位0");
+							}
+						}catch(Exception e){
+							throw new Exception("通过申请失败，原因是："+e.getMessage());
+						}
+					
+				}
+				
+				public int updateNumber(int num1,int num2,int id) throws Exception{
+					 try{
+							int i= sda.updateNumber(num1,num2,id);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("更新项目人数条数位0");
+							}
+						}catch(Exception e){
+							throw new Exception("更新项目人数失败，原因是："+e.getMessage());
+						}
+				}
 				
 }

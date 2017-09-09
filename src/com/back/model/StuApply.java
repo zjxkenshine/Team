@@ -80,6 +80,12 @@ public class StuApply {
 	public void setStuName(String stuName) {
 		StuName = stuName;
 	}
+	public String getEducationBgd() {
+		return EducationBgd;
+	}
+	public void setEducationBgd(String educationBgd) {
+		EducationBgd = educationBgd;
+	}
 	@Override
 	public String toString() {
 		return "StuApply [ID=" + ID + ", StuID=" + StuID + ", StartID=" + StartID + ", StuName=" + StuName
@@ -87,6 +93,7 @@ public class StuApply {
 				+ ", Intention=" + Intention + ", Major=" + Major + ", ApplyTime=" + ApplyTime + ", EducationBgd="
 				+ EducationBgd + "]";
 	}
+	
 	
 	
 

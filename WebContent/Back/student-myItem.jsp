@@ -32,7 +32,7 @@ String  path = request.getContextPath();
 <body>
 <div class="pd-20" style="padding-top:20px;">
   <p class="f-20 text-success">我的项目</p>
-  <a href="../StudentSchoolSet.sdo"><button class="btn btn-primary radius">绑定学校</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="student-updateSelfMessage.jsp"><button class="btn btn-primary radius">修改信息</button></a>
+  <a id="itemmsg"><button class="btn btn-primary radius">基本信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemaddr"><button class="btn btn-primary radius">地址管理</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemfind"><button class="btn btn-primary radius">招募管理</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${item.getCheckStatus() eq '0' }"><a id="itemcheck"><button class="btn btn-danger radius">项目审核</button></a></c:if>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
@@ -108,11 +108,11 @@ String  path = request.getContextPath();
         </td>
       </tr>
       <tr>
-        <td>发布状态 </td>
+        <td>审核状态 </td>
         <td>
-        <c:if test="${item.getCheckStatus() eq '0' }">未发布</c:if>
-        <c:if test="${item.getCheckStatus() eq '1' }">待审核</c:if>
-        <c:if test="${item.getCheckStatus() eq '2' }">已发布</c:if>
+        <c:if test="${item.getCheckStatus() eq '0' }">未审核或未通过</c:if>
+        <c:if test="${item.getCheckStatus() eq '1' }">正在审核</c:if>
+        <c:if test="${item.getCheckStatus() eq '2' }">已审核通过</c:if>
         </td>
       </tr>
     </tbody>
@@ -126,15 +126,51 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="js/H-ui.admin.js"></script> 
 <script>
 
-$(intention).click(function(){
+$(itemmsg).click(function(){
 	layer.open({
 	    type: 2 //Page层类型
-	   	,area: ['1000px', '530px']
-	    ,title: '设置求职意向'
+	   	,area: ['800px', '530px']
+	    ,title: '基本信息'
 	    ,shade: 0.6 //遮罩透明度
 	    ,maxmin: true //允许全屏最小化
 	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: '',	  
+	    ,content: '../StudentItemMessageSet.sdo',	  
+	});
+})
+
+$(itemaddr).click(function(){
+	layer.open({
+	    type: 2 //Page层类型
+	   	,area: ['800px', '530px']
+	    ,title: '基本信息'
+	    ,shade: 0.6 //遮罩透明度
+	    ,maxmin: true //允许全屏最小化
+	    ,anim: 2 //0-6的动画形式，-1不开启
+	    ,content: '../StudentItemAddressSet.sdo',	  
+	});
+})
+
+$(itemfind).click(function(){
+	layer.open({
+	    type: 2 //Page层类型
+	   	,area: ['800px', '530px']
+	    ,title: '基本信息'
+	    ,shade: 0.6 //遮罩透明度
+	    ,maxmin: true //允许全屏最小化
+	    ,anim: 2 //0-6的动画形式，-1不开启
+	    ,content: '../StudentItemFindSet.sdo',	  
+	});
+})
+
+$(itemcheck).click(function(){
+	layer.open({
+	    type: 2 //Page层类型
+	   	,area: ['800px', '530px']
+	    ,title: '基本信息'
+	    ,shade: 0.6 //遮罩透明度
+	    ,maxmin: true //允许全屏最小化
+	    ,anim: 2 //0-6的动画形式，-1不开启
+	    ,content: '../StudentItemCheckSet.sdo',	  
 	});
 })
 

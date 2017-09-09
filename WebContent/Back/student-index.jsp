@@ -103,9 +103,8 @@ String  path = request.getContextPath();
 			<dd>
 				<ul>
 					<li><a _href="../StudentMyStartItemSet.sdo" href="javascript:void(0)">我的创业项目</a></li>
-					<li><a _href="" href="javascript:void(0)">项目申报</a></li>
-					<li><a _href="" href="javascript:void(0)">申请管理</a></li>
-					<li><a _href="" href="javascript:void(0)">成员管理</a></li>
+					<li><a _href="../StudentApplyManageSet.sdo" href="javascript:void(0)">申请管理</a></li>
+					<li><a _href="../StudentMemberManageSet.sdo" href="javascript:void(0)">成员管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -128,6 +127,9 @@ String  path = request.getContextPath();
 				<ul>
 					<li><a _href="../StudentCollectRecruitListSet.sdo" href="javascript:void(0)">收藏招聘信息</a></li>
 					<li><a _href="../StudentCollectFirmListSet.sdo" href="javascript:void(0)">收藏公司</a></li>
+					<c:if test="${student.getCheckStatus() eq '2' }">
+					<li><a _href="" href="javascript:void(0)">收藏创业项目</a></li>
+					</c:if>
 				</ul>
 			</dd>
 		</dl>

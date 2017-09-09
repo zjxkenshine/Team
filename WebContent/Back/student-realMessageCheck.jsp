@@ -106,14 +106,14 @@ String  path = request.getContextPath();
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>真实头像(真人)：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url3" name="Picture"  value=""  datatype="*" nullmsg="请上传头像" /><img src="" width="200px" height="200px" id="img3"><input type="button" id="image3" value="选择图片" /></p>
+      	<p><input type="hidden" id="url3" name="Picture"  value=""  datatype="*" nullmsg="请上传头像" /><img src="" width="200px" height="200px" id="img3">&nbsp;&nbsp;&nbsp;<a id="image3" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>选择图片</a></p>
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>学生证信息照片（正面）：</label>
       <div class="formControls col-5">
-      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传学生证照片" /><img width="200px" height="200px" src="" id="img1"><input type="button" id="image1" value="选择图片" /></p>
+      	<p><input type="hidden" id="url1" name="IdPic" value=""  datatype="*" nullmsg="请上传学生证照片" /><img width="200px" height="200px" src="" id="img1">&nbsp;&nbsp;&nbsp;<a id="image1" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i>选择图片</a></p>
       </div>
       <div class="col-4"> </div>
     </div>
