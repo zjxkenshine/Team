@@ -643,7 +643,7 @@ public class student_dao {
 		//	System.out.println(lmap);
 			if(lmap!=null){
 				Item ite=new Item();				
-				ite.setAddresss((String)lmap.get("Address"));
+				ite.setAddresss((String)lmap.get("Addresss"));
 				ite.setBusinessPlan((String)lmap.get("BusinessPlan"));
 				ite.setCheckStatus((String)lmap.get("CheckStatus"));				
 				ite.setDescripe((String)lmap.get("Descripe"));
@@ -1025,6 +1025,13 @@ public class student_dao {
 		public int deleteCollectItem(String id){
 			String sql="delete from stu_startcollect where ID=?";
 			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+		
+		//更新地址
+		public int updateItemAddress(Item ite){
+			String sql="update stu_start set Addresss=?,School=? where ID=? ";
+			int i=DBUtil.executeUpdate(sql,new Object[]{ite.getAddresss(),ite.getSchool(),ite.getID()});
 			return i;
 		}
 				

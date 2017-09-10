@@ -11,16 +11,16 @@ import com.back.model.Item;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentItemAddressSetServlet
+ * Servlet implementation class StudentUpdateItemAddressServlet
  */
-@WebServlet("/StudentItemAddressSet.sdo")
-public class StudentItemAddressSetServlet extends HttpServlet {
+@WebServlet("/StudentUpdateItemAddress.sdo")
+public class StudentUpdateItemAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentItemAddressSetServlet() {
+    public StudentUpdateItemAddressServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +29,29 @@ public class StudentItemAddressSetServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 地址更新
 		try{
 			//初始化
 			student_service stus=new student_service();
 			
 			//取值
 			int itemId=(int) request.getSession().getAttribute("itemId");
+			String School=request.getParameter("School");
+			String Address=request.getParameter("map");
+			System.out.println(Address);
+		
+			//存值进Iteml类
+			Item ite =new Item();
+			ite.setID(itemId);
+			ite.setSchool(School);
+			ite.setAddresss(Address);
 			
-			//获取项目信息
-			Item it=stus.queryItemById(String.valueOf(itemId));
 			
-			//传值
-			request.setAttribute("Item", it);
-			
+			//执行更新
+			stus.updateItemAddress(ite);
+
 			//跳转
-			request.getRequestDispatcher("Back/student-setAddress.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("Back/student-updateSuccess.jsp").forward(request, response);
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);

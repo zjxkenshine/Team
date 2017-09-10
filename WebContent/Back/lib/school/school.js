@@ -59,15 +59,15 @@ $(function(){
 	  }
 	});
 	//学校列表mouseover事件
-	$("div[class='schoolList'] ul li").mouseover(function(){
+	$("div[class='schoolList'] ul li").live("mouseover",function(){
 	  $(this).css("background-color","#72B9D7");
 	});
 	//学校列表mouseout事件
-	$("div[class='schoolList'] ul li").mouseout(function(){
+	$("div[class='schoolList'] ul li").live("mouseout",function(){
 	  $(this).css("background-color","");
 	});
 	//学校列表点击事件
-	$("div[class='schoolList'] ul li").click(function(){
+	$("div[class='schoolList'] ul li").live("click",function(){
 	  $("#school").val($(this).html());
 	  $("div[class='provinceSchool']").hide();
 	});

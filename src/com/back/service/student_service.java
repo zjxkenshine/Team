@@ -681,4 +681,17 @@ public class student_service {
 					}
 				}
 				
+				public int updateItemAddress(Item ite) throws Exception{
+					try{
+						int i= sda.updateItemAddress(ite);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("更新地址条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("更新地址失败，原因是："+e.getMessage());
+					}
+				}
+				
 }

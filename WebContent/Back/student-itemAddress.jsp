@@ -74,7 +74,7 @@ String  path = request.getContextPath();
 	
 
 </style>
-<script type="text/javascript" src="js/school.js"></script>
+<script type="text/javascript" src="lib/school/school.js"></script>
 <title>地址管理</title>
 </head>
 <body>
@@ -88,7 +88,7 @@ String  path = request.getContextPath();
     </div>
     <div class="row cl">
       <label class="form-label col-3"><span class="c-red">*</span>相关学校：</label>
-<input type="text" id="school" value="${Item.getSchool() }"  placeholder="请点击选择学校" readonly />
+<input type="text" id="school" value="${Item.getSchool() }"  placeholder="请点击选择学校" readonly  />
 <div id="proSchool" class="provinceSchool">
     <div class="title"><span>请选择学校</span></div>
     <div class="proSelect">
@@ -118,15 +118,13 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=EZPCgQ6zGu6hZSmXlRrUMTpr"></script>
-<script type="text/javascript" src="WebContent/Back/lib/Map/map.jquery.min.js"></script>
-<script type="text/javascript" src="WebContent/Back/lib/Map/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$("#case1").bMap();
-})
+
 
 $(function(){
+	alter("111");
+	$("#case1").bMap();
+	
 	$("#form-member-add").Validform({
 		tiptype:2,
 		callback:function(){
