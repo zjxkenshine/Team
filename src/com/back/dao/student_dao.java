@@ -744,6 +744,36 @@ public class student_dao {
 		}
 		
 		//查询申请列表
+		public List<StuApply> queryApplyById(String id){
+			String sql="select * from stu_apply where ID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+			List<StuApply> ls=new ArrayList<StuApply>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					StuApply stua=new StuApply();
+					stua.setApplyTime((String)lmap.get(i).get("ApplyTime"));
+					stua.setDescripe((String)lmap.get(i).get("Descripe"));
+					stua.setID((int)lmap.get(i).get("ID"));
+					stua.setIntention((String)lmap.get(i).get("Intention"));
+					stua.setMajor((String)lmap.get(i).get("Major"));
+					stua.setSchool((String)lmap.get(i).get("School"));
+					stua.setStartID((int)lmap.get(i).get("StartID"));
+					stua.setStatus((String)lmap.get(i).get("Status"));
+					stua.setStuID((int)lmap.get(i).get("StuID"));
+					stua.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+					stua.setStuName((String)lmap.get(i).get("StuName"));
+					stua.setTel((String)lmap.get(i).get("Tel"));
+					ls.add(stua);
+					
+				}
+				return ls;
+			}else{
+				return null;
+			}
+					
+		}
+		
+		//查询申请列表
 		public List<StuApply> queryApply(int id){
 			String sql="select * from stu_apply where StartID=? and Status='1'";
 			List<Map<String,Object>> lmap=DBUtil.list(sql, id);
@@ -821,5 +851,147 @@ public class student_dao {
 			return i;
 		}
 		
-	
+		//查询项目列表
+		public List<Item> queryAllItem(int id){
+			String sql="select * from stu_start where Status='1' and CheckStatus='2' and StuID!=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+			List<Item> lte=new ArrayList<Item>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					Item ite=new Item();				
+					ite.setAddresss((String)lmap.get(i).get("Address"));
+					ite.setBusinessPlan((String)lmap.get(i).get("BusinessPlan"));
+					ite.setCheckStatus((String)lmap.get(i).get("CheckStatus"));				
+					ite.setDescripe((String)lmap.get(i).get("Descripe"));
+					ite.setEmail((String)lmap.get(i).get("Email"));
+					ite.setFirmID((int)lmap.get(i).get("FirmID"));
+					ite.setFirmName((String)lmap.get(i).get("FirmName"));				
+					ite.setID((int)lmap.get(i).get("ID"));				
+					ite.setIntention((String)lmap.get(i).get("Intention"));
+					ite.setItemName((String)lmap.get(i).get("ItemName"));
+					ite.setNeedDiscripe((String)lmap.get(i).get("NeedDiscripe"));
+					ite.setNumber((int)lmap.get(i).get("Number"));
+					ite.setPatentNum((int)lmap.get(i).get("PatentNum"));
+					ite.setQQ((String)lmap.get(i).get("QQ"));
+					ite.setSchool((String)lmap.get(i).get("School"));
+					ite.setStatus((String)lmap.get(i).get("Status"));
+					ite.setStuID((int)lmap.get(i).get("StuID"));
+					ite.setStuName((String)lmap.get(i).get("StuName"));
+					ite.setTel((String)lmap.get(i).get("Tel"));
+					ite.setNeedNumber((int)lmap.get(i).get("NeedNumber"));
+					lte.add(ite);
+				}
+				return lte;
+			}else{
+				return null;
+			}
+		}
+		
+		//判断收藏表是否有值
+		public boolean checkCollectItem(String iteid,int stuid){
+			String sql="select * from stu_startcollect where StartID=? and StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{iteid,stuid});
+			if(lmap.size()==0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//添加项目收藏
+		public int addCollectItem(Item ite,int id,String time){
+			String sql="insert into stu_startcollect(StuID,StartID,StuName,StartName,Tel,CollectTime,Email) values(?,?,?,?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{id,ite.getID(),ite.getStuName(),ite.getItemName(),ite.getTel(),time,ite.getEmail()});
+			return i;
+		}
+		
+		//判断是否已加入项目
+		public boolean checkApplyJoin(int id){
+			String sql="select * from stu_apply where StuID=? and Status=2";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,id);
+			if(lmap.size()==0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//判断是否重复申请
+		public boolean checkApplyDouble(String iteid,int stuid){
+			String sql="select * from stu_apply where StartID=? and StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,new Object[]{iteid,stuid});
+			if(lmap.size()==0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		//添加申请表
+		public int insertApply(Student stu,String id,String desc,String time){
+			String sql="insert into stu_apply(StuID,StuName,StartID,Tel,School,Major,EducationBgd,Intention,Descripe,ApplyTime) values(?,?,?,?,?,?,?,?,?,?)";
+			int i=DBUtil.executeUpdate(sql,new Object[]{stu.getID(),stu.getStudentName(),id,stu.getTel(),stu.getSchool(),stu.getMajor(),stu.getEducationBgd(),stu.getIntention(),desc,time});
+			return i;
+		}
+		
+		//查询我的申请
+		public List<StuApply> queryMyApply(int id){
+			String sql="select * from stu_apply where StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql, id);
+			List<StuApply> ls=new ArrayList<StuApply>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					StuApply stua=new StuApply();
+					stua.setApplyTime((String)lmap.get(i).get("ApplyTime"));
+					stua.setDescripe((String)lmap.get(i).get("Descripe"));
+					stua.setID((int)lmap.get(i).get("ID"));
+					stua.setIntention((String)lmap.get(i).get("Intention"));
+					stua.setMajor((String)lmap.get(i).get("Major"));
+					stua.setSchool((String)lmap.get(i).get("School"));
+					stua.setStartID((int)lmap.get(i).get("StartID"));
+					stua.setStatus((String)lmap.get(i).get("Status"));
+					stua.setStuID((int)lmap.get(i).get("StuID"));
+					stua.setStuName((String)lmap.get(i).get("StuName"));
+					stua.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+					stua.setTel((String)lmap.get(i).get("Tel"));
+					ls.add(stua);
+				}
+				return ls;
+			}else{
+				return null;
+			}
+		}
+		
+		//删除申请
+		public int deleteApply(String id){
+			String sql="delete from stu_apply where ID=?";
+			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+		
+		//查询加入项目id
+		public int queryJoinItemId(int id){
+			String sql="select * from stu_apply where StuID=? and Status='2'";
+			Map<String,Object> map=DBUtil.query(sql,id);
+			if(map.get("StartID")!=null){
+				return (int)map.get("StartID");
+			}else{
+				return 0;
+			}
+		}
+		
+		//退出项目
+		public int quitItem(int id){
+			String sql="delete from stu_apply where StuID=?";
+			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+		
+		//通过申请时删除其他申请
+		public int deleteApplyWhenJoin(int id){
+			String sql="delete from stu_apply where StuID=? and Status!='2'";
+			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+				
 }

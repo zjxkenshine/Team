@@ -1,7 +1,8 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.back.model.Item;
-import com.back.model.StuApply;
 import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentPassApplyServlet
+ * Servlet implementation class StudentCollectItemServlet
  */
-@WebServlet("/StudentPassApply.sdo")
-public class StudentPassApplyServlet extends HttpServlet {
+@WebServlet("/StudentCollectItem.sdo")
+public class StudentCollectItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentPassApplyServlet() {
+    public StudentCollectItemServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,54 +33,37 @@ public class StudentPassApplyServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 申请通过
+		// 收藏项目
 		try{
 			//初始化
 			student_service stus=new student_service();
+			Date nowTime =new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String now = sf.format(nowTime);
 			
 			//取值
-			Student stu=(Student) request.getSession().getAttribute("student");
+			Student stu=(Student)request.getSession().getAttribute("student");
 			String idString=request.getParameter("CollectID");
-			Item ite=(Item) request.getSession().getAttribute("Item");
+			stu.setResumeTime(now);
 			
 			//预处理
-		//	System.out.println(idString);
+			System.out.println(idString);
 			String [] lid=idString.split(",");
-			int i=0;
 			
-			//执行通过
+			//添加数据库
 			for(String a:lid){
-				if(i==ite.getNeedNumber()){
-					break;
+			//	System.out.println(a);
+				Item ite=stus.queryItemByItemId(Integer.parseInt(a));
+				boolean m=stus.checkCollectItem(a,stu.getID());
+				if(m){
+					stus.addCollectItem(ite,stu.getID(),now);
 				}
-				stus.passApply(a);
-				
-				//获取该学生ID
-				List<StuApply> lte=stus.queryApplyById(a);
-				int stuid=lte.get(0).getStuID();	
-				
-				//删除该学生其余申请
-				
-				
-				i++;
 			}
-			
-			int num1=0;
-			int num2=0;
-			if(ite.getNeedNumber()>lid.length){
-				 num1=ite.getNumber()+lid.length;
-				 num2=ite.getNeedNumber()-lid.length;
-			}else{
-				 num1=ite.getNumber()+ite.getNeedNumber();
-				 num2=0;
-			}
-			
-			stus.updateNumber(num1, num2,ite.getID());
 		
 			
 			//跳转
-			request.getRequestDispatcher("Back/student-updateSuccess.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("Back/student-collectSuccess.jsp").forward(request, response);
+		
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	
 			request.getRequestDispatcher("Back/student-error.jsp").forward(request, response);

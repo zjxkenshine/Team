@@ -32,7 +32,7 @@ String  path = request.getContextPath();
 <body>
 <div class="pd-20" style="padding-top:20px;">
   <p class="f-20 text-success">我的项目</p>
-  <a id="itemmsg"><button class="btn btn-primary radius">基本信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemaddr"><button class="btn btn-primary radius">地址管理</button></a><c:if test="${item.getCheckStatus() eq '2' }">&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemfind"><button class="btn btn-primary radius">招募管理</button></a></c:if><c:if test="${item.getCheckStatus() eq '0' }">&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemcheck"><button class="btn btn-danger radius">项目审核</button></a></c:if>
+  <c:if test="${item.getID()!=0 }"><a id="itemquit"><button class="btn btn-danger radius">退出该项目</button></a></c:if>  <c:if test="${item.getID()==0 }"><a ><button class="btn btn-danger radius">您未加入任何项目</button></a></c:if>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
@@ -126,53 +126,20 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="js/H-ui.admin.js"></script> 
 <script>
 
-$("#itemmsg").click(function(){
+$("#itemquit").click(function(){
+	layer.confirm('确认退出该项目吗？',{icon:0,},function(index){
 	layer.open({
 	    type: 2 //Page层类型
 	   	,area: ['800px', '530px']
-	    ,title: '基本信息'
+	    ,title: '退出项目'
 	    ,shade: 0.6 //遮罩透明度
 	    ,maxmin: true //允许全屏最小化
 	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: '../StudentItemMessageSet.sdo',	  
+	    ,content: '../StudentQuitItem.sdo',	  
+	});
 	});
 })
 
-$("#itemaddr").click(function(){
-	layer.open({
-	    type: 2 //Page层类型
-	   	,area: ['800px', '530px']
-	    ,title: '基本信息'
-	    ,shade: 0.6 //遮罩透明度
-	    ,maxmin: true //允许全屏最小化
-	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: '../StudentItemAddressSet.sdo',	  
-	});
-})
-
-$("#itemfind").click(function(){
-	layer.open({
-	    type: 2 //Page层类型
-	   	,area: ['800px', '530px']
-	    ,title: '基本信息'
-	    ,shade: 0.6 //遮罩透明度
-	    ,maxmin: true //允许全屏最小化
-	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: '../StudentItemFindSet.sdo',	  
-	});
-})
-
-$("#itemcheck").click(function(){
-	layer.open({
-	    type: 2 //Page层类型
-	   	,area: ['800px', '530px']
-	    ,title: '基本信息'
-	    ,shade: 0.6 //遮罩透明度
-	    ,maxmin: true //允许全屏最小化
-	    ,anim: 2 //0-6的动画形式，-1不开启
-	    ,content: '../StudentItemCheckSet.sdo',	  
-	});
-})
 
 
 var _hmt = _hmt || [];

@@ -114,9 +114,9 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe62d;</i>创业管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="" href="javascript:void(0)">项目列表</a></li>
-					<li><a _href="" href="javascript:void(0)">我的申请</a></li>
-					<li><a _href="" href="javascript:void(0)">我加入的项目</a></li>
+					<li><a _href="../StudentItemListSet.sdo" href="javascript:void(0)">项目列表</a></li>
+					<li><a _href="../StudentMyApplySet.sdo" href="javascript:void(0)">我的申请</a></li>
+					<li><a _href="../StudentMyJoinSet.sdo" href="javascript:void(0)">我加入的项目</a></li>
 				</ul>
 			</dd>
 		</dl>
