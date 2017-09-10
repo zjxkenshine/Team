@@ -1,6 +1,6 @@
 package com.back.model;
 
-public class Collect {
+public class StuCollect {
 	private int CollectID;
 	private int RecruitID;
 	private int FirmID;

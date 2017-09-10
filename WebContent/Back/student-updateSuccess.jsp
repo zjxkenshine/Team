@@ -10,7 +10,7 @@
 </head>
 <body>
  	<script type="text/javascript">	
- 	top.layer.alert('修改成功！',{
+ 	top.layer.alert('更新成功！',{
   	  	  			               title: '提示框',				
   	  	  						   icon:1,		
   	  	  						  });

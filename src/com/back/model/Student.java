@@ -29,11 +29,15 @@ public class Student implements Serializable {
 	private String RegisterTime;	//注册时间
 	private String LastLoginTime;   //上次登录时间
 	private int LoginNum;   //登录次数
-	private String CheckStatus; //认证状态
-	private String IdPic; //认证照片
+	private String CheckStatus; //学生认证状态
+	private String StuPic;   //学生证照片
+	private String IdPic; //身份证照片
+	private String CreaPic; //大学生创业证照片
+	private String CreaStatus;   //大学生创业认证状态
 
 	
 	
+
 	@Override
 	public String toString() {
 		return "Student [ID=" + ID + ", StudentName=" + StudentName + ", PassWord=" + PassWord + ", Sex=" + Sex
@@ -42,7 +46,26 @@ public class Student implements Serializable {
 				+ picture + ", Resume=" + Resume + ", ResumeTime=" + ResumeTime + ", Motto=" + Motto + ", Status="
 				+ Status + ", Intention=" + Intention + ", EducationBgd=" + EducationBgd + ", RealName=" + RealName
 				+ ", RegisterStatus=" + RegisterStatus + ", RegisterTime=" + RegisterTime + ", LastLoginTime="
-				+ LastLoginTime + ", LoginNum=" + LoginNum + ", CheckStatus=" + CheckStatus + ", IdPic=" + IdPic + "]";
+				+ LastLoginTime + ", LoginNum=" + LoginNum + ", CheckStatus=" + CheckStatus + ", StuPic=" + StuPic
+				+ ", IdPic=" + IdPic + ", CreaPic=" + CreaPic + ", CreaStatus=" + CreaStatus + "]";
+	}
+	public String getStuPic() {
+		return StuPic;
+	}
+	public void setStuPic(String stuPic) {
+		StuPic = stuPic;
+	}
+	public String getCreaPic() {
+		return CreaPic;
+	}
+	public void setCreaPic(String creaPic) {
+		CreaPic = creaPic;
+	}
+	public String getCreaStatus() {
+		return CreaStatus;
+	}
+	public void setCreaStatus(String creaStatus) {
+		CreaStatus = creaStatus;
 	}
 	public String getCheckStatus() {
 		return CheckStatus;

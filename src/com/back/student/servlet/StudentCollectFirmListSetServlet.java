@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.model.Collect;
+import com.back.model.StuCollect;
 import com.back.model.Firm;
 import com.back.model.Student;
 import com.back.service.student_service;
@@ -42,10 +42,10 @@ public class StudentCollectFirmListSetServlet extends HttpServlet {
 			//取值
 			Student stu=(Student)request.getSession().getAttribute("student");
 			String id=String.valueOf(stu.getID());
-			List<Collect> lco=stus.queryFirmCollect(id);
+			List<StuCollect> lco=stus.queryFirmCollect(id);
 		//	System.out.println(lco);
 			List<Integer> lid=new ArrayList<Integer>();
-			for(Collect co:lco){
+			for(StuCollect co:lco){
 				lid.add(co.getFirmID());
 			}
 			List<Firm> lf=stus.queryFirmCollectDetils(lid);

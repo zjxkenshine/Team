@@ -1,31 +1,27 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.back.model.StuCollect;
-import com.back.model.Recruit;
 import com.back.model.Student;
 import com.back.service.student_service;
 
 /**
- * Servlet implementation class StudentCollectRecruitListSetServlet
+ * Servlet implementation class StudentCreatCheckServlet
  */
-@WebServlet("/StudentCollectRecruitListSet.sdo")
-public class StudentCollectRecruitListSetServlet extends HttpServlet {
+@WebServlet("/StudentCreatCheck.sdo")
+public class StudentCreatCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentCollectRecruitListSetServlet() {
+    public StudentCreatCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +30,29 @@ public class StudentCollectRecruitListSetServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 招聘信息收藏初始化
+		// 创业认证
 		try{
 			//初始化
 			student_service stus=new student_service();
+			HttpSession session = request.getSession(); //获取session
+			session.setMaxInactiveInterval(30*60); //设置session时间
 			
 			//取值
-			Student stu=(Student)request.getSession().getAttribute("student");
+			Student stu=(Student) request.getSession().getAttribute("student");
+			String ID_Card=request.getParameter("ID_Card");
 			String id=String.valueOf(stu.getID());
-			List<StuCollect> lco=stus.queryRecruitCollect(id);
-			List<Integer> lid=new ArrayList<Integer>();
-			for(StuCollect co:lco){
-				lid.add(co.getRecruitID());
-			}
-			List<Recruit> lf=stus.queryRecruitCollectDetils(lid);
-			//System.out.println(lf);
+			String IdPic=request.getParameter("IdPic");
+			String CreaPic=request.getParameter("CreaPic");
+		//	System.out.println(IdPic+","+Picture+","+id);
+			
+			
+			//执行更新
+			stus.updatecreaCheck(ID_Card, IdPic, CreaPic, id);
+			Student stu1=stus.queryOneStudent(id);
 			
 			//传值跳转
-			request.setAttribute("RecruitCollectList", lf);
-			request.getRequestDispatcher("Back/student-recruitCollectList.jsp").forward(request, response);
+			session.setAttribute("student", stu1); //存值进session
+			request.getRequestDispatcher("Back/student-creatCheck.jsp").forward(request, response);	
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	

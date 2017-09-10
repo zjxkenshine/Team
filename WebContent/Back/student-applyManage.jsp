@@ -26,46 +26,52 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>简历投递</title>
+<title>申请管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 我的简历<span class="c-gray en">&gt;</span> 简历投递 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 学生后台 <span class="c-gray en">&gt;</span> 我的创业<span class="c-gray en">&gt;</span> 申请管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a id="propass" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe603;</i>一键通过</a> &nbsp;&nbsp;<a id="prodelete" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 一键忽略</a> </div>
+
 	<div class="mt-20">
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a id="prosend" class="btn btn-primary radius">一键投递</a>&nbsp;&nbsp;&nbsp;&nbsp; <a id="procol" class="btn btn-primary radius">一键收藏</a></div>
 	<table class="table table-border table-bordered table-hover table-bg table-sort">
 		<thead>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="80">企业ID</th>
-				<th width="100">企业Logo</th>
-				<th width="100">企业名</th>
-				<th width="40">企业类型</th>
-				<th width="90">所在地区</th>
-				<th width="150">邮箱</th>
-				<th width="">电话</th>
-				<th width="130">联系人</th>
-				<th width="70">简介</th>
+				<th width="80">申请编号</th>
+				<th width="100">申请学生</th>
+				<th width="100">电话</th>
+				<th width="40">学校</th>
+				<th width="90">专业</th>
+				<th width="150">学历</th>
+				<th width="">行业</th>
+				<th width="130">描述</th>
+				<th width="70">申请时间</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach items="${firmlist }" var="fir"> 
+		<c:forEach items="${appList }" var="app"> 
 			<tr class="text-c">
-				<td><input btn_name='checkid' type="checkbox" value="${fir.getID() }" class="ace" ></td>
-				<td><c:out value="${fir.getID() }"></c:out></td>
-				<td><img src="${fir.getLogo() }" ></td>
-				<td><c:out value="${fir.getFirmName() }"></c:out></td>
-				<td><c:out value="${fir.getType() }"></c:out></td>
-				<td><c:out value="${fir.getArea() }"></c:out></td>
-				<td><c:out value="${fir.getEmail() }"></c:out></td>
-				<td><c:out value="${fir.getTel() }"></c:out></td>
-				<td><c:out value="${fir.getLinkMan() }"></c:out></td>
-				<td><c:out value="${fir.getDes() }"></c:out></td>
-				<td> 
-				<a style="text-decoration:none" onClick="collect(this,${fir.getID() })" href="javascript:;" title="收藏"><i class="Hui-iconfont">&#xe603;</i></a>
-				<a style="text-decoration:none" onClick="sendresume(this,${fir.getID() })" href="javascript:;" title="投递简历"><i class="Hui-iconfont">&#xe6de;</i></a>
-				</td>
+				<td><input btn_name='checkid' type="checkbox" value="${app.getID() }" class="ace" ></td>
+				<td><c:out value="${app.getID() }"></c:out></td>
+				<td><c:out value="${app.getStuName() }"></c:out></td>
+				<td><c:out value="${app.getTel() }"></c:out></td>
+				<td><c:out value="${app.getSchool() }"></c:out></td>
+				<td><c:out value="${app.getMajor() }"></c:out></td>
+				<td><c:out value="${app.getEducationBgd() }"></c:out></td>
+				<td><c:out value="${app.getIntention() }"></c:out></td>
+				<td><c:out value="${app.getDescripe() }"></c:out></td>
+				<td><c:out value="${app.getApplyTime() }"></c:out></td>
+				<td>
+				<a title="忽略" href="javascript:;" onclick="member_del(this,${app.getID() })" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				 <c:if test="${Item.getNeedNumber()!=0 }">
+				 <a title="同意" href="javascript:;" onclick="member_add(this,${app.getID() })" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe603;</i></a>
+				 </c:if>
+				 <c:if test="${Item.getNeedNumber()==0 }">
+				 	团队需要人数为0，无法进行通过操作
+				 </c:if>
+				 </td>
 			
 			</tr>
 			</c:forEach>
@@ -136,24 +142,41 @@ function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 
-function sendresume(obj,id){
-	layer.confirm('确认要向该公司投递简历吗？',function(index){
+function member_add(obj,id){
+	layer.confirm('确认要通过该申请吗？',function(index){
 		layer.open({
 		    type: 2 //Page层类型
 		   	,area: ['700px', '530px']
-		    ,title: '简历投递'
+		    ,title: '申请通过'
 		    ,shade: 0.6 //遮罩透明度
 		    ,maxmin: true //允许全屏最小化
 		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentSendResume.sdo?CollectID='+id,
+		    ,content: '../StudentPassApply.sdo?CollectID='+id,
 		  
 		});
 	});
 }
 
-//批量删除
-$("#prosend").click(function(){
-	layer.confirm('确认要向这些公司投递简历吗？',{icon:0,},function(index){
+function member_del(obj,id){
+	layer.confirm('确认要忽略该申请吗？',function(index){
+		layer.open({
+		    type: 2 //Page层类型
+		   	,area: ['700px', '530px']
+		    ,title: '申请不通过'
+		    ,shade: 0.6 //遮罩透明度
+		    ,maxmin: true //允许全屏最小化
+		    ,anim: 2 //0-6的动画形式，-1不开启
+		    ,content: '../StudentDeleteApply.sdo?CollectID='+id,
+		  
+		});
+	});
+}
+
+
+
+//批量通过
+$("#propass").click(function(){
+	layer.confirm('确认要通过这些申请吗？',{icon:0,},function(index){
 		var status=[];
 		$(".ace[btn_name='checkid']:checked").each(function(){
 			status.push($(this).val());
@@ -161,31 +184,18 @@ $("#prosend").click(function(){
 		layer.open({
 		    type: 2 //Page层类型
 		   	,area: ['700px', '530px']
-		    ,title: '一键投递'
+		    ,title: '批量通过'
 		    ,shade: 0.6 //遮罩透明度
 		    ,maxmin: true //允许全屏最小化
 		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentSendResume.sdo?CollectID='+status,
+		    ,content: '../StudentPassApply.sdo?CollectID='+status,
 		});
 	});
 })
 
-function collect(obj,id){
-		layer.open({
-		    type: 2 //Page层类型
-		   	,area: ['700px', '530px']
-		    ,title: '收藏公司'
-		    ,shade: 0.6 //遮罩透明度
-		    ,maxmin: true //允许全屏最小化
-		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentCollectFirm.sdo?CollectID='+id,
-		  
-		});
-}
-
 //批量删除
-$("#procol").click(function(){
-	layer.confirm('确认要收藏这些公司吗？',{icon:0,},function(index){
+$("#prodelete").click(function(){
+	layer.confirm('确认要忽略这些申请吗？',{icon:0,},function(index){
 		var status=[];
 		$(".ace[btn_name='checkid']:checked").each(function(){
 			status.push($(this).val());
@@ -193,14 +203,15 @@ $("#procol").click(function(){
 		layer.open({
 		    type: 2 //Page层类型
 		   	,area: ['700px', '530px']
-		    ,title: '一键收藏'
+		    ,title: '批量取消'
 		    ,shade: 0.6 //遮罩透明度
 		    ,maxmin: true //允许全屏最小化
 		    ,anim: 2 //0-6的动画形式，-1不开启
-		    ,content: '../StudentCollectFirm.sdo?CollectID='+status,
+		    ,content: '../StudentDeleteApply.sdo?CollectID='+status,
 		});
 	});
 })
+
 </script> 
 </body>
 </html>

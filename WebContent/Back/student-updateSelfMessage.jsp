@@ -48,16 +48,16 @@ String  path = request.getContextPath();
       <div class="col-4"> </div>
     </div>
      <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>真实姓名(认证成功后不可修改)：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>真实姓名(学生认证成功后不可修改)：</label>
       <div class="formControls col-5">
         <input type="text" class="input-text" value="${student.getRealName() }" <c:if test="${student.getCheckStatus() eq '2' }">readonly="readonly"</c:if> placeholder="必填" id="RealName" name="RealName">
       </div>
       <div class="col-4"> </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-3"><span class="c-red">*</span>身份证号：</label>
+      <label class="form-label col-3"><span class="c-red">*</span>身份证号(创业认证成功后不可修改)：</label>
       <div class="formControls col-5">
-        <input type="text" class="input-text" value="${student.getID_Card() }" placeholder="必填" id="ID_Card" name="ID_Card" datatype="idcard" nullmsg="身份证号不能为空" ajaxurl="../StudentUpdateSelfMessageCheck.sdo?idcard=${student.getID_Card() }">
+        <input type="text" class="input-text" value="${student.getID_Card() }" <c:if test="${student.getCreaStatus() eq '2' }">readonly="readonly"</c:if> placeholder="必填" id="ID_Card" name="ID_Card" datatype="idcard" nullmsg="身份证号不能为空" ajaxurl="../StudentUpdateSelfMessageCheck.sdo?idcard=${student.getID_Card() }">
       </div>
       <div class="col-4"> </div>
     </div>
