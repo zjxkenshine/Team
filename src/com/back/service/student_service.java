@@ -7,6 +7,7 @@ import com.back.dao.student_dao;
 import com.back.model.StuCollect;
 import com.back.model.Firm;
 import com.back.model.Item;
+import com.back.model.ItemCollect;
 import com.back.model.Recruit;
 import com.back.model.Resume;
 import com.back.model.StuApply;
@@ -651,14 +652,32 @@ public class student_service {
 
 				public int deleteApplyWhenJoin(int id) throws Exception{
 					try{
-						int i= sda.deleteApplyWhenJoin(id);
+						return sda.deleteApplyWhenJoin(id);
+						
+					}catch(Exception e){
+						throw new Exception("删除申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public List<ItemCollect> queryAllItemCollect(int id) throws Exception{
+					try{
+						return sda.queryAllItemCollect(id);
+						
+					}catch(Exception e){
+						throw new Exception("查询收藏项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int deleteCollectItem(String id) throws Exception{
+					try{
+						int i= sda.deleteCollectItem(id);
 						if(i>0){
 							return i;
 						}else{
-							throw new Exception("删除申请条数为0");
+							throw new Exception("删除项目收藏条数为0");
 						}
 					}catch(Exception e){
-						throw new Exception("删除申请失败，原因是："+e.getMessage());
+						throw new Exception("删除项目收藏失败，原因是："+e.getMessage());
 					}
 				}
 				

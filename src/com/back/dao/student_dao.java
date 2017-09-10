@@ -9,6 +9,7 @@ import java.util.Map;
 import com.back.model.StuCollect;
 import com.back.model.Firm;
 import com.back.model.Item;
+import com.back.model.ItemCollect;
 import com.back.model.Recruit;
 import com.back.model.Resume;
 import com.back.model.StuApply;
@@ -989,7 +990,40 @@ public class student_dao {
 		
 		//通过申请时删除其他申请
 		public int deleteApplyWhenJoin(int id){
+		//	System.out.println(id);
 			String sql="delete from stu_apply where StuID=? and Status!='2'";
+			int i=DBUtil.executeUpdate(sql,id);
+			return i;
+		}
+		
+		//获取学生收藏的项目
+		public List<ItemCollect> queryAllItemCollect(int id){
+			String sql="select * from stu_startcollect where StuID=?";
+			List<Map<String,Object>> lmap=DBUtil.list(sql, id);
+		//	System.out.println(lmap);
+			List<ItemCollect> lic=new ArrayList<ItemCollect>();
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					ItemCollect ico=new ItemCollect();
+					ico.setCollectTime((String)lmap.get(i).get("CollectTime"));
+					ico.setEmail((String)lmap.get(i).get("Email"));
+					ico.setID((int)lmap.get(i).get("ID"));
+					ico.setStartID(String.valueOf((int)lmap.get(i).get("StartID")));
+					ico.setStartName((String)lmap.get(i).get("StartName"));
+					ico.setStuID((int)lmap.get(i).get("StuID"));
+					ico.setStuName((String)lmap.get(i).get("StuName"));
+					ico.setTel((String)lmap.get(i).get("Tel"));
+					lic.add(ico);
+				}
+				return lic;
+			}else{
+				return null;
+			}
+		}
+		
+		//删除项目收藏
+		public int deleteCollectItem(String id){
+			String sql="delete from stu_startcollect where ID=?";
 			int i=DBUtil.executeUpdate(sql,id);
 			return i;
 		}

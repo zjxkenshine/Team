@@ -128,7 +128,7 @@ String  path = request.getContextPath();
 					<li><a _href="../StudentCollectRecruitListSet.sdo" href="javascript:void(0)">收藏招聘信息</a></li>
 					<li><a _href="../StudentCollectFirmListSet.sdo" href="javascript:void(0)">收藏公司</a></li>
 					<c:if test="${student.getCheckStatus() eq '2' }">
-					<li><a _href="" href="javascript:void(0)">收藏创业项目</a></li>
+					<li><a _href="../StudentCollectItemListSet.sdo" href="javascript:void(0)">收藏创业项目</a></li>
 					</c:if>
 				</ul>
 			</dd>
