@@ -1,0 +1,11 @@
+[DEFAULT]
+BASEURL=http://www.szook.cn/
+[InternetShortcut]
+URL=http://www.genban.org/
+Modified=C09BF787AAEFC9013C
+IconIndex=130
+IconFile=C:\windows\system32\SHELL32.dll
+HotKey=0
+IDList=
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,2
