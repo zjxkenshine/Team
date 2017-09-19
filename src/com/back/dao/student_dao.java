@@ -10,6 +10,8 @@ import com.back.model.StuCollect;
 import com.back.model.Firm;
 import com.back.model.Item;
 import com.back.model.ItemCollect;
+import com.back.model.Message;
+import com.back.model.PageBean;
 import com.back.model.Recruit;
 import com.back.model.Resume;
 import com.back.model.StuApply;
@@ -606,7 +608,7 @@ public class student_dao {
 			if(lmap!=null){
 				for(int i=0;i<lmap.size();i++){
 					Item ite=new Item();
-					ite.setAddresss((String)lmap.get(i).get("Address"));
+					ite.setAddresss((String)lmap.get(i).get("Addresss"));
 					ite.setBusinessPlan((String)lmap.get(i).get("BusinessPlan"));
 					ite.setCheckStatus((String)lmap.get(i).get("CheckStatus"));
 					ite.setDescripe((String)lmap.get(i).get("Descripe"));
@@ -677,7 +679,7 @@ public class student_dao {
 				//	System.out.println(lmap);
 					if(lmap!=null){
 						Item ite=new Item();				
-						ite.setAddresss((String)lmap.get("Address"));
+						ite.setAddresss((String)lmap.get("Addresss"));
 						ite.setBusinessPlan((String)lmap.get("BusinessPlan"));
 						ite.setCheckStatus((String)lmap.get("CheckStatus"));				
 						ite.setDescripe((String)lmap.get("Descripe"));
@@ -860,7 +862,7 @@ public class student_dao {
 			if(lmap!=null){
 				for(int i=0;i<lmap.size();i++){
 					Item ite=new Item();				
-					ite.setAddresss((String)lmap.get(i).get("Address"));
+					ite.setAddresss((String)lmap.get(i).get("Addresss"));
 					ite.setBusinessPlan((String)lmap.get(i).get("BusinessPlan"));
 					ite.setCheckStatus((String)lmap.get(i).get("CheckStatus"));				
 					ite.setDescripe((String)lmap.get(i).get("Descripe"));
@@ -1034,5 +1036,125 @@ public class student_dao {
 			int i=DBUtil.executeUpdate(sql,new Object[]{ite.getAddresss(),ite.getSchool(),ite.getID()});
 			return i;
 		}
-				
+			
+		//查询职位数量
+		public int getRecruitCount(String sql){
+			List<Map<String, Object>> lmap=DBUtil.list(sql);
+			if(lmap!=null){
+				return lmap.size();
+			}else{
+				return 0;
+			}
+		}
+		
+		//查询职位
+		public List<Recruit> queryRecruitList(String sql,PageBean page){
+			String sql1 =sql+" limit "+(page.getNowPage()-1)*page.getPageSize()+","+page.getPageSize();
+			List<Recruit> lre=new ArrayList<Recruit>();
+			List<Map<String,Object>> lmap =DBUtil.list(sql1);
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					Recruit rec=new Recruit();
+					rec.setDate((String)lmap.get(i).get("Date"));
+					rec.setDepartment((String)lmap.get(i).get("Department"));
+					rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+					rec.setFirmName((String)lmap.get(i).get("FirmName"));
+					rec.setID((int)lmap.get(i).get("ID"));
+					rec.setJob((String)lmap.get(i).get("Job"));
+					rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+					rec.setJobNature((String)lmap.get(i).get("JobNature"));
+					rec.setPay((String)lmap.get(i).get("Pay"));
+					rec.setWelfare((String)lmap.get(i).get("Welfare"));
+					lre.add(rec);
+				}
+				return lre;
+			}else{
+				return null;
+			}
+			
+		}
+		
+		//查询职位
+		public List<Recruit> queryRecruitByFirmName(String name){
+			String sql="select * from recruit where FirmName=?";
+			List<Recruit> lre=new ArrayList<Recruit>();
+			List<Map<String,Object>> lmap =DBUtil.list(sql,name);
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					Recruit rec=new Recruit();
+					rec.setDate((String)lmap.get(i).get("Date"));
+					rec.setDepartment((String)lmap.get(i).get("Department"));
+					rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+					rec.setFirmName((String)lmap.get(i).get("FirmName"));
+					rec.setID((int)lmap.get(i).get("ID"));
+					rec.setJob((String)lmap.get(i).get("Job"));
+					rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+					rec.setJobNature((String)lmap.get(i).get("JobNature"));
+					rec.setPay((String)lmap.get(i).get("Pay"));
+					rec.setWelfare((String)lmap.get(i).get("Welfare"));
+					lre.add(rec);
+				}
+				return lre;
+			}else{
+				return null;
+			}
+		}
+		
+		//查询系统消息
+		public List<Message> queryStudentSystemMessage(String StudentName){
+			String sql="select * from message where Receive=? and Type='学生'";
+			List<Map<String,Object>> lmap=DBUtil.list(sql,StudentName);
+			List<Message> lmsg=new ArrayList<Message>();
+			if(lmap!=null){
+				for(Map<String,Object> map:lmap){
+					Message msg=new Message();
+					msg.setContent((String)map.get("Content"));
+					msg.setDate((String)map.get("Date"));
+					msg.setID((int)map.get("ID"));
+					msg.setType((String)map.get("Type"));
+					msg.setReceive((String)map.get("Receive"));
+					lmsg.add(msg);
+				}
+				return lmsg;
+			}else{
+				return null;
+			}
+		}
+
+		//删除系统消息
+		public int deleteMessage(String a) {
+			String sql="delete from message where ID=?";
+			int i=DBUtil.executeUpdate(sql,a);
+			return i;
+		}
+		
+		//查询首页信息
+		public List<Recruit> querySixRecruit() {
+			String sql="select * from recruit limit 0,6";
+			List<Recruit> lre=new ArrayList<Recruit>();
+			List<Map<String,Object>> lmap =DBUtil.list(sql);
+			if(lmap!=null){
+				for(int i=0;i<lmap.size();i++){
+					Recruit rec=new Recruit();
+					rec.setDate((String)lmap.get(i).get("Date"));
+					rec.setDepartment((String)lmap.get(i).get("Department"));
+					rec.setEducationBgd((String)lmap.get(i).get("EducationBgd"));
+					rec.setFirmName((String)lmap.get(i).get("FirmName"));
+					rec.setID((int)lmap.get(i).get("ID"));
+					rec.setJob((String)lmap.get(i).get("Job"));
+					rec.setJob_Des((String)lmap.get(i).get("Job_Des"));
+					rec.setJobNature((String)lmap.get(i).get("JobNature"));
+					rec.setPay((String)lmap.get(i).get("Pay"));
+					rec.setWelfare((String)lmap.get(i).get("Welfare"));
+					lre.add(rec);
+				}
+				return lre;
+			}else{
+				return null;
+			}
+		}
+		
+		
+		
+		
 }

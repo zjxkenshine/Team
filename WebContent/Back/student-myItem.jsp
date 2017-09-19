@@ -96,6 +96,12 @@ String  path = request.getContextPath();
         <td>需要人才描述 </td>
         <td><c:out value="${item.getNeedDiscripe() }"></c:out></td>
       </tr>
+      <c:if test="${item.getCheckStatus() eq '2' }">
+      <tr>
+        <td>我的商业计划书 </td>
+        <td><a href="${item.getBusinessPlan()}" download="">下载查看</a></td>
+      </tr>
+      </c:if>
       <tr>
         <td>项目描述 </td>
         <td><c:out value="${item.getDescripe() }"></c:out></td>

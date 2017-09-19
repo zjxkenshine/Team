@@ -1,6 +1,12 @@
 package com.back.model;
 
 public class Recruit {
+	@Override
+	public String toString() {
+		return "Recruit [ID=" + ID + ", FirmName=" + FirmName + ", Job=" + Job + ", Department=" + Department + ", Pay="
+				+ Pay + ", Welfare=" + Welfare + ", EducationBgd=" + EducationBgd + ", JobNature=" + JobNature
+				+ ", Job_Des=" + Job_Des + ", Date=" + Date + "]";
+	}
 	private int ID;
 	private String FirmName;
 	private String Job;

@@ -39,6 +39,7 @@ String  path = request.getContextPath();
 	<nav class="mainnav cl" id="Hui-nav">
 	</nav>
 	<ul class="Hui-userbar">
+		<li><a href="../Front/home.jsp" >返回首页&nbsp;</a></li>
 		<li>欢迎登录</li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A">学生：<c:out value="${student.getStudentName() }"></c:out> <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
@@ -48,7 +49,7 @@ String  path = request.getContextPath();
 				<li><a href="../StudentLogout.sdo">退出</a></li>
 			</ul>
 		</li>
-		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-msg"> <a href="../StudentSystemMessgeSet.sdo" target="commoniframe" title="消息"><span class="badge badge-danger">${systmsgnum }</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
 		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -137,10 +138,10 @@ String  path = request.getContextPath();
 			<dt><i class="Hui-iconfont">&#xe622;</i>我的消息<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="" href="javascript:;">系统消息</a></li>
-					<li><a _href="" href="javascript:void(0)">老师消息</a></li>
-					<li><a _href="" href="javascript:void(0)">企业消息</a></li>
-					<li><a _href="" href="javascript:;">其他消息</a></li>
+					<li><a _href="../StudentSystemMessgeSet.sdo" href="javascript:;">系统消息</a></li>
+					<li><a _href="../StudentTeacherMessageSet.sdo" href="javascript:void(0)">老师消息</a></li>
+					<li><a _href="../StudentReplyTeacher.sdo" href="javascript:void(0)">我的回复</a></li>
+					<li><a _href="student-otherMessage.jsp" href="javascript:;">其他消息</a></li>
 				</ul>
 			</dd>
 		</dl>
