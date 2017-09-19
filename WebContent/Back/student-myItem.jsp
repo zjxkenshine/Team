@@ -32,7 +32,7 @@ String  path = request.getContextPath();
 <body>
 <div class="pd-20" style="padding-top:20px;">
   <p class="f-20 text-success">我的项目</p>
-  <a id="itemmsg"><button class="btn btn-primary radius">基本信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemaddr"><button class="btn btn-primary radius">地址管理</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemfind"><button class="btn btn-primary radius">招募管理</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<c:if test="${item.getCheckStatus() eq '0' }"><a id="itemcheck"><button class="btn btn-danger radius">项目审核</button></a></c:if>
+  <a id="itemmsg"><button class="btn btn-primary radius">基本信息</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemaddr"><button class="btn btn-primary radius">地址管理</button></a><c:if test="${item.getCheckStatus() eq '2' }">&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemfind"><button class="btn btn-primary radius">招募管理</button></a></c:if><c:if test="${item.getCheckStatus() eq '0' }">&nbsp;&nbsp;&nbsp;&nbsp;<a id="itemcheck"><button class="btn btn-danger radius">项目审核</button></a></c:if>
   <table class="table table-border table-bordered table-bg mt-20">
     <thead>
       <tr>
@@ -96,6 +96,12 @@ String  path = request.getContextPath();
         <td>需要人才描述 </td>
         <td><c:out value="${item.getNeedDiscripe() }"></c:out></td>
       </tr>
+      <c:if test="${item.getCheckStatus() eq '2' }">
+      <tr>
+        <td>我的商业计划书 </td>
+        <td><a href="${item.getBusinessPlan()}" download="">下载查看</a></td>
+      </tr>
+      </c:if>
       <tr>
         <td>项目描述 </td>
         <td><c:out value="${item.getDescripe() }"></c:out></td>
@@ -126,7 +132,7 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="js/H-ui.admin.js"></script> 
 <script>
 
-$(itemmsg).click(function(){
+$("#itemmsg").click(function(){
 	layer.open({
 	    type: 2 //Page层类型
 	   	,area: ['800px', '530px']
@@ -138,7 +144,7 @@ $(itemmsg).click(function(){
 	});
 })
 
-$(itemaddr).click(function(){
+$("#itemaddr").click(function(){
 	layer.open({
 	    type: 2 //Page层类型
 	   	,area: ['800px', '530px']
@@ -150,7 +156,7 @@ $(itemaddr).click(function(){
 	});
 })
 
-$(itemfind).click(function(){
+$("#itemfind").click(function(){
 	layer.open({
 	    type: 2 //Page层类型
 	   	,area: ['800px', '530px']
@@ -162,7 +168,7 @@ $(itemfind).click(function(){
 	});
 })
 
-$(itemcheck).click(function(){
+$("#itemcheck").click(function(){
 	layer.open({
 	    type: 2 //Page层类型
 	   	,area: ['800px', '530px']

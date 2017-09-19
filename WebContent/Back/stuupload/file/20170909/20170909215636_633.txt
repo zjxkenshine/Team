@@ -1,4 +1,0 @@
--XX:PermSize=128M
--XX:MaxPermSize=128M
--XX:+UserParallelGC
--Xverify:none

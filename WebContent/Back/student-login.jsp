@@ -28,13 +28,12 @@ String  path = request.getContextPath();
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>学生后台登录</title>
+<title>学生登录</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="login.do" method="post">
@@ -62,15 +61,15 @@ String  path = request.getContextPath();
       <div class="row">
         <div class="formControls col-8 col-offset-3">
           <input name="loginbtn" id="loginbtn" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
           <a href="student-register.jsp"><input name="" id="" type="button" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;"></a>
+          <a onclick="history.go(-1)"><input name="" id="" type="button" class="btn btn-danger radius size-L" value="&nbsp;返&nbsp;&nbsp;&nbsp;&nbsp;回&nbsp;"></a>
           <a href="student-forgetPassword.jsp">忘记密码</a>
         </div>
       </div>
     </form>
   </div>
 </div>
-<div class="footer">大学生就业创业服务中心</div>
+<div class="footer">学生登录</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="js/H-ui.js"></script> 
 <script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>

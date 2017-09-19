@@ -7,6 +7,9 @@ import com.back.dao.student_dao;
 import com.back.model.StuCollect;
 import com.back.model.Firm;
 import com.back.model.Item;
+import com.back.model.ItemCollect;
+import com.back.model.Message;
+import com.back.model.PageBean;
 import com.back.model.Recruit;
 import com.back.model.Resume;
 import com.back.model.StuApply;
@@ -489,6 +492,14 @@ public class student_service {
 						}
 				}
 				
+				public List<StuApply> queryApplyById(String id) throws Exception{
+					 try{
+							return sda.queryApplyById(id);
+						}catch(Exception e){
+							throw new Exception("查询申请失败，原因是："+e.getMessage());
+						}
+				}
+				
 				public List<StuApply> queryApply(int id) throws Exception{
 					 try{
 							return sda.queryApply(id);
@@ -543,6 +554,221 @@ public class student_service {
 						}catch(Exception e){
 							throw new Exception("更新项目人数失败，原因是："+e.getMessage());
 						}
+				}
+				
+				public List<Item> queryAllItem(int id) throws Exception{
+					try{
+						return sda.queryAllItem(id);
+					}catch(Exception e){
+						throw new Exception("查询所有项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public boolean checkCollectItem(String iteid,int stuid) throws Exception{
+					try{
+						return sda.checkCollectItem(iteid,stuid);
+					}catch(Exception e){
+						throw new Exception("验证项目收藏失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int addCollectItem(Item ite,int id,String time) throws Exception{
+					 try{
+							int i= sda.addCollectItem(ite,id,time);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("更新项目收藏条数位0");
+							}
+						}catch(Exception e){
+							throw new Exception("更新项目收藏失败，原因是："+e.getMessage());
+						}
+				}
+				
+				public boolean checkApplyJoin(int id) throws Exception{
+					try{
+						return sda.checkApplyJoin(id);
+					}catch(Exception e){
+						throw new Exception("验证申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public boolean checkApplyDouble(String iteid,int stuid) throws Exception{
+					try{
+						return sda.checkApplyDouble(iteid,stuid);
+					}catch(Exception e){
+						throw new Exception("验证申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int insertApply(Student stu,String id,String desc,String time) throws Exception{
+					 try{
+							int i= sda.insertApply(stu,id,desc,time);
+							if(i>0){
+								return i;
+							}else{
+								throw new Exception("更新申请条数位0");
+							}
+						}catch(Exception e){
+							throw new Exception("更新申请失败，原因是："+e.getMessage());
+						}
+				}
+				
+				public List<StuApply> queryMyApply(int id) throws Exception{
+					try{
+						return sda.queryMyApply(id);
+					}catch(Exception e){
+						throw new Exception("查询我的申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int deleteApply(String id) throws Exception{
+					try{
+						return sda.deleteApply(id);
+					}catch(Exception e){
+						throw new Exception("删除我的申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int queryJoinItemId(int id) throws Exception{
+					try{
+						return sda.queryJoinItemId(id);
+						
+					}catch(Exception e){
+						return 0;
+					}
+				}
+				
+				public int quitItem(int id) throws Exception{
+					try{
+						int i= sda.quitItem(id);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("退出项目条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("退出项目失败，原因是："+e.getMessage());
+					}
+				}
+
+				public int deleteApplyWhenJoin(int id) throws Exception{
+					try{
+						return sda.deleteApplyWhenJoin(id);
+						
+					}catch(Exception e){
+						throw new Exception("删除申请失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public List<ItemCollect> queryAllItemCollect(int id) throws Exception{
+					try{
+						return sda.queryAllItemCollect(id);
+						
+					}catch(Exception e){
+						throw new Exception("查询收藏项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int deleteCollectItem(String id) throws Exception{
+					try{
+						int i= sda.deleteCollectItem(id);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("删除项目收藏条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("删除项目收藏失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public int updateItemAddress(Item ite) throws Exception{
+					try{
+						int i= sda.updateItemAddress(ite);
+						if(i>0){
+							return i;
+						}else{
+							throw new Exception("更新地址条数为0");
+						}
+					}catch(Exception e){
+						throw new Exception("更新地址失败，原因是："+e.getMessage());
+					}
+				}
+				
+				
+				public int getRecruitCount(Recruit rec) throws Exception{
+					try{
+						String sql="select * from recruit where 1=1";
+						if(rec.getJob()!=null&&rec.getJob()!=""){
+							sql=sql+" and Job like '"+rec.getJob()+"'";
+						}
+						if(rec.getFirmName()!=null&&rec.getFirmName()!=""){
+							sql=sql+" and FirmName like '"+rec.getFirmName()+"'";
+						}
+						if(rec.getEducationBgd()!=""&&rec.getEducationBgd()!=null){
+							sql=sql+" and EducationBgd like '"+rec.getEducationBgd()+"'";
+						}
+						
+						return sda.getRecruitCount(sql);
+						
+					}catch(Exception e){
+						throw new Exception("查询收藏项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public List<Recruit> queryRecruitList(Recruit rec,PageBean page) throws Exception{
+					try{
+						String sql="select * from recruit where 1=1";
+						if(rec.getJob()!=null&&rec.getJob()!=""){
+							sql=sql+" and Job like '"+rec.getJob()+"'";
+						}
+						if(rec.getFirmName()!=null&&rec.getFirmName()!=""){
+							sql=sql+" and FirmName like '"+rec.getFirmName()+"'";
+						}
+						if(rec.getEducationBgd()!=""&&rec.getEducationBgd()!=null){
+							sql=sql+" and EducationBgd like '"+rec.getEducationBgd()+"'";
+						}
+						return sda.queryRecruitList(sql,page);
+						
+					}catch(Exception e){
+						throw new Exception("查询收藏项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				public List<Recruit> queryRecruitByFirmName(String name) throws Exception{
+					try{
+						return sda.queryRecruitByFirmName(name);
+					}catch(Exception e){
+							throw new Exception("查询项目失败，原因是："+e.getMessage());
+					}
+				}
+				
+				
+				public List<Message> queryStudentSystemMessage(String StudentName) throws Exception{
+					try{
+						return sda.queryStudentSystemMessage(StudentName);
+					}catch(Exception e){
+							throw new Exception("查询系统消息失败，原因是："+e.getMessage());
+					}
+				}
+
+				
+				public int deleteMessage(String a) throws Exception {
+					try{
+						return sda.deleteMessage(a);
+					}catch(Exception e){
+							throw new Exception("删除系统消息失败，原因是："+e.getMessage());
+					}
+				}
+				
+				//查询首页显示的职位
+				public List<Recruit>  querySixRecruit() throws Exception{
+					try{
+						return sda.querySixRecruit();
+					}catch(Exception e){
+							throw new Exception("删除系统消息失败，原因是："+e.getMessage());
+					}
 				}
 				
 }

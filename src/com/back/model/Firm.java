@@ -17,7 +17,24 @@ public class Firm {
 	private String Logo;
 	private String CardStart;
 	private String Status;
+	private String RecruitSum="3";
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Firm [ID=" + ID + ", FirmName=" + FirmName + ", PassWord=" + PassWord + ", Type=" + Type + ", Area="
+				+ Area + ", Adress=" + Adress + ", LinkMan=" + LinkMan + ", Tel=" + Tel + ", Email=" + Email
+				+ ", PeopleNumber=" + PeopleNumber + ", Des=" + Des + ", FirmID=" + FirmID + ", Picture=" + Picture
+				+ ", Logo=" + Logo + ", CardStart=" + CardStart + ", Status=" + Status + ", RecruitSum=" + RecruitSum
+				+ "]";
+	}
+	public String getRecruitSum() {
+		return RecruitSum;
+	}
+	public void setRecruitSum(String recruitSum) {
+		RecruitSum = recruitSum;
+	}
 	public String getStatus() {
 		return Status;
 	}

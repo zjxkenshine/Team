@@ -44,7 +44,7 @@ public class StudentItemAddressSetServlet extends HttpServlet {
 			request.setAttribute("Item", it);
 			
 			//跳转
-			request.getRequestDispatcher("Back/student-itemAddress.jsp").forward(request, response);
+			request.getRequestDispatcher("Back/student-setAddress.jsp").forward(request, response);
 			
 		}catch(Exception e){
 			request.setAttribute("message",e.getMessage());	

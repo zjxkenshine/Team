@@ -1,6 +1,8 @@
 package com.back.student.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.back.model.Item;
+import com.back.model.StuApply;
 import com.back.model.Student;
 import com.back.service.student_service;
 
@@ -51,6 +54,15 @@ public class StudentPassApplyServlet extends HttpServlet {
 					break;
 				}
 				stus.passApply(a);
+				
+				//获取该学生ID
+				List<StuApply> lte=stus.queryApplyById(a);
+				int stuid=lte.get(0).getStuID();	
+				
+				//删除该学生其余申请
+		//		System.out.println(stuid);
+				stus.deleteApplyWhenJoin(stuid);
+				
 				i++;
 			}
 			
